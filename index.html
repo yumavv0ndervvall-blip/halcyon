@@ -1,0 +1,626 @@
+<div class="arch-roster">
+  <style>
+    .arch-roster {
+      --frame: #11151a;
+      --line: #3b4b5e;
+      --line-soft: rgba(148, 163, 184, 0.14);
+      --text: #edf4ff;
+      --muted: #778290;
+
+      width: 100%;
+      max-width: 816px;
+      margin: 0 auto;
+      color: var(--text);
+      font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+    }
+
+    .arch-roster * {
+      box-sizing: border-box;
+    }
+
+    .arch-frame {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      padding: 20px 24px 42px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.055), transparent 34%),
+        linear-gradient(180deg, #12161c 0%, #0d1014 100%);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.02) inset,
+        0 20px 55px rgba(0, 0, 0, 0.38);
+    }
+
+    .arch-frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.014) 1px, transparent 1px);
+      background-size: 32px 32px;
+      opacity: 0.28;
+      pointer-events: none;
+    }
+
+    .arch-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .arch-top {
+      text-align: center;
+      padding: 0 0 20px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .arch-top h1 {
+      margin: 0;
+      color: #f8fbff;
+      font-family: Impact, "Arial Black", Pretendard, sans-serif;
+      font-size: 28px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 0.075em;
+      text-transform: uppercase;
+      text-shadow:
+        0 0 7px rgba(255,255,255,0.28),
+        0 2px 0 rgba(0,0,0,0.85);
+    }
+
+    .arch-section {
+      margin-top: 34px;
+    }
+
+    .arch-section:first-of-type {
+      margin-top: 0;
+    }
+
+    .arch-section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .arch-title-block {
+      flex: 1;
+      max-width: 620px;
+    }
+
+    .arch-title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .arch-mark {
+      width: 7px;
+      height: 20px;
+      background: var(--section-color);
+      box-shadow: 0 0 12px var(--section-glow);
+    }
+
+    .arch-section-title {
+      margin: 0;
+      color: #edf4ff;
+      font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+      font-size: 20px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      text-shadow: 0 2px 0 rgba(0,0,0,0.65);
+    }
+
+    .arch-line {
+      width: 100%;
+      height: 2px;
+      margin-top: 8px;
+      background: linear-gradient(
+        90deg,
+        var(--section-color) 0%,
+        var(--section-color) 58%,
+        rgba(255,255,255,0.045) 100%
+      );
+      box-shadow: 0 0 10px var(--section-glow);
+    }
+
+    .arch-class {
+      min-width: 120px;
+      text-align: right;
+      color: var(--section-color);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      text-shadow: 0 0 8px var(--section-glow);
+      white-space: nowrap;
+    }
+
+    .arch-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .arch-card {
+      --accent: #38bdf8;
+      --img: none;
+
+      position: relative;
+      display: block;
+      width: 128px;
+      height: 172px;
+      overflow: hidden;
+      border-radius: 7px;
+      border: 1px solid rgba(96, 165, 250, 0.62);
+      background:
+        radial-gradient(circle at 50% 18%, rgba(120, 160, 190, 0.16), transparent 42%),
+        linear-gradient(180deg, #151a22 0%, #050608 100%);
+      text-decoration: none;
+      color: #ffffff;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.025) inset,
+        0 10px 22px rgba(0,0,0,0.34);
+      transition:
+        transform 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+    }
+
+    .arch-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow:
+        0 14px 28px rgba(0,0,0,0.48),
+        0 0 18px rgba(56, 189, 248, 0.32),
+        0 0 0 1px rgba(255,255,255,0.035) inset;
+      filter: brightness(1.08);
+    }
+
+    .arch-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image: var(--img);
+      background-size: cover;
+      background-position: center top;
+      transform: scale(1.01);
+      transition: 0.24s ease;
+    }
+
+    .arch-card:hover::before {
+      transform: scale(1.055);
+    }
+
+    .arch-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,0.08) 0%, transparent 26%),
+        linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.68) 25%, rgba(0,0,0,0.18) 52%, transparent 100%),
+        radial-gradient(circle at 50% 18%, rgba(255,255,255,0.10), transparent 38%);
+      pointer-events: none;
+    }
+
+    .arch-corner {
+      position: absolute;
+      z-index: 3;
+      width: 14px;
+      height: 14px;
+      pointer-events: none;
+    }
+
+    .arch-corner.lt {
+      top: 6px;
+      left: 6px;
+      border-top: 1px solid rgba(255,255,255,0.42);
+      border-left: 1px solid rgba(255,255,255,0.42);
+    }
+
+    .arch-corner.rb {
+      right: 6px;
+      bottom: 6px;
+      border-right: 1px solid rgba(255,255,255,0.24);
+      border-bottom: 1px solid rgba(255,255,255,0.24);
+    }
+
+    .arch-info {
+      position: absolute;
+      z-index: 4;
+      left: 9px;
+      right: 8px;
+      bottom: 9px;
+    }
+
+    .arch-name {
+      margin: 0 0 7px;
+      color: #fff;
+      font-size: 15px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      text-shadow:
+        0 0 5px rgba(0,0,0,1),
+        0 2px 2px rgba(0,0,0,0.95);
+      word-break: keep-all;
+    }
+
+    .arch-attr {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 21px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 10px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      box-shadow:
+        0 2px 6px rgba(0,0,0,0.45),
+        0 0 10px rgba(255,255,255,0.08);
+      word-break: keep-all;
+      white-space: nowrap;
+    }
+
+    .arch-card.fire { --accent: #e34235; }
+    .arch-card.plant { --accent: #75a95a; }
+    .arch-card.lightning { --accent: #f6c915; }
+    .arch-card.wind { --accent: #22bd72; }
+    .arch-card.ice { --accent: #5f8588; }
+    .arch-card.water { --accent: #1798d4; }
+    .arch-card.none { --accent: #64748b; }
+
+    .arch-card.fire .arch-attr { background: #e34235; }
+    .arch-card.plant .arch-attr { background: #75a95a; }
+
+    .arch-card.lightning .arch-attr {
+      background: #f6c915;
+      color: #191919;
+    }
+
+    .arch-card.wind .arch-attr {
+      background: #22bd72;
+    }
+
+    .arch-card.ice .arch-attr {
+      background: #5f8588;
+      color: #ffffff;
+    }
+
+    .arch-card.water .arch-attr {
+      background: #1798d4;
+    }
+
+    .arch-card.none .arch-attr {
+      background: #64748b;
+    }
+
+    @media (max-width: 780px) {
+      .arch-frame {
+        padding: 18px 16px 34px;
+      }
+
+      .arch-top h1 {
+        font-size: 25px;
+      }
+
+      .arch-section-head {
+        gap: 12px;
+      }
+
+      .arch-section-title {
+        font-size: 19px;
+      }
+
+      .arch-class {
+        min-width: 92px;
+        font-size: 12px;
+      }
+
+      .arch-grid {
+        gap: 12px;
+      }
+
+      .arch-card {
+        width: calc(50% - 6px);
+        height: 194px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .arch-frame {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      .arch-card {
+        height: 180px;
+      }
+
+      .arch-name {
+        font-size: 14px;
+      }
+
+      .arch-attr {
+        font-size: 10px;
+      }
+    }
+  </style>
+
+  <div class="arch-frame">
+    <div class="arch-inner">
+      <header class="arch-top">
+        <h1>ARCH ROSTER</h1>
+      </header>
+
+      <!-- REARGUARD -->
+      <section
+        class="arch-section"
+        style="--section-color:#ef4444; --section-glow:rgba(239,68,68,0.45);"
+      >
+        <div class="arch-section-head">
+          <div class="arch-title-block">
+            <div class="arch-title-row">
+              <span class="arch-mark"></span>
+              <h2 class="arch-section-title">REARGUARD</h2>
+            </div>
+
+            <div class="arch-line"></div>
+          </div>
+
+          <div class="arch-class">S-CLASS</div>
+        </div>
+
+        <div class="arch-grid">
+          <a
+            class="arch-card fire"
+            href="#kai"
+            aria-label="카이 프로필로 이동"
+            style="--img:url('카이_이미지주소');"
+          >
+            <span class="arch-corner lt"></span>
+            <span class="arch-corner rb"></span>
+
+            <div class="arch-info">
+              <h3 class="arch-name">카이</h3>
+              <span class="arch-attr">S급 불 속성</span>
+            </div>
+          </a>
+
+          <a
+            class="arch-card plant"
+            href="#lily"
+            aria-label="릴리 프로필로 이동"
+            style="--img:url('릴리_이미지주소');"
+          >
+            <span class="arch-corner lt"></span>
+            <span class="arch-corner rb"></span>
+
+            <div class="arch-info">
+              <h3 class="arch-name">릴리</h3>
+              <span class="arch-attr">S급 풀 속성</span>
+            </div>
+          </a>
+
+          <a
+            class="arch-card lightning"
+            href="#short"
+            aria-label="쇼트 프로필로 이동"
+            style="--img:url('쇼트_이미지주소');"
+          >
+            <span class="arch-corner lt"></span>
+            <span class="arch-corner rb"></span>
+
+            <div class="arch-info">
+              <h3 class="arch-name">쇼트</h3>
+              <span class="arch-attr">S급 번개 속성</span>
+            </div>
+          </a>
+
+          <a
+            class="arch-card wind"
+            href="#nocturne"
+            aria-label="녹턴 프로필로 이동"
+            style="--img:url('녹턴_이미지주소');"
+          >
+            <span class="arch-corner lt"></span>
+            <span class="arch-corner rb"></span>
+
+            <div class="arch-info">
+              <h3 class="arch-name">녹턴</h3>
+              <span class="arch-attr">S급 바람 속성</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- ACOLYTE -->
+      <section
+        class="arch-section"
+        style="--section-color:#38bdf8; --section-glow:rgba(56,189,248,0.45);"
+      >
+        <div class="arch-section-head">
+          <div class="arch-title-block">
+            <div class="arch-title-row">
+              <span class="arch-mark"></span>
+              <h2 class="arch-section-title">ACOLYTE</h2>
+            </div>
+
+            <div class="arch-line"></div>
+          </div>
+
+          <div class="arch-class">C-CLASS</div>
+        </div>
+
+        <div class="arch-grid">
+          <a
+            class="arch-card water"
+            href="#sora"
+            aria-label="소라 프로필로 이동"
+            style="--img:url('소라_이미지주소');"
+          >
+            <span class="arch-corner lt"></span>
+            <span class="arch-corner rb"></span>
+
+            <div class="arch-info">
+              <h3 class="arch-name">소라</h3>
+              <span class="arch-attr">C급 물 속성</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- HARMONY DIV. SUPPORT -->
+      <section
+        class="arch-section"
+        style="--section-color:#9ca3af; --section-glow:rgba(156,163,175,0.42);"
+      >
+        <div class="arch-section-head">
+          <div class="arch-title-block">
+            <div class="arch-title-row">
+              <span class="arch-mark"></span>
+              <h2 class="arch-section-title">HARMONY DIV.</h2>
+            </div>
+
+            <div class="arch-line"></div>
+          </div>
+
+          <div class="arch-class">SUPPORT</div>
+        </div>
+
+        <div class="arch-grid">
+          <a
+            class="arch-card none"
+            href="#polaris"
+            aria-label="폴라리스 프로필로 이동"
+            style="--img:url('폴라리스_이미지주소');"
+          >
+            <span class="arch-corner lt"></span>
+            <span class="arch-corner rb"></span>
+
+            <div class="arch-info">
+              <h3 class="arch-name">폴라리스</h3>
+              <span class="arch-attr">A급 무속성</span>
+            </div>
+          </a>
+
+          <a
+            class="arch-card ice"
+            href="#cairn"
+            aria-label="케언 프로필로 이동"
+            style="--img:url('케언_이미지주소');"
+          >
+            <span class="arch-corner lt"></span>
+            <span class="arch-corner rb"></span>
+
+            <div class="arch-info">
+              <h3 class="arch-name">케언</h3>
+              <span class="arch-attr">S급 얼음 속성</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- HARMONY DIV. R.S.T. -->
+      <section
+        class="arch-section"
+        style="--section-color:#22c55e; --section-glow:rgba(34,197,94,0.42);"
+      >
+        <div class="arch-section-head">
+          <div class="arch-title-block">
+            <div class="arch-title-row">
+              <span class="arch-mark"></span>
+              <h2 class="arch-section-title">HARMONY DIV.</h2>
+            </div>
+
+            <div class="arch-line"></div>
+          </div>
+
+          <div class="arch-class">R.S.T. (긴급제압팀)</div>
+        </div>
+
+        <div class="arch-grid">
+          <a
+            class="arch-card none"
+            href="#dove"
+            aria-label="도브 프로필로 이동"
+            style="--img:url('도브_이미지주소');"
+          >
+            <span class="arch-corner lt"></span>
+            <span class="arch-corner rb"></span>
+
+            <div class="arch-info">
+              <h3 class="arch-name">도브</h3>
+              <span class="arch-attr">C급 무속성</span>
+            </div>
+          </a>
+
+          <a
+            class="arch-card none"
+            href="#echo"
+            aria-label="에코 프로필로 이동"
+            style="--img:url('에코_이미지주소');"
+          >
+            <span class="arch-corner lt"></span>
+            <span class="arch-corner rb"></span>
+
+            <div class="arch-info">
+              <h3 class="arch-name">에코</h3>
+              <span class="arch-attr">S급 무속성</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- HARMONY DIV. CORE -->
+      <section
+        class="arch-section"
+        style="--section-color:#b794f4; --section-glow:rgba(183,148,244,0.42);"
+      >
+        <div class="arch-section-head">
+          <div class="arch-title-block">
+            <div class="arch-title-row">
+              <span class="arch-mark"></span>
+              <h2 class="arch-section-title">HARMONY DIV.</h2>
+            </div>
+
+            <div class="arch-line"></div>
+          </div>
+
+          <div class="arch-class">CORE</div>
+        </div>
+
+        <div class="arch-grid">
+          <a
+            class="arch-card none"
+            href="#lexi"
+            aria-label="Dr. 렉시 프로필로 이동"
+            style="--img:url('렉시_이미지주소');"
+          >
+            <span class="arch-corner lt"></span>
+            <span class="arch-corner rb"></span>
+
+            <div class="arch-info">
+              <h3 class="arch-name">Dr. 렉시</h3>
+              <span class="arch-attr">S급 무속성</span>
+            </div>
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
