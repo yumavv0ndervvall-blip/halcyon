@@ -1,7 +1,4 @@
-body {
-  background: red !important;
-}
-
+body 
 * {
   box-sizing: border-box;
 }
