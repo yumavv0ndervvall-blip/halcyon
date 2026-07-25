@@ -1,333 +1,354 @@
-<div class="brief_home_alt" id="main">
-<style>
-.brief_home_alt {
-width: 100%;
-max-width: 816px;
-margin: 0 auto 44px;
-color: #e9edf2;
-font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
-}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-.brief_home_alt * {
-box-sizing: border-box;
-}
+  <title>ARCH PERSONA DATABASE</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="favicon.png">
 
-.bha_frame {
-position: relative;
-overflow: hidden;
-padding: 22px 28px 22px;
-border-top: 1px solid rgba(255,255,255,0.10);
-border-bottom: 1px solid rgba(255,255,255,0.08);
-background:
-linear-gradient(180deg, rgba(10,13,17,0.34), rgba(5,7,10,0.24));
-backdrop-filter: blur(4px);
--webkit-backdrop-filter: blur(4px);
-}
+  <style>
+    .brief_home_alt {
+      width: 100%;
+      max-width: 816px;
+      margin: 0 auto 44px;
+      color: #e9edf2;
+      font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+    }
 
-.bha_frame::before {
-content: "";
-position: absolute;
-inset: 0;
-background-image:
-linear-gradient(rgba(255,255,255,0.007) 1px, transparent 1px),
-linear-gradient(90deg, rgba(255,255,255,0.005) 1px, transparent 1px);
-background-size: 42px 42px;
-opacity: 0.10;
-pointer-events: none;
-}
+    .brief_home_alt * {
+      box-sizing: border-box;
+    }
 
-.bha_inner {
-position: relative;
-z-index: 1;
-}
+    .bha_frame {
+      position: relative;
+      overflow: hidden;
+      padding: 22px 28px 22px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(180deg, rgba(10,13,17,0.34), rgba(5,7,10,0.24));
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
 
-.bha_top {
-display: flex;
-align-items: center;
-justify-content: space-between;
-gap: 14px;
-padding-bottom: 12px;
-border-bottom: 1px solid rgba(255,255,255,0.07);
-}
+    .bha_frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.007) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.005) 1px, transparent 1px);
+      background-size: 42px 42px;
+      opacity: 0.10;
+      pointer-events: none;
+    }
 
-.bha_top_left {
-display: flex;
-align-items: center;
-gap: 8px;
-color: rgba(255,255,255,0.58);
-font-size: 10px;
-line-height: 1;
-font-weight: 850;
-letter-spacing: 0.12em;
-text-transform: uppercase;
-}
+    .bha_inner {
+      position: relative;
+      z-index: 1;
+    }
 
-.bha_top_left::before {
-content: "";
-width: 5px;
-height: 5px;
-border-radius: 50%;
-background: rgba(255,255,255,0.62);
-box-shadow: 0 0 7px rgba(255,255,255,0.16);
-}
+    .bha_top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
 
-.bha_top_right {
-color: rgba(255,255,255,0.38);
-font-size: 10px;
-line-height: 1;
-font-weight: 850;
-letter-spacing: 0.10em;
-text-transform: uppercase;
-white-space: nowrap;
-}
+    .bha_top_left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.58);
+      font-size: 10px;
+      line-height: 1;
+      font-weight: 850;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
 
-.bha_main {
-display: grid;
-grid-template-columns: 1.1fr 0.9fr;
-gap: 22px;
-padding: 34px 0 0;
-align-items: start;
-}
+    .bha_top_left::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.62);
+      box-shadow: 0 0 7px rgba(255,255,255,0.16);
+    }
 
-.bha_left {
-position: relative;
-min-height: auto;
-padding: 2px 0 0 0;
-}
+    .bha_top_right {
+      color: rgba(255,255,255,0.38);
+      font-size: 10px;
+      line-height: 1;
+      font-weight: 850;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
 
-.bha_kicker {
-color: rgba(255,255,255,0.34);
-font-size: 10px;
-line-height: 1;
-font-weight: 850;
-letter-spacing: 0.16em;
-text-transform: uppercase;
-}
+    .bha_main {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+      padding: 34px 0 0;
+      align-items: start;
+    }
 
-.bha_title {
-margin: 14px 0 0;
-color: rgba(248,250,252,0.96);
-font-size: clamp(30px, 5.8vw, 46px);
-line-height: 0.98;
-font-weight: 900;
-letter-spacing: 0.03em;
-text-transform: uppercase;
-text-shadow:
-0 0 8px rgba(255,255,255,0.10),
-0 2px 0 rgba(0,0,0,0.74);
-}
+    .bha_left {
+      position: relative;
+      min-height: auto;
+      padding: 2px 0 0 0;
+    }
 
-.bha_desc {
-max-width: 430px;
-margin: 18px 0 0;
-color: rgba(232,237,242,0.62);
-font-size: 12px;
-line-height: 1.9;
-font-weight: 700;
-letter-spacing: -0.035em;
-word-break: keep-all;
-}
+    .bha_kicker {
+      color: rgba(255,255,255,0.34);
+      font-size: 10px;
+      line-height: 1;
+      font-weight: 850;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
 
-.bha_tags {
-display: flex;
-flex-wrap: wrap;
-gap: 7px;
-margin-top: 20px;
-}
+    .bha_title {
+      margin: 14px 0 0;
+      color: rgba(248,250,252,0.96);
+      font-size: clamp(30px, 5.8vw, 46px);
+      line-height: 0.98;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      text-shadow:
+        0 0 8px rgba(255,255,255,0.10),
+        0 2px 0 rgba(0,0,0,0.74);
+    }
 
-.bha_tag {
-padding: 5px 7px;
-border: 1px solid rgba(255,255,255,0.11);
-color: rgba(255,255,255,0.48);
-background: rgba(255,255,255,0.008);
-font-size: 9px;
-line-height: 1;
-font-weight: 850;
-letter-spacing: 0.08em;
-text-transform: uppercase;
-}
+    .bha_desc {
+      max-width: 430px;
+      margin: 18px 0 0;
+      color: rgba(232,237,242,0.62);
+      font-size: 12px;
+      line-height: 1.9;
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      word-break: keep-all;
+    }
 
-.bha_right {
-display: grid;
-gap: 10px;
-}
+    .bha_tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 20px;
+    }
 
-.bha_info {
-padding: 14px 14px 12px;
-border: 1px solid rgba(255,255,255,0.09);
-background: rgba(255,255,255,0.006);
-}
+    .bha_tag {
+      padding: 5px 7px;
+      border: 1px solid rgba(255,255,255,0.11);
+      color: rgba(255,255,255,0.48);
+      background: rgba(255,255,255,0.008);
+      font-size: 9px;
+      line-height: 1;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
-.bha_info_title {
-margin: 0 0 12px;
-color: rgba(235,241,246,0.64);
-font-size: 10px;
-line-height: 1;
-font-weight: 900;
-letter-spacing: 0.10em;
-text-transform: uppercase;
-}
+    .bha_right {
+      display: grid;
+      gap: 10px;
+    }
 
-.bha_info_rows {
-display: grid;
-gap: 8px;
-}
+    .bha_info {
+      padding: 14px 14px 12px;
+      border: 1px solid rgba(255,255,255,0.09);
+      background: rgba(255,255,255,0.006);
+    }
 
-.bha_row {
-display: grid;
-grid-template-columns: 74px 1fr;
-gap: 10px;
-align-items: start;
-}
+    .bha_info_title {
+      margin: 0 0 12px;
+      color: rgba(235,241,246,0.64);
+      font-size: 10px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+    }
 
-.bha_row dt {
-color: rgba(255,255,255,0.34);
-font-size: 9px;
-line-height: 1.4;
-font-weight: 850;
-letter-spacing: 0.06em;
-text-transform: uppercase;
-margin: 0;
-}
+    .bha_info_rows {
+      display: grid;
+      gap: 8px;
+    }
 
-.bha_row dd {
-color: rgba(232,237,242,0.58);
-font-size: 10px;
-line-height: 1.6;
-font-weight: 700;
-letter-spacing: -0.02em;
-margin: 0;
-word-break: keep-all;
-}
+    .bha_row {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
 
-.bha_notice_box {
-padding: 14px 14px 12px;
-border: 1px solid rgba(255,255,255,0.09);
-background: rgba(255,255,255,0.006);
-}
+    .bha_row dt {
+      color: rgba(255,255,255,0.34);
+      font-size: 9px;
+      line-height: 1.4;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 0;
+    }
 
-.bha_notice_title {
-margin: 0 0 10px;
-color: rgba(235,241,246,0.64);
-font-size: 10px;
-line-height: 1;
-font-weight: 900;
-letter-spacing: 0.10em;
-text-transform: uppercase;
-}
+    .bha_row dd {
+      color: rgba(232,237,242,0.58);
+      font-size: 10px;
+      line-height: 1.6;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0;
+      word-break: keep-all;
+    }
 
-.bha_notice_text {
-margin: 0;
-color: rgba(232,237,242,0.50);
-font-size: 10px;
-line-height: 1.75;
-font-weight: 700;
-letter-spacing: -0.02em;
-word-break: keep-all;
-}
+    .bha_notice_box {
+      padding: 14px 14px 12px;
+      border: 1px solid rgba(255,255,255,0.09);
+      background: rgba(255,255,255,0.006);
+    }
 
-.bha_bottom_note {
-display: flex;
-align-items: center;
-justify-content: space-between;
-gap: 14px;
-margin-top: 34px;
-padding-top: 14px;
-border-top: 1px solid rgba(255,255,255,0.07);
-color: rgba(255,255,255,0.34);
-font-size: 9px;
-line-height: 1;
-font-weight: 850;
-letter-spacing: 0.10em;
-text-transform: uppercase;
-}
+    .bha_notice_title {
+      margin: 0 0 10px;
+      color: rgba(235,241,246,0.64);
+      font-size: 10px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+    }
 
-@media (max-width: 740px) {
-.bha_frame {
-padding: 22px 18px 22px;
-}
+    .bha_notice_text {
+      margin: 0;
+      color: rgba(232,237,242,0.50);
+      font-size: 10px;
+      line-height: 1.75;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      word-break: keep-all;
+    }
 
-.bha_main {
-grid-template-columns: 1fr;
-gap: 14px;
-padding: 34px 0 0;
-}
-}
+    .bha_bottom_note {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 34px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.34);
+      font-size: 9px;
+      line-height: 1;
+      font-weight: 850;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+    }
 
-@media (max-width: 620px) {
-.bha_top,
-.bha_bottom_note {
-flex-direction: column;
-align-items: flex-start;
-gap: 8px;
-}
-}
-</style>
+    @media (max-width: 740px) {
+      .bha_frame {
+        padding: 22px 18px 22px;
+      }
 
-<div class="bha_frame">
-<div class="bha_inner">
+      .bha_main {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 34px 0 0;
+      }
+    }
 
-<div class="bha_top">
-<div class="bha_top_left">ARCH PERSONA DATABASE</div>
+    @media (max-width: 620px) {
+      .bha_top,
+      .bha_bottom_note {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
 
-</div>
+<body>
 
-<section class="bha_main">
-<div class="bha_left">
-<div class="bha_kicker">CURRENT ACCESS</div>
+  <div id="nav-placeholder"></div>
+  <script src="script.js"></script>
 
-<h1 class="bha_title">ACCESS GRANTED</h1>
+  <main>
+    <div class="brief_home_alt" id="main">
+      <div class="bha_frame">
+        <div class="bha_inner">
 
-<p class="bha_desc">
-CherryMango님의 ARCH 세계관 기반 비공식 창작 설정을 기록합니다.
+          <div class="bha_top">
+            <div class="bha_top_left">ARCH PERSONA DATABASE</div>
+            <div class="bha_top_right">ACCESS LEVEL 02</div>
+          </div>
 
-</p>
+          <section class="bha_main">
+            <div class="bha_left">
+              <div class="bha_kicker">CURRENT ACCESS</div>
 
-<div class="bha_tags">
-<span class="bha_tag">PERSONA</span>
-<span class="bha_tag">UNIT FILE</span>
-<span class="bha_tag">FIELD LOG</span>
-<span class="bha_tag">DATABASE</span>
-</div>
-</div>
+              <h1 class="bha_title">ACCESS GRANTED</h1>
 
-<div class="bha_right">
-<div class="bha_info">
-<h2 class="bha_info_title">INDEX</h2>
+              <p class="bha_desc">
+                ARCH 세계관 기반 비공식 페르소나 아카이브.
+                공개된 캐릭터 명부, 부대 설정, 작전 기록 및 보조 자료를 정리합니다.
+              </p>
 
-<dl class="bha_info_rows">
-<div class="bha_row">
-<dt>ROSTER</dt>
-<dd>페르소나 프로필 명부</dd>
-</div>
+              <div class="bha_tags">
+                <span class="bha_tag">PERSONA</span>
+                <span class="bha_tag">UNIT FILE</span>
+                <span class="bha_tag">FIELD LOG</span>
+                <span class="bha_tag">DATABASE</span>
+              </div>
+            </div>
 
-<div class="bha_row">
-<dt>UNIT</dt>
-<dd>창작 유닛 설정</dd>
-</div>
+            <div class="bha_right">
+              <div class="bha_info">
+                <h2 class="bha_info_title">INDEX</h2>
 
-<div class="bha_row">
-<dt>ARCHIVE</dt>
-<dd>아카이빙 사이트</dd>
-</div>
-</dl>
-</div>
+                <dl class="bha_info_rows">
+                  <div class="bha_row">
+                    <dt>ROSTER</dt>
+                    <dd>공개된 페르소나 프로필과 소속별 명부.</dd>
+                  </div>
 
-<div class="bha_notice_box">
-<h2 class="bha_notice_title">NOTICE</h2>
-<p class="bha_notice_text">
-본 페이지는 개인 2차 창작 사이트이며 원작 및 원작자와 공식적인 관계가 없습니다.
-일부 설정에는 민감한 소재가 포함될 수 있으며, 사이트 내 모든 이미지는 AI 생성 이미지를 포함합니다.
-</p>
-</div>
-</div>
-</section>
+                  <div class="bha_row">
+                    <dt>UNIT</dt>
+                    <dd>리어가드, SFS 및 관련 부대 설정 기록.</dd>
+                  </div>
 
-<div class="bha_bottom_note">
-<span>UNOFFICIAL PERSONA ARCHIVE</span>
-<span>AI GENERATED IMAGE INCLUDED</span>
-</div>
+                  <div class="bha_row">
+                    <dt>ARCHIVE</dt>
+                    <dd>사건 로그, 용어, 세계관 보조 자료 보관.</dd>
+                  </div>
+                </dl>
+              </div>
 
-</div>
-</div>
-</div>
+              <div class="bha_notice_box">
+                <h2 class="bha_notice_title">NOTICE</h2>
+                <p class="bha_notice_text">
+                  본 페이지는 개인 2차 창작 사이트이며 원작 및 원작자와 공식적인 관계가 없습니다.
+                  일부 설정에는 민감한 소재가 포함될 수 있으며, 사이트 내 일부 이미지는 AI 생성 이미지를 포함합니다.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <div class="bha_bottom_note">
+            <span>UNOFFICIAL PERSONA ARCHIVE</span>
+            <span>AI GENERATED IMAGE INCLUDED</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
