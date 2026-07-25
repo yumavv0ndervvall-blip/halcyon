@@ -138,7 +138,7 @@ body.home_center main {
 #nav-placeholder {
   width: 100%;
   max-width: var(--max_width);
-  margin: 56px auto 34px;
+  margin: 24px auto 34px;
   padding: 0;
   background: transparent;
 }
