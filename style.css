@@ -14,9 +14,6 @@
   --line_soft: rgba(255, 255, 255, 0.10);
   --line_mid: rgba(255, 255, 255, 0.16);
 
-  --panel_bg: rgba(10, 13, 17, 0.34);
-  --panel_bg_dark: rgba(5, 7, 10, 0.42);
-
   --white_glow: rgba(255, 255, 255, 0.18);
 
   --max_width: 816px;
@@ -53,14 +50,16 @@ button {
   font-family: inherit;
 }
 
+/* ==============================
+   COMMON LAYOUT
+============================== */
+
 main {
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
   padding: 0 20px 80px;
 }
-
-/* 공통 페이지 제목 */
 
 .page_title {
   width: 100%;
@@ -102,14 +101,22 @@ main {
   word-break: keep-all;
 }
 
-/* 메뉴 */
+/* ==============================
+   NAVIGATION
+============================== */
+
+#nav-placeholder {
+  width: 100%;
+  background: transparent;
+  padding-top: 16px;
+}
 
 .site_header {
   position: relative;
-  z-index: 20;
+  z-index: 50;
   width: calc(100% - 40px);
   max-width: var(--max_width);
-  margin: 26px auto 18px;
+  margin: 0 auto 18px;
   background: transparent;
 }
 
@@ -130,11 +137,14 @@ main {
   grid-template-columns: repeat(4, 1fr);
   border-top: 1px solid rgba(255,255,255,0.14);
   border-bottom: 1px solid rgba(255,255,255,0.10);
+  background: transparent;
+  overflow: visible;
 }
 
 .site_nav a,
 .nav_dropdown > button {
   position: relative;
+  width: 100%;
   min-height: 42px;
   display: flex;
   align-items: center;
@@ -142,6 +152,8 @@ main {
   color: rgba(255,255,255,0.56);
   background: transparent;
   border: 0;
+  appearance: none;
+  -webkit-appearance: none;
   text-decoration: none;
   font-size: 11px;
   line-height: 1;
@@ -151,6 +163,8 @@ main {
   cursor: pointer;
   transition: 0.16s ease;
   white-space: nowrap;
+  padding: 0;
+  margin: 0;
 }
 
 .site_nav a::after,
@@ -169,7 +183,7 @@ main {
 .nav_dropdown:hover > button {
   color: rgba(255,255,255,0.96);
   background: rgba(255,255,255,0.025);
-  text-shadow: 0 0 8px var(--white_glow);
+  text-shadow: 0 0 8px rgba(255,255,255,0.18);
 }
 
 .site_nav a:hover::after,
@@ -187,7 +201,7 @@ main {
   position: absolute;
   left: 50%;
   top: 100%;
-  z-index: 50;
+  z-index: 100;
   width: 154px;
   transform: translateX(-50%);
   padding: 6px;
@@ -222,7 +236,9 @@ main {
   display: none;
 }
 
-/* 대문 */
+/* ==============================
+   MAIN PAGE
+============================== */
 
 .brief_home_alt {
   width: 100%;
@@ -445,31 +461,150 @@ main {
   text-transform: uppercase;
 }
 
-/* 로스터 */
+/* ==============================
+   ORIGINAL ARCH ROSTER
+============================== */
 
-.roster_page {
+.arch-roster {
+  --frame: #11151a;
+  --line: #3b4b5e;
+  --line-soft: rgba(148, 163, 184, 0.14);
+  --text: #edf4ff;
+  --muted: #778290;
+
   width: 100%;
-  max-width: var(--max_width);
+  max-width: 816px;
   margin: 0 auto 44px;
+  color: var(--text);
+  font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
 }
 
-.roster_section {
-  margin-top: 24px;
-  padding-top: 18px;
-  border-top: 1px solid rgba(255,255,255,0.11);
+.arch-roster * {
+  box-sizing: border-box;
 }
 
-.roster_section_head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 14px;
-  margin-bottom: 14px;
+.roster_notice {
+  width: 100%;
+  max-width: 816px;
+  margin: 0 auto 18px;
+  padding: 14px 16px;
+  border: 1px solid rgba(148, 163, 184, 0.20);
+  background: rgba(10, 13, 17, 0.34);
+  color: rgba(232,237,242,0.58);
+  font-size: 10px;
+  line-height: 1.8;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  word-break: keep-all;
 }
 
-.roster_section_title {
+.roster_notice b {
+  display: block;
+  margin-bottom: 7px;
+  color: rgba(248,250,252,0.78);
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.roster_notice a {
+  color: rgba(255,255,255,0.82);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.arch-frame {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 20px 24px 42px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.055), transparent 34%),
+    linear-gradient(180deg, #12161c 0%, #0d1014 100%);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.02) inset,
+    0 20px 55px rgba(0, 0, 0, 0.38);
+}
+
+.arch-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.014) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+.arch-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.arch-top {
+  text-align: center;
+  padding: 0 0 20px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.arch-top h1 {
   margin: 0;
-  color: rgba(248,250,252,0.92);
+  color: #f8fbff;
+  font-family: Impact, "Arial Black", Pretendard, sans-serif;
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 7px rgba(255,255,255,0.28),
+    0 2px 0 rgba(0,0,0,0.85);
+}
+
+.arch-section {
+  margin-top: 34px;
+}
+
+.arch-section:first-of-type {
+  margin-top: 0;
+}
+
+.arch-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.arch-title-block {
+  flex: 1;
+  max-width: 620px;
+}
+
+.arch-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.arch-mark {
+  width: 7px;
+  height: 20px;
+  background: var(--section-color);
+  box-shadow: 0 0 12px var(--section-glow);
+}
+
+.arch-section-title {
+  margin: 0;
+  color: #edf4ff;
   font-size: 20px;
   line-height: 1;
   font-weight: 900;
@@ -478,71 +613,198 @@ main {
   text-shadow: 0 2px 0 rgba(0,0,0,0.65);
 }
 
-.roster_section_sub {
-  color: rgba(255,255,255,0.42);
-  font-size: 10px;
+.arch-line {
+  width: 100%;
+  height: 2px;
+  margin-top: 8px;
+  background: linear-gradient(
+    90deg,
+    var(--section-color) 0%,
+    var(--section-color) 58%,
+    rgba(255,255,255,0.045) 100%
+  );
+  box-shadow: 0 0 10px var(--section-glow);
+}
+
+.arch-class {
+  min-width: 120px;
+  text-align: right;
+  color: var(--section-color);
+  font-size: 13px;
+  font-weight: 800;
   line-height: 1;
-  font-weight: 850;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
+  letter-spacing: 0.01em;
+  text-shadow: 0 0 8px var(--section-glow);
   white-space: nowrap;
 }
 
-.roster_grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
-  gap: 14px;
+.arch-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
-.roster_card {
+.harmony-section .arch-card {
+  border-color: rgba(255, 255, 255, 0.52);
+}
+
+.arch-card {
+  --accent: #38bdf8;
+  --img: none;
+
   position: relative;
+  display: block;
+  width: 128px;
+  height: 172px;
   overflow: hidden;
-  min-height: 184px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(255,255,255,0.025);
-  transition: 0.18s ease;
-}
-
-.roster_card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(255,255,255,0.42);
-  box-shadow:
-    0 14px 28px rgba(0,0,0,0.46),
-    0 0 18px rgba(255,255,255,0.08);
-}
-
-.roster_img {
-  height: 132px;
+  border-radius: 7px;
+  border: 1px solid rgba(96, 165, 250, 0.62);
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.18)),
-    var(--img);
+    radial-gradient(circle at 50% 18%, rgba(120, 160, 190, 0.16), transparent 42%),
+    linear-gradient(180deg, #151a22 0%, #050608 100%);
+  text-decoration: none;
+  color: #ffffff;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.025) inset,
+    0 10px 22px rgba(0,0,0,0.34);
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
+}
+
+.arch-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow:
+    0 14px 28px rgba(0,0,0,0.48),
+    0 0 18px rgba(56, 189, 248, 0.32),
+    0 0 0 1px rgba(255,255,255,0.035) inset;
+  filter: brightness(1.08);
+}
+
+.arch-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: var(--img);
   background-size: cover;
-  background-position: center;
-  filter: saturate(0.95) contrast(1.02);
+  background-position: center top;
+  transform: scale(1.01);
+  transition: 0.24s ease;
 }
 
-.roster_info {
-  padding: 10px 10px 11px;
+.arch-card:hover::before {
+  transform: scale(1.055);
 }
 
-.roster_name {
-  color: rgba(248,250,252,0.96);
+.arch-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,0.08) 0%, transparent 26%),
+    linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.68) 25%, rgba(0,0,0,0.18) 52%, transparent 100%),
+    radial-gradient(circle at 50% 18%, rgba(255,255,255,0.10), transparent 38%);
+  pointer-events: none;
+}
+
+.arch-corner {
+  position: absolute;
+  z-index: 3;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+
+.arch-corner.lt {
+  top: 6px;
+  left: 6px;
+  border-top: 1px solid rgba(255,255,255,0.42);
+  border-left: 1px solid rgba(255,255,255,0.42);
+}
+
+.arch-corner.rb {
+  right: 6px;
+  bottom: 6px;
+  border-right: 1px solid rgba(255,255,255,0.24);
+  border-bottom: 1px solid rgba(255,255,255,0.24);
+}
+
+.arch-info {
+  position: absolute;
+  z-index: 4;
+  left: 9px;
+  right: 8px;
+  bottom: 9px;
+}
+
+.arch-name {
+  margin: 0 0 7px;
+  color: #fff;
   font-size: 15px;
   line-height: 1;
-  font-weight: 900;
-  letter-spacing: -0.05em;
-}
-
-.roster_meta {
-  margin-top: 7px;
-  color: rgba(255,255,255,0.48);
-  font-size: 9px;
-  line-height: 1.35;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.05em;
+  text-shadow:
+    0 0 5px rgba(0,0,0,1),
+    0 2px 2px rgba(0,0,0,0.95);
+  word-break: keep-all;
 }
 
-/* 프로필 */
+.arch-attr {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 21px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 550;
+  letter-spacing: -0.06em;
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.45),
+    0 0 10px rgba(255,255,255,0.08);
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+.arch-card.fire { --accent: #EA473B; }
+.arch-card.plant { --accent: #65B161; }
+.arch-card.lightning { --accent: #F8BF00; }
+.arch-card.wind { --accent: #23C56E; }
+.arch-card.ice { --accent: #9CD2D3; }
+.arch-card.water { --accent: #3195E0; }
+.arch-card.none { --accent: #64748b; }
+
+.arch-card.fire .arch-attr { background: #EA473B; }
+.arch-card.plant .arch-attr { background: #65B161; }
+
+.arch-card.lightning .arch-attr {
+  background: #F8BF00;
+  color: #1A1D24;
+}
+
+.arch-card.wind .arch-attr { background: #23C56E; }
+
+.arch-card.ice .arch-attr {
+  background: #9CD2D3;
+  color: #1A1D24;
+}
+
+.arch-card.water .arch-attr { background: #1798d4; }
+.arch-card.none .arch-attr { background: #64748b; }
+
+/* ==============================
+   PROFILE PAGE
+============================== */
 
 .profile_page {
   width: 100%;
@@ -663,7 +925,9 @@ main {
   word-break: keep-all;
 }
 
-/* 유닛 목록 */
+/* ==============================
+   UNIT PAGE
+============================== */
 
 .unit_page {
   width: 100%;
@@ -725,7 +989,9 @@ main {
   word-break: keep-all;
 }
 
-/* 아카이브 */
+/* ==============================
+   ARCHIVE PAGE
+============================== */
 
 .archive_page {
   width: 100%;
@@ -765,14 +1031,43 @@ main {
   word-break: keep-all;
 }
 
-/* 반응형 */
+/* ==============================
+   RESPONSIVE
+============================== */
 
-@media (max-width: 740px) {
-  .site_header {
-    width: calc(100% - 28px);
-    margin: 22px auto 18px;
+@media (max-width: 780px) {
+  .arch-frame {
+    padding: 18px 16px 34px;
   }
 
+  .arch-top h1 {
+    font-size: 25px;
+  }
+
+  .arch-section-head {
+    gap: 12px;
+  }
+
+  .arch-section-title {
+    font-size: 19px;
+  }
+
+  .arch-class {
+    min-width: 92px;
+    font-size: 12px;
+  }
+
+  .arch-grid {
+    gap: 12px;
+  }
+
+  .arch-card {
+    width: calc(50% - 6px);
+    height: 194px;
+  }
+}
+
+@media (max-width: 740px) {
   main {
     padding: 0 14px 70px;
   }
@@ -807,10 +1102,6 @@ main {
     gap: 8px;
   }
 
-  .roster_grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .profile_table,
   .profile_table tbody,
   .profile_table tr,
@@ -830,6 +1121,14 @@ main {
 }
 
 @media (max-width: 560px) {
+  #nav-placeholder {
+    padding-top: 12px;
+  }
+
+  .site_header {
+    width: calc(100% - 28px);
+  }
+
   .site_nav a,
   .nav_dropdown > button {
     min-height: 40px;
@@ -844,12 +1143,23 @@ main {
   .site_header_label {
     font-size: 9px;
   }
+}
 
-  .roster_card {
-    min-height: 174px;
+@media (max-width: 420px) {
+  .arch-frame {
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
-  .roster_img {
-    height: 122px;
+  .arch-card {
+    height: 180px;
+  }
+
+  .arch-name {
+    font-size: 14px;
+  }
+
+  .arch-attr {
+    font-size: 10px;
   }
 }
