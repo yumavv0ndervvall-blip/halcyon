@@ -1040,41 +1040,14 @@ main {
    RESPONSIVE
 ============================== */
 
-@media (max-width: 780px) {
-  .arch-frame {
-    padding: 18px 16px 34px;
-  }
-
-  .arch-top h1 {
-    font-size: 25px;
-  }
-
-  .arch-section-head {
-    gap: 12px;
-  }
-
-  .arch-section-title {
-    font-size: 19px;
-  }
-
-  .arch-class {
-    min-width: 92px;
-    font-size: 12px;
-  }
-
-  .arch-grid {
-    gap: 12px;
-  }
-
-  .arch-card {
-    width: calc(50% - 6px);
-    height: 194px;
-  }
-}
-
 @media (max-width: 740px) {
   main {
-    padding: 0 14px 70px;
+    width: calc(100% - 28px);
+    padding: 0 0 70px;
+  }
+
+  .site_header {
+    width: calc(100% - 28px);
   }
 
   .bha_frame {
