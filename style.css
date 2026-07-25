@@ -107,8 +107,9 @@ main {
 
 #nav-placeholder {
   width: 100%;
+  margin: 0;
+  padding: 0;
   background: transparent;
-  padding-top: 16px;
 }
 
 .site_header {
@@ -117,35 +118,39 @@ main {
   width: calc(100% - 40px);
   max-width: var(--max_width);
   margin: 0 auto 18px;
+  padding: 0;
   background: transparent;
 }
 
 .site_header_label {
-  display: block;
-  padding: 0 0 10px;
-  color: rgba(255,255,255,0.50);
-  font-size: 10px;
-  line-height: 1;
-  font-weight: 900;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  display: none;
 }
 
 .site_nav {
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
   border-top: 1px solid rgba(255,255,255,0.14);
   border-bottom: 1px solid rgba(255,255,255,0.10);
   background: transparent;
   overflow: visible;
 }
 
+.site_nav > a,
+.site_nav > .nav_dropdown {
+  flex: 1 1 0;
+  height: 100%;
+  min-width: 0;
+}
+
 .site_nav a,
 .nav_dropdown > button {
   position: relative;
   width: 100%;
-  min-height: 42px;
+  height: 100%;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -171,8 +176,8 @@ main {
 .nav_dropdown > button::after {
   content: "";
   position: absolute;
-  left: 30%;
-  right: 30%;
+  left: 32%;
+  right: 32%;
   bottom: 0;
   height: 2px;
   background: transparent;
@@ -194,7 +199,6 @@ main {
 
 .nav_dropdown {
   position: relative;
-  min-width: 0;
 }
 
 .nav_dropdown_menu {
@@ -222,6 +226,7 @@ main {
 
 .nav_dropdown_menu a {
   min-height: 34px;
+  height: 34px;
   justify-content: flex-start;
   padding: 0 10px;
   font-size: 10px;
