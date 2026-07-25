@@ -38,10 +38,6 @@ body {
 
 body.home_center {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   padding: 0;
 }
 
@@ -71,12 +67,30 @@ main {
 }
 
 body.home_center main {
-  width: calc(100% - 40px);
+  width: 100%;
   max-width: var(--max_width);
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
-  flex: 0 0 auto;
 }
+
+/* ==============================
+   HOME CENTER WRAPPER
+============================== */
+
+.home_stage {
+  width: 100%;
+  min-height: 100vh;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-12px);
+}
+
+/* ==============================
+   PAGE TITLE
+============================== */
 
 .page_title {
   width: 100%;
@@ -123,19 +137,6 @@ body.home_center main {
 ============================== */
 
 #nav-placeholder {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  background: transparent;
-}
-
-body.home_center #nav-placeholder {
-  flex: 0 0 auto;
-}
-
-.site_header {
-  position: relative;
-  z-index: 50;
   width: calc(100% - 40px);
   max-width: var(--max_width);
   margin: 0 auto 32px;
@@ -143,8 +144,20 @@ body.home_center #nav-placeholder {
   background: transparent;
 }
 
-body.home_center .site_header {
-  margin: 0 auto 28px;
+.home_stage #nav-placeholder {
+  width: 100%;
+  max-width: var(--max_width);
+  margin: 0 0 32px;
+}
+
+.site_header {
+  position: relative;
+  z-index: 50;
+  width: 100%;
+  max-width: var(--max_width);
+  margin: 0;
+  padding: 0;
+  background: transparent;
 }
 
 .site_header_label {
@@ -195,6 +208,11 @@ body.home_center .site_header {
   white-space: nowrap;
   padding: 0;
   margin: 0;
+}
+
+.site_nav > a:not(:last-child),
+.site_nav > .nav_dropdown {
+  border-right: 1px solid rgba(255,255,255,0.08);
 }
 
 .site_nav a::after,
@@ -1102,21 +1120,28 @@ body.home_center .brief_home_alt {
 }
 
 @media (max-width: 740px) {
-  body.home_center {
+  .home_stage {
+    min-height: auto;
     justify-content: flex-start;
-    padding-top: 28px;
+    padding: 28px 14px 70px;
+    transform: none;
   }
 
   main,
   body.home_center main {
-    width: calc(100% - 28px);
-    padding: 0 0 70px;
+    width: 100%;
+    padding: 0;
   }
 
-  .site_header,
-  body.home_center .site_header {
-    width: calc(100% - 28px);
-    margin: 0 auto 22px;
+  #nav-placeholder,
+  .home_stage #nav-placeholder {
+    width: 100%;
+    margin: 0 0 22px;
+  }
+
+  .site_header {
+    width: 100%;
+    margin: 0;
   }
 
   .bha_frame {
