@@ -2,9 +2,29 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg_top: #111827;
+  --bg_mid: #0a0d14;
+  --bg_bottom: #05070a;
+
+  --text_main: #e9edf2;
+  --text_sub: rgba(232, 237, 242, 0.62);
+  --text_dim: rgba(255, 255, 255, 0.38);
+
+  --line_soft: rgba(255, 255, 255, 0.10);
+  --line_mid: rgba(255, 255, 255, 0.16);
+
+  --panel_bg: rgba(10, 13, 17, 0.34);
+  --panel_bg_dark: rgba(5, 7, 10, 0.42);
+
+  --white_glow: rgba(255, 255, 255, 0.18);
+
+  --max_width: 816px;
+}
+
 html {
   min-height: 100%;
-  background: #05070a;
+  background: var(--bg_bottom);
 }
 
 body {
@@ -14,13 +34,23 @@ body {
   background:
     radial-gradient(circle at top left, rgba(45, 52, 66, 0.28), transparent 34%),
     radial-gradient(circle at top right, rgba(32, 38, 49, 0.20), transparent 32%),
-    linear-gradient(180deg, #111827 0%, #0a0d14 55%, #05070a 100%);
-  color: #e9edf2;
+    linear-gradient(180deg, var(--bg_top) 0%, var(--bg_mid) 55%, var(--bg_bottom) 100%);
+  color: var(--text_main);
   font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
 }
 
 a {
   color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
 }
 
 main {
@@ -30,20 +60,60 @@ main {
   padding: 0 20px 80px;
 }
 
-/* 메뉴 */
+/* 공통 페이지 */
 
-.site-header {
-  position: relative;
-  z-index: 10;
+.page_title {
   width: 100%;
-  max-width: 816px;
-  margin: 38px auto 22px;
-  background: transparent;
-  border-top: 1px solid rgba(255,255,255,0.14);
-  border-bottom: 1px solid rgba(255,255,255,0.10);
+  max-width: var(--max_width);
+  margin: 0 auto 22px;
 }
 
-.site-header::before {
+.page_label {
+  margin-bottom: 10px;
+  color: rgba(255,255,255,0.42);
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.page_title h1 {
+  margin: 0;
+  color: rgba(248,250,252,0.96);
+  font-size: clamp(34px, 7vw, 62px);
+  line-height: 0.95;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 8px rgba(255,255,255,0.10),
+    0 2px 0 rgba(0,0,0,0.74);
+}
+
+.page_desc {
+  max-width: 620px;
+  margin: 14px 0 0;
+  color: var(--text_sub);
+  font-size: 12px;
+  line-height: 1.9;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  word-break: keep-all;
+}
+
+/* 메뉴 */
+
+.site_header {
+  position: relative;
+  z-index: 20;
+  width: calc(100% - 40px);
+  max-width: var(--max_width);
+  margin: 38px auto 22px;
+  background: transparent;
+}
+
+.site_header::before {
   content: "ARCH DB";
   display: block;
   padding: 0 0 12px;
@@ -55,17 +125,16 @@ main {
   text-transform: uppercase;
 }
 
-.site-nav {
+.site_nav {
   width: 100%;
-  max-width: 816px;
-  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  align-items: stretch;
+  border-top: 1px solid rgba(255,255,255,0.14);
+  border-bottom: 1px solid rgba(255,255,255,0.10);
 }
 
-.site-nav a,
-.nav-dropdown > button {
+.site_nav a,
+.nav_dropdown > button {
   position: relative;
   min-height: 42px;
   display: flex;
@@ -75,7 +144,6 @@ main {
   background: transparent;
   border: 0;
   text-decoration: none;
-  font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
   font-size: 11px;
   font-weight: 850;
   letter-spacing: 0.08em;
@@ -84,8 +152,8 @@ main {
   transition: 0.16s ease;
 }
 
-.site-nav a::after,
-.nav-dropdown > button::after {
+.site_nav a::after,
+.nav_dropdown > button::after {
   content: "";
   position: absolute;
   left: 30%;
@@ -96,28 +164,28 @@ main {
   transition: 0.16s ease;
 }
 
-.site-nav a:hover,
-.nav-dropdown:hover > button {
+.site_nav a:hover,
+.nav_dropdown:hover > button {
   color: rgba(255,255,255,0.96);
   background: rgba(255,255,255,0.025);
-  text-shadow: 0 0 8px rgba(255,255,255,0.18);
+  text-shadow: 0 0 8px var(--white_glow);
 }
 
-.site-nav a:hover::after,
-.nav-dropdown:hover > button::after {
+.site_nav a:hover::after,
+.nav_dropdown:hover > button::after {
   background: rgba(255,255,255,0.82);
   box-shadow: 0 0 9px rgba(255,255,255,0.25);
 }
 
-.nav-dropdown {
+.nav_dropdown {
   position: relative;
 }
 
-.nav-dropdown-menu {
+.nav_dropdown_menu {
   position: absolute;
   left: 50%;
   top: 100%;
-  width: 150px;
+  width: 154px;
   transform: translateX(-50%);
   padding: 6px;
   background: rgba(8, 11, 16, 0.96);
@@ -129,13 +197,13 @@ main {
   transition: 0.16s ease;
 }
 
-.nav-dropdown:hover .nav-dropdown-menu {
+.nav_dropdown:hover .nav_dropdown_menu {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
 }
 
-.nav-dropdown-menu a {
+.nav_dropdown_menu a {
   min-height: 34px;
   justify-content: flex-start;
   padding: 0 10px;
@@ -143,11 +211,11 @@ main {
   border-bottom: 1px solid rgba(255,255,255,0.07);
 }
 
-.nav-dropdown-menu a:last-child {
+.nav_dropdown_menu a:last-child {
   border-bottom: 0;
 }
 
-.nav-dropdown-menu a::after {
+.nav_dropdown_menu a::after {
   display: none;
 }
 
@@ -155,20 +223,15 @@ main {
 
 .brief_home_alt {
   width: 100%;
-  max-width: 816px;
+  max-width: var(--max_width);
   margin: 0 auto 44px;
-  color: #e9edf2;
-  font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
-}
-
-.brief_home_alt * {
-  box-sizing: border-box;
+  color: var(--text_main);
 }
 
 .bha_frame {
   position: relative;
   overflow: hidden;
-  padding: 22px 28px 22px;
+  padding: 22px 28px;
   border-top: 1px solid rgba(255,255,255,0.10);
   border-bottom: 1px solid rgba(255,255,255,0.08);
   background:
@@ -240,12 +303,6 @@ main {
   gap: 22px;
   padding: 34px 0 0;
   align-items: start;
-}
-
-.bha_left {
-  position: relative;
-  min-height: auto;
-  padding: 2px 0 0 0;
 }
 
 .bha_kicker {
@@ -385,12 +442,292 @@ main {
   text-transform: uppercase;
 }
 
-/* 모바일 */
+/* 로스터 */
+
+.roster_page {
+  width: 100%;
+  max-width: var(--max_width);
+  margin: 0 auto 44px;
+}
+
+.roster_section {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,0.11);
+}
+
+.roster_section_head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.roster_section_title {
+  margin: 0;
+  color: rgba(248,250,252,0.92);
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.65);
+}
+
+.roster_section_sub {
+  color: rgba(255,255,255,0.42);
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.roster_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+  gap: 14px;
+}
+
+.roster_card {
+  position: relative;
+  overflow: hidden;
+  min-height: 184px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.025);
+  transition: 0.18s ease;
+}
+
+.roster_card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255,255,255,0.42);
+  box-shadow:
+    0 14px 28px rgba(0,0,0,0.46),
+    0 0 18px rgba(255,255,255,0.08);
+}
+
+.roster_img {
+  height: 132px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.18)),
+    var(--img);
+  background-size: cover;
+  background-position: center;
+  filter: saturate(0.95) contrast(1.02);
+}
+
+.roster_info {
+  padding: 10px 10px 11px;
+}
+
+.roster_name {
+  color: rgba(248,250,252,0.96);
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+.roster_meta {
+  margin-top: 7px;
+  color: rgba(255,255,255,0.48);
+  font-size: 9px;
+  line-height: 1.35;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* 프로필 */
+
+.profile_page {
+  width: 100%;
+  max-width: var(--max_width);
+  margin: 0 auto 44px;
+}
+
+.profile_panel {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 18px;
+  padding: 18px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  border-bottom: 1px solid rgba(255,255,255,0.09);
+  background: rgba(10,13,17,0.30);
+}
+
+.profile_image {
+  min-height: 360px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.18)),
+    var(--img);
+  background-size: cover;
+  background-position: center;
+}
+
+.profile_content {
+  min-width: 0;
+}
+
+.profile_code {
+  color: rgba(255,255,255,0.38);
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.profile_name {
+  margin: 12px 0 0;
+  color: rgba(248,250,252,0.96);
+  font-size: clamp(34px, 6vw, 54px);
+  line-height: 0.95;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+.profile_summary {
+  margin: 16px 0 0;
+  color: rgba(232,237,242,0.62);
+  font-size: 12px;
+  line-height: 1.9;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  word-break: keep-all;
+}
+
+.profile_table {
+  width: 100%;
+  margin-top: 18px;
+  border-collapse: collapse;
+}
+
+.profile_table tr {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.profile_table th {
+  width: 92px;
+  padding: 10px 12px 10px 0;
+  color: rgba(255,255,255,0.38);
+  font-size: 10px;
+  line-height: 1.5;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+  vertical-align: top;
+}
+
+.profile_table td {
+  padding: 10px 0;
+  color: rgba(232,237,242,0.72);
+  font-size: 12px;
+  line-height: 1.7;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  word-break: keep-all;
+  vertical-align: top;
+}
+
+.profile_section {
+  margin-top: 18px;
+  padding: 15px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.012);
+}
+
+.profile_section h2 {
+  margin: 0 0 10px;
+  color: rgba(248,250,252,0.86);
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+}
+
+.profile_section p {
+  margin: 0;
+  color: rgba(232,237,242,0.62);
+  font-size: 12px;
+  line-height: 1.9;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  word-break: keep-all;
+}
+
+/* 유닛 목록 */
+
+.unit_page {
+  width: 100%;
+  max-width: var(--max_width);
+  margin: 0 auto 44px;
+}
+
+.unit_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.unit_card {
+  display: block;
+  min-height: 150px;
+  padding: 18px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(10,13,17,0.30);
+  transition: 0.18s ease;
+}
+
+.unit_card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255,255,255,0.34);
+  background: rgba(255,255,255,0.035);
+  box-shadow:
+    0 14px 28px rgba(0,0,0,0.36),
+    0 0 16px rgba(255,255,255,0.08);
+}
+
+.unit_code {
+  color: rgba(255,255,255,0.36);
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.unit_name {
+  margin: 13px 0 0;
+  color: rgba(248,250,252,0.94);
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+.unit_desc {
+  margin: 12px 0 0;
+  color: rgba(232,237,242,0.56);
+  font-size: 11px;
+  line-height: 1.75;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  word-break: keep-all;
+}
+
+/* 반응형 */
 
 @media (max-width: 740px) {
-  .site-header {
-    margin: 28px auto 18px;
+  .site_header {
     width: calc(100% - 28px);
+    margin: 28px auto 18px;
   }
 
   main {
@@ -398,13 +735,24 @@ main {
   }
 
   .bha_frame {
-    padding: 22px 18px 22px;
+    padding: 22px 18px;
   }
 
   .bha_main {
     grid-template-columns: 1fr;
     gap: 14px;
-    padding: 34px 0 0;
+  }
+
+  .profile_panel {
+    grid-template-columns: 1fr;
+  }
+
+  .profile_image {
+    min-height: 420px;
+  }
+
+  .unit_grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -415,21 +763,50 @@ main {
     align-items: flex-start;
     gap: 8px;
   }
+
+  .roster_grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .profile_table,
+  .profile_table tbody,
+  .profile_table tr,
+  .profile_table th,
+  .profile_table td {
+    display: block;
+    width: 100%;
+  }
+
+  .profile_table th {
+    padding: 10px 0 3px;
+  }
+
+  .profile_table td {
+    padding: 0 0 10px;
+  }
 }
 
 @media (max-width: 560px) {
-  .site-nav a,
-  .nav-dropdown > button {
+  .site_nav a,
+  .nav_dropdown > button {
     min-height: 40px;
     font-size: 10px;
     letter-spacing: 0.05em;
   }
 
-  .nav-dropdown-menu {
+  .nav_dropdown_menu {
     width: 130px;
   }
 
-  .site-header::before {
+  .site_header::before {
     font-size: 9px;
+  }
+
+  .roster_card {
+    min-height: 174px;
+  }
+
+  .roster_img {
+    height: 122px;
   }
 }
