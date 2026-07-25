@@ -60,7 +60,7 @@ button {
 ============================== */
 
 main {
-  width: calc(100% - 40px);
+  width: 100%;
   max-width: var(--max_width);
   margin: 0 auto;
   padding: 0 0 80px;
@@ -80,12 +80,11 @@ body.home_center main {
 .home_stage {
   width: 100%;
   min-height: 100vh;
-  padding: 0 20px;
+  padding: 52px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transform: translateY(-12px);
 }
 
 /* ==============================
@@ -137,9 +136,9 @@ body.home_center main {
 ============================== */
 
 #nav-placeholder {
-  width: calc(100% - 40px);
+  width: 100%;
   max-width: var(--max_width);
-  margin: 0 auto 32px;
+  margin: 56px auto 34px;
   padding: 0;
   background: transparent;
 }
@@ -147,7 +146,7 @@ body.home_center main {
 .home_stage #nav-placeholder {
   width: 100%;
   max-width: var(--max_width);
-  margin: 0 0 32px;
+  margin: 0 0 34px;
 }
 
 .site_header {
@@ -519,8 +518,8 @@ body.home_center .brief_home_alt {
 
 .arch-roster {
   --frame: #11151a;
-  --line: #3b4b5e;
-  --line-soft: rgba(148, 163, 184, 0.14);
+  --line: rgba(255,255,255,0.10);
+  --line-soft: rgba(255,255,255,0.07);
   --text: #edf4ff;
   --muted: #778290;
 
@@ -538,31 +537,54 @@ body.home_center .brief_home_alt {
 .roster_notice {
   width: 100%;
   max-width: var(--max_width);
-  margin: 0 auto 18px;
-  padding: 14px 16px;
-  border: 1px solid rgba(148, 163, 184, 0.20);
-  background: rgba(10, 13, 17, 0.34);
-  color: rgba(232,237,242,0.58);
-  font-size: 10px;
-  line-height: 1.8;
+  margin: 0 auto 26px;
+  padding: 18px 20px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background:
+    linear-gradient(180deg, rgba(10,13,17,0.34), rgba(5,7,10,0.24));
+  color: rgba(232,237,242,0.72);
+  font-size: 12px;
+  line-height: 1.9;
   font-weight: 700;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
   word-break: keep-all;
 }
 
 .roster_notice b {
-  display: block;
-  margin-bottom: 7px;
-  color: rgba(248,250,252,0.78);
-  font-size: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+  color: rgba(248,250,252,0.88);
+  font-size: 11px;
   line-height: 1;
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
+.roster_notice b::before {
+  content: "!";
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.92);
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 900;
+}
+
 .roster_notice a {
-  color: rgba(255,255,255,0.82);
+  color: rgba(255,255,255,0.86);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -571,15 +593,15 @@ body.home_center .brief_home_alt {
   position: relative;
   overflow: hidden;
   width: 100%;
-  padding: 20px 24px 42px;
+  padding: 22px 0 34px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0;
+  box-shadow: none;
   background:
-    radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.055), transparent 34%),
-    linear-gradient(180deg, #12161c 0%, #0d1014 100%);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.02) inset,
-    0 20px 55px rgba(0, 0, 0, 0.38);
+    linear-gradient(180deg, rgba(10,13,17,0.34), rgba(5,7,10,0.24));
 }
 
 .arch-frame::before {
@@ -587,23 +609,24 @@ body.home_center .brief_home_alt {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.014) 1px, transparent 1px);
-  background-size: 32px 32px;
-  opacity: 0.28;
+    linear-gradient(rgba(255,255,255,0.007) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.005) 1px, transparent 1px);
+  background-size: 42px 42px;
+  opacity: 0.10;
   pointer-events: none;
 }
 
 .arch-inner {
   position: relative;
   z-index: 1;
+  padding: 0 22px;
 }
 
 .arch-top {
   text-align: center;
-  padding: 0 0 20px;
+  padding: 0 0 18px;
   margin-bottom: 22px;
-  border-bottom: 1px solid var(--line-soft);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
 }
 
 .arch-top h1 {
@@ -1089,7 +1112,11 @@ body.home_center .brief_home_alt {
 
 @media (max-width: 780px) {
   .arch-frame {
-    padding: 18px 16px 34px;
+    padding: 18px 0 28px;
+  }
+
+  .arch-inner {
+    padding: 0 14px;
   }
 
   .arch-top h1 {
@@ -1123,8 +1150,7 @@ body.home_center .brief_home_alt {
   .home_stage {
     min-height: auto;
     justify-content: flex-start;
-    padding: 28px 14px 70px;
-    transform: none;
+    padding: 28px 0 70px;
   }
 
   main,
@@ -1142,6 +1168,19 @@ body.home_center .brief_home_alt {
   .site_header {
     width: 100%;
     margin: 0;
+  }
+
+  .roster_notice {
+    padding: 16px 14px;
+    font-size: 11px;
+  }
+
+  .arch-frame {
+    padding: 18px 0 28px;
+  }
+
+  .arch-inner {
+    padding: 0 12px;
   }
 
   .bha_frame {
@@ -1205,11 +1244,6 @@ body.home_center .brief_home_alt {
 }
 
 @media (max-width: 420px) {
-  .arch-frame {
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-
   .arch-card {
     height: 180px;
   }
