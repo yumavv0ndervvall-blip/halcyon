@@ -55,10 +55,10 @@ button {
 ============================== */
 
 main {
-  width: 100%;
-  max-width: 960px;
+  width: calc(100% - 40px);
+  max-width: var(--max_width);
   margin: 0 auto;
-  padding: 0 20px 80px;
+  padding: 0 0 80px;
 }
 
 .page_title {
