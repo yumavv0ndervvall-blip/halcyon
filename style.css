@@ -21,19 +21,23 @@
 
 html {
   min-height: 100%;
-  background: var(--bg_bottom);
+  background:
+    radial-gradient(circle at top left, rgba(45, 52, 66, 0.28), transparent 34%),
+    radial-gradient(circle at top right, rgba(32, 38, 49, 0.20), transparent 32%),
+    linear-gradient(180deg, var(--bg_top) 0%, var(--bg_mid) 55%, var(--bg_bottom) 100%);
 }
 
 body {
   min-height: 100vh;
   margin: 0;
-  padding: 0;
+  padding: 24px 0 0;
   background:
     radial-gradient(circle at top left, rgba(45, 52, 66, 0.28), transparent 34%),
     radial-gradient(circle at top right, rgba(32, 38, 49, 0.20), transparent 32%),
     linear-gradient(180deg, var(--bg_top) 0%, var(--bg_mid) 55%, var(--bg_bottom) 100%);
   color: var(--text_main);
   font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 body.home_center {
@@ -146,7 +150,7 @@ body.home_center main {
 .home_stage #nav-placeholder {
   width: 100%;
   max-width: var(--max_width);
-  margin: 0 0 60px;
+  margin: 0 0 34px;
 }
 
 .site_header {
@@ -1147,6 +1151,10 @@ body.home_center .brief_home_alt {
 }
 
 @media (max-width: 740px) {
+  body {
+    padding-top: 16px;
+  }
+
   .home_stage {
     min-height: auto;
     justify-content: flex-start;
