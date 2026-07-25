@@ -1,0 +1,132 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: #05070a;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background:
+    radial-gradient(circle at top left, rgba(45, 52, 66, 0.28), transparent 34%),
+    radial-gradient(circle at top right, rgba(32, 38, 49, 0.20), transparent 32%),
+    linear-gradient(180deg, #111827 0%, #0a0d14 55%, #05070a 100%);
+  color: #e9edf2;
+  font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+main {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 34px 20px 80px;
+}
+
+/* 메뉴 */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  background: rgba(5, 7, 10, 0.92);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.site-nav {
+  width: 100%;
+  max-width: 816px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: stretch;
+}
+
+.site-nav a,
+.nav-dropdown > button {
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.62);
+  background: transparent;
+  border: 0;
+  text-decoration: none;
+  font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.16s ease;
+}
+
+.site-nav a:hover,
+.nav-dropdown:hover > button {
+  color: rgba(255,255,255,0.96);
+  background: rgba(255,255,255,0.045);
+}
+
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 150px;
+  transform: translateX(-50%);
+  padding: 6px;
+  background: #080b10;
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.35);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: 0.16s ease;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.nav-dropdown-menu a {
+  min-height: 34px;
+  justify-content: flex-start;
+  padding: 0 10px;
+  font-size: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.nav-dropdown-menu a:last-child {
+  border-bottom: 0;
+}
+
+@media (max-width: 560px) {
+  .site-nav a,
+  .nav-dropdown > button {
+    min-height: 42px;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-dropdown-menu {
+    width: 130px;
+  }
+
+  main {
+    padding: 28px 14px 70px;
+  }
+}
