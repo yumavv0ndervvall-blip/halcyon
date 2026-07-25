@@ -36,6 +36,15 @@ body {
   font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
 }
 
+body.home_center {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -59,6 +68,14 @@ main {
   max-width: var(--max_width);
   margin: 0 auto;
   padding: 0 0 80px;
+}
+
+body.home_center main {
+  width: calc(100% - 40px);
+  max-width: var(--max_width);
+  margin: 0 auto;
+  padding: 0;
+  flex: 0 0 auto;
 }
 
 .page_title {
@@ -112,14 +129,22 @@ main {
   background: transparent;
 }
 
+body.home_center #nav-placeholder {
+  flex: 0 0 auto;
+}
+
 .site_header {
   position: relative;
   z-index: 50;
   width: calc(100% - 40px);
   max-width: var(--max_width);
-  margin: 0 auto 18px;
+  margin: 0 auto 32px;
   padding: 0;
   background: transparent;
+}
+
+body.home_center .site_header {
+  margin: 0 auto 28px;
 }
 
 .site_header_label {
@@ -250,6 +275,10 @@ main {
   max-width: var(--max_width);
   margin: 0 auto 44px;
   color: var(--text_main);
+}
+
+body.home_center .brief_home_alt {
+  margin: 0 auto;
 }
 
 .bha_frame {
@@ -478,7 +507,7 @@ main {
   --muted: #778290;
 
   width: 100%;
-  max-width: 816px;
+  max-width: var(--max_width);
   margin: 0 auto 44px;
   color: var(--text);
   font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
@@ -490,7 +519,7 @@ main {
 
 .roster_notice {
   width: 100%;
-  max-width: 816px;
+  max-width: var(--max_width);
   margin: 0 auto 18px;
   padding: 14px 16px;
   border: 1px solid rgba(148, 163, 184, 0.20);
@@ -1040,14 +1069,54 @@ main {
    RESPONSIVE
 ============================== */
 
+@media (max-width: 780px) {
+  .arch-frame {
+    padding: 18px 16px 34px;
+  }
+
+  .arch-top h1 {
+    font-size: 25px;
+  }
+
+  .arch-section-head {
+    gap: 12px;
+  }
+
+  .arch-section-title {
+    font-size: 19px;
+  }
+
+  .arch-class {
+    min-width: 92px;
+    font-size: 12px;
+  }
+
+  .arch-grid {
+    gap: 12px;
+  }
+
+  .arch-card {
+    width: calc(50% - 6px);
+    height: 194px;
+  }
+}
+
 @media (max-width: 740px) {
-  main {
+  body.home_center {
+    justify-content: flex-start;
+    padding-top: 28px;
+  }
+
+  main,
+  body.home_center main {
     width: calc(100% - 28px);
     padding: 0 0 70px;
   }
 
-  .site_header {
+  .site_header,
+  body.home_center .site_header {
     width: calc(100% - 28px);
+    margin: 0 auto 22px;
   }
 
   .bha_frame {
@@ -1099,27 +1168,14 @@ main {
 }
 
 @media (max-width: 560px) {
-  #nav-placeholder {
-    padding-top: 12px;
-  }
-
-  .site_header {
-    width: calc(100% - 28px);
-  }
-
   .site_nav a,
   .nav_dropdown > button {
-    min-height: 40px;
     font-size: 10px;
     letter-spacing: 0.05em;
   }
 
   .nav_dropdown_menu {
     width: 130px;
-  }
-
-  .site_header_label {
-    font-size: 9px;
   }
 }
 
