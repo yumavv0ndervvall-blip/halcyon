@@ -446,6 +446,9 @@ body.home_center .brief_home_alt {
   border: 1px solid rgba(255,255,255,0.09);
   background: rgba(255,255,255,0.006);
 }
+.bha_info {
+  padding: 12px 14px 7px;
+}
 
 .bha_info_title,
 .bha_notice_title {
