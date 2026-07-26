@@ -1,4 +1,4 @@
-fetch("./nav.html?v=24")
+fetch("./nav.html?v=25")
   .then(function(response) {
     return response.text();
   })
@@ -41,31 +41,79 @@ function setupCustomCursor() {
 
   cursor.dataset.ready = "true";
 
-  document.addEventListener("mousemove", function (event) {
-    cursor.style.left = event.clientX + "px";
-    cursor.style.top = event.clientY + "px";
+  var mouseX = window.innerWidth / 2;
+  var mouseY = window.innerHeight / 2;
+  var currentX = mouseX;
+  var currentY = mouseY;
+  var isHovering = false;
+
+  cursor.style.left = currentX + "px";
+  cursor.style.top = currentY + "px";
+  cursor.classList.add("is_active");
+
+  function moveCursor(event) {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+
+    cursor.classList.add("is_active");
+  }
+
+  function animateCursor() {
+    currentX += (mouseX - currentX) * 0.38;
+    currentY += (mouseY - currentY) * 0.38;
+
+    cursor.style.left = currentX + "px";
+    cursor.style.top = currentY + "px";
+
+    cursor.classList.add("is_active");
+
+    if (isHovering) {
+      cursor.classList.add("is_hover");
+    } else {
+      cursor.classList.remove("is_hover");
+    }
+
+    requestAnimationFrame(animateCursor);
+  }
+
+  window.addEventListener("pointermove", moveCursor, { passive: true });
+  window.addEventListener("mousemove", moveCursor, { passive: true });
+
+  document.addEventListener("pointerover", function (event) {
+    if (event.target.closest("a, button, input, textarea, select, label, summary, .arch-card, .sfs_photo, .rgr_photo, .nav_dropdown")) {
+      isHovering = true;
+    }
+  }, true);
+
+  document.addEventListener("pointerout", function (event) {
+    if (event.target.closest("a, button, input, textarea, select, label, summary, .arch-card, .sfs_photo, .rgr_photo, .nav_dropdown")) {
+      isHovering = false;
+    }
+  }, true);
+
+  document.addEventListener("mousedown", function () {
+    isHovering = true;
+    cursor.classList.add("is_hover");
+    cursor.classList.add("is_active");
+  }, true);
+
+  document.addEventListener("mouseup", function () {
+    isHovering = false;
+    cursor.classList.remove("is_hover");
+    cursor.classList.add("is_active");
+  }, true);
+
+  window.addEventListener("blur", function () {
     cursor.classList.add("is_active");
   });
 
-
-
-  document.addEventListener("mouseover", function (event) {
-    if (event.target.closest("a, button, .arch-card, .sfs_photo, .rgr_photo, .nav_dropdown")) {
-      cursor.classList.add("is_hover");
-    }
+  window.addEventListener("focus", function () {
+    cursor.classList.add("is_active");
   });
 
-  document.addEventListener("mouseout", function (event) {
-    if (event.target.closest("a, button, .arch-card, .sfs_photo, .rgr_photo, .nav_dropdown")) {
-      cursor.classList.remove("is_hover");
-    }
-  });
+  setInterval(function () {
+    cursor.classList.add("is_active");
+  }, 250);
 
-  document.addEventListener("mousedown", function () {
-    cursor.classList.add("is_hover");
-  });
-
-  document.addEventListener("mouseup", function () {
-    cursor.classList.remove("is_hover");
-  });
+  requestAnimationFrame(animateCursor);
 }
