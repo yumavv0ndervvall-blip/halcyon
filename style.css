@@ -1274,6 +1274,7 @@ body.home_center .brief_home_alt {
 
 /* ==============================
    REARGUARD PAGE
+   style.css 맨 아래에 추가
 ============================== */
 
 .rg_record_page {
@@ -1320,7 +1321,7 @@ body.home_center .brief_home_alt {
 
 .rgr_header {
   display: grid;
-  grid-template-columns: 1fr 210px;
+  grid-template-columns: 1fr 230px;
   gap: 22px;
   align-items: stretch;
   padding-bottom: 20px;
@@ -1369,7 +1370,7 @@ body.home_center .brief_home_alt {
 
 .rgr_stamp strong {
   display: block;
-  color: rgba(248,250,252,0.86);
+  color: rgba(248,250,252,0.88);
   font-size: 11px;
   line-height: 1;
   font-weight: 900;
@@ -1380,12 +1381,42 @@ body.home_center .brief_home_alt {
 .rgr_stamp span {
   display: block;
   margin-top: 9px;
-  color: rgba(232,237,242,0.50);
+  color: rgba(232,237,242,0.56);
   font-size: 10px;
-  line-height: 1.55;
+  line-height: 1.65;
   font-weight: 800;
-  letter-spacing: 0.04em;
+  letter-spacing: -0.015em;
   word-break: keep-all;
+}
+
+.rgr_stamp_line {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+
+.rgr_aliases {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 16px;
+}
+
+.rgr_alias {
+  padding: 5px 8px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.018);
+  color: rgba(248,250,252,0.72);
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.rgr_alias.danger {
+  border-color: rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.032);
+  color: rgba(248,250,252,0.90);
 }
 
 .rgr_meta {
@@ -1476,11 +1507,24 @@ body.home_center .brief_home_alt {
   margin-top: 12px;
 }
 
+.rgr_dark_note {
+  margin-top: 14px;
+  padding: 13px 15px;
+  border-left: 3px solid rgba(255,255,255,0.32);
+  background: rgba(255,255,255,0.018);
+  color: rgba(232,237,242,0.66);
+  font-size: 11px;
+  line-height: 1.85;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  word-break: keep-all;
+}
+
 .rgr_two_col {
   display: grid;
-  grid-template-columns: 1fr 270px;
+  grid-template-columns: 1fr 258px;
   gap: 16px;
-  align-items: stretch;
+  align-items: start;
 }
 
 .rgr_table {
@@ -1542,7 +1586,7 @@ body.home_center .brief_home_alt {
 
 .rgmap_pro {
   position: relative;
-  height: 230px;
+  height: 214px;
   overflow: hidden;
   background: #080d13;
 }
@@ -1605,7 +1649,7 @@ body.home_center .brief_home_alt {
 
 .rgmap_radar_origin {
   position: absolute;
-  left: 47%;
+  left: 56%;
   top: 43%;
   width: 14px;
   height: 14px;
@@ -1659,7 +1703,7 @@ body.home_center .brief_home_alt {
 
 .rgmap_scan_arc {
   position: absolute;
-  left: 47%;
+  left: 56%;
   top: 43%;
   width: 112px;
   height: 112px;
@@ -1732,49 +1776,6 @@ body.home_center .brief_home_alt {
   word-break: keep-all;
 }
 
-.rgr_flow {
-  display: grid;
-  gap: 10px;
-}
-
-.rgr_flow_item {
-  display: grid;
-  grid-template-columns: 92px 1fr;
-  gap: 14px;
-  padding: 12px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(255,255,255,0.012);
-}
-
-.rgr_flow_phase {
-  color: rgba(248,250,252,0.72);
-  font-size: 11px;
-  line-height: 1.4;
-  font-weight: 900;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.rgr_flow_text b {
-  display: block;
-  color: rgba(248,250,252,0.88);
-  font-size: 12px;
-  line-height: 1.4;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-}
-
-.rgr_flow_text span {
-  display: block;
-  margin-top: 5px;
-  color: rgba(232,237,242,0.62);
-  font-size: 11px;
-  line-height: 1.75;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  word-break: keep-all;
-}
-
 .rgr_cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1808,16 +1809,156 @@ body.home_center .brief_home_alt {
   word-break: keep-all;
 }
 
-.rgr_note {
-  margin-top: 14px;
-  padding: 13px 15px;
-  border-left: 3px solid rgba(255,255,255,0.32);
-  background: rgba(255,255,255,0.018);
-  color: rgba(232,237,242,0.64);
+.rgr_member_photo_area {
+  margin-bottom: 16px;
+  padding: 10px;
+  min-height: 236px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.06), transparent 26%),
+    radial-gradient(circle at 80% 40%, rgba(255,255,255,0.045), transparent 24%),
+    rgba(255,255,255,0.010);
+  overflow: hidden;
+}
+
+.rgr_photo_wall {
+  position: relative;
+  min-height: 236px;
+}
+
+.rgr_photo {
+  position: absolute;
+  width: 184px;
+  height: 124px;
+  padding: 7px 7px 22px;
+  background: rgba(248,250,252,0.92);
+  box-shadow:
+    0 12px 22px rgba(0,0,0,0.42),
+    0 0 0 1px rgba(255,255,255,0.18);
+  transform: rotate(var(--rot));
+  transition:
+    transform 0.16s ease,
+    z-index 0.16s ease,
+    filter 0.16s ease;
+  cursor: zoom-in;
+}
+
+.rgr_photo:hover {
+  z-index: 20;
+  transform: rotate(var(--rot)) translateY(-4px) scale(1.035);
+  filter: brightness(1.06);
+}
+
+.rgr_photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  background:
+    radial-gradient(circle at 50% 25%, rgba(255,255,255,0.18), transparent 28%),
+    linear-gradient(180deg, #1b2430, #05070a);
+}
+
+.rgr_photo::after {
+  content: attr(data-name);
+  position: absolute;
+  left: 9px;
+  right: 9px;
+  bottom: 6px;
+  color: rgba(7,10,14,0.72);
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.rgr_photo.is-right::after {
+  left: auto;
+  right: 9px;
+  text-align: right;
+}
+
+.rgr_photo.p1 {
+  left: 30px;
+  top: 18px;
+  --rot: -7deg;
+  z-index: 3;
+}
+
+.rgr_photo.p2 {
+  left: 188px;
+  top: 0;
+  --rot: 4deg;
+  z-index: 7;
+}
+
+.rgr_photo.p3 {
+  left: 440px;
+  top: 16px;
+  --rot: -5deg;
+  z-index: 4;
+}
+
+.rgr_photo.p4 {
+  left: 104px;
+  top: 108px;
+  --rot: 5deg;
+  z-index: 8;
+}
+
+.rgr_photo.p5 {
+  left: 308px;
+  top: 110px;
+  --rot: -6deg;
+  z-index: 5;
+}
+
+.rgr_member_list {
+  display: grid;
+  gap: 10px;
+}
+
+.rgr_member_card {
+  padding: 14px 15px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.012);
+}
+
+.rgr_member_top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  padding-bottom: 9px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.rgr_member_name {
+  color: rgba(248,250,252,0.90);
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.rgr_member_type {
+  color: rgba(255,255,255,0.40);
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.rgr_member_text {
+  margin: 10px 0 0;
+  color: rgba(232,237,242,0.62);
   font-size: 11px;
-  line-height: 1.85;
+  line-height: 1.75;
   font-weight: 700;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.03em;
   word-break: keep-all;
 }
 
@@ -1836,6 +1977,79 @@ body.home_center .brief_home_alt {
   text-transform: uppercase;
 }
 
+/* 이미지 클릭 확대창 */
+
+.rgr_lightbox {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(3,6,10,0.82);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: 0.18s ease;
+  z-index: 9999;
+}
+
+.rgr_lightbox.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.rgr_lightbox_inner {
+  position: relative;
+  max-width: min(92vw, 980px);
+  max-height: 88vh;
+}
+
+.rgr_lightbox_img {
+  display: block;
+  max-width: 100%;
+  max-height: 88vh;
+  object-fit: contain;
+  border: 10px solid rgba(248,250,252,0.96);
+  box-shadow: 0 22px 42px rgba(0,0,0,0.52);
+}
+
+.rgr_lightbox_close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(10,13,18,0.92);
+  color: rgba(255,255,255,0.9);
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rgr_lightbox_hint {
+  position: absolute;
+  left: 50%;
+  bottom: -30px;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.66);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ==============================
+   REARGUARD RESPONSIVE
+============================== */
+
 @media (max-width: 760px) {
   .rgr_frame {
     padding: 18px 0 28px;
@@ -1846,18 +2060,49 @@ body.home_center .brief_home_alt {
     margin-right: 14px;
   }
 
-  .rgr_header {
-    grid-template-columns: 1fr;
-  }
-
+  .rgr_header,
   .rgr_meta,
   .rgr_cards,
   .rgr_two_col {
     grid-template-columns: 1fr;
   }
 
-  .rgmap_pro {
-    height: 220px;
+  .rgr_photo_wall {
+    min-height: 426px;
+  }
+
+  .rgr_photo {
+    width: 172px;
+    height: 120px;
+  }
+
+  .rgr_photo.p1 {
+    left: 6px;
+    top: 8px;
+  }
+
+  .rgr_photo.p2 {
+    right: 6px;
+    left: auto;
+    top: 40px;
+  }
+
+  .rgr_photo.p3 {
+    left: 18px;
+    right: auto;
+    top: 136px;
+  }
+
+  .rgr_photo.p4 {
+    right: 18px;
+    left: auto;
+    top: 224px;
+  }
+
+  .rgr_photo.p5 {
+    left: 30px;
+    right: auto;
+    top: 312px;
   }
 }
 
@@ -1879,8 +2124,9 @@ body.home_center .brief_home_alt {
     padding: 0 0 11px;
   }
 
-  .rgr_flow_item {
-    grid-template-columns: 1fr;
+  .rgr_member_top {
+    flex-direction: column;
+    align-items: flex-start;
     gap: 6px;
   }
 
