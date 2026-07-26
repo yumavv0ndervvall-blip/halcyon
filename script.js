@@ -47,9 +47,7 @@ function setupCustomCursor() {
     cursor.classList.add("is_active");
   });
 
-  document.addEventListener("mouseleave", function () {
-    
-  });
+
 
   document.addEventListener("mouseover", function (event) {
     if (event.target.closest("a, button, .arch-card, .sfs_photo, .rgr_photo, .nav_dropdown")) {
