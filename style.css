@@ -446,9 +446,6 @@ body.home_center .brief_home_alt {
   border: 1px solid rgba(255,255,255,0.09);
   background: rgba(255,255,255,0.006);
 }
-.bha_info {
-  padding: 12px 14px 7px;
-}
 
 .bha_info_title,
 .bha_notice_title {
@@ -2847,7 +2844,7 @@ body.home_center .brief_home_alt {
 }
 
 /* ==============================
-   HOME GUIDE / SELECTION / CURSOR / BGM
+   HOME GUIDE / SELECTION / CURSOR / PAGE FADE
 ============================== */
 
 /* 드래그 선택 효과 */
@@ -2867,6 +2864,25 @@ body.home_center .brief_home_alt {
     0 0 3px rgba(248,250,252,0.92),
     0 0 8px rgba(248,250,252,0.42),
     0 0 14px rgba(248,250,252,0.20);
+}
+
+/* 모든 페이지 진입 페이드인 */
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+body {
+  animation: pageFadeIn 0.48s ease both;
 }
 
 /* 대문 안내문 */
@@ -2892,10 +2908,17 @@ body.home_center .brief_home_alt {
 
 /* 커스텀 마우스 커서 */
 @media (hover: hover) and (pointer: fine) {
+  html,
   body,
+  body *,
   a,
-  button {
-    cursor: none;
+  button,
+  input,
+  textarea,
+  select,
+  label,
+  summary {
+    cursor: none !important;
   }
 
   .custom_cursor {
@@ -2944,77 +2967,7 @@ body.home_center .brief_home_alt {
   }
 }
 
-/* 우측 하단 BGM 바 */
-.bgm_player {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index: 400;
-  width: 214px;
-  min-height: 46px;
-  display: grid;
-  grid-template-columns: 1fr 54px;
-  gap: 10px;
-  align-items: center;
-  padding: 10px 10px 10px 12px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(6,8,12,0.76);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 16px 34px rgba(0,0,0,0.36);
-}
-
-.bgm_meta {
-  min-width: 0;
-}
-
-.bgm_label {
-  display: block;
-  color: rgba(255,255,255,0.36);
-  font-size: 8px;
-  line-height: 1;
-  font-weight: 900;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.bgm_title {
-  display: block;
-  margin-top: 6px;
-  color: rgba(248,250,252,0.74);
-  font-size: 9px;
-  line-height: 1;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.bgm_button {
-  height: 26px;
-  border: 1px solid rgba(255,255,255,0.14);
-  background: rgba(255,255,255,0.035);
-  color: rgba(248,250,252,0.72);
-  font-size: 9px;
-  line-height: 1;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.bgm_button:hover {
-  color: rgba(248,250,252,0.96);
-  border-color: rgba(255,255,255,0.28);
-  background: rgba(255,255,255,0.06);
-}
-
-@media (max-width: 560px) {
-  .bgm_player {
-    right: 12px;
-    bottom: 12px;
-    width: 190px;
-  }
+/* HOME tag buttons hidden */
+.brief_home_alt .bha_tags {
+  display: none !important;
 }
