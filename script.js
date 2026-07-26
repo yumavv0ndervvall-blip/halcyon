@@ -48,7 +48,7 @@ function setupCustomCursor() {
   });
 
   document.addEventListener("mouseleave", function () {
-    cursor.classList.remove("is_active");
+    
   });
 
   document.addEventListener("mouseover", function (event) {
