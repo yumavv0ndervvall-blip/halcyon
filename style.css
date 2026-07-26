@@ -437,6 +437,7 @@ body.home_center .brief_home_alt {
 .bha_right {
   display: grid;
   gap: 10px;
+  align-content: start;
 }
 
 .bha_info,
@@ -2848,24 +2849,26 @@ body.home_center .brief_home_alt {
 
 /* 드래그 선택 효과 */
 ::selection {
-  color: rgba(248,250,252,0.72);
-  background: rgba(255,255,255,0.02);
+  color: transparent;
+  background: rgba(255,255,255,0.035);
   text-shadow:
-    0 0 5px rgba(248,250,252,0.45),
-    0 0 12px rgba(248,250,252,0.22);
+    0 0 3px rgba(248,250,252,0.92),
+    0 0 8px rgba(248,250,252,0.42),
+    0 0 14px rgba(248,250,252,0.20);
 }
 
 ::-moz-selection {
-  color: rgba(248,250,252,0.72);
-  background: rgba(255,255,255,0.02);
+  color: transparent;
+  background: rgba(255,255,255,0.035);
   text-shadow:
-    0 0 5px rgba(248,250,252,0.45),
-    0 0 12px rgba(248,250,252,0.22);
+    0 0 3px rgba(248,250,252,0.92),
+    0 0 8px rgba(248,250,252,0.42),
+    0 0 14px rgba(248,250,252,0.20);
 }
 
 /* 대문 안내문 */
 .home_access_note {
-  margin-top: 18px;
+  margin-top: 16px;
   padding-top: 13px;
   border-top: 1px solid rgba(255,255,255,0.07);
   color: rgba(232,237,242,0.48);
