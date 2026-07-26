@@ -1272,15 +1272,3 @@ body.home_center .brief_home_alt {
   }
 }
 
-body::after {
-  content: "CSS UPDATED";
-  position: fixed;
-  right: 12px;
-  bottom: 12px;
-  z-index: 999999;
-  padding: 6px 8px;
-  background: red;
-  color: white;
-  font-size: 12px;
-  font-weight: 900;
-}
