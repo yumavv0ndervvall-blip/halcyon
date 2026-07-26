@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>REARGUARD | ARCH PERSONA DATABASE</title>
+  <link rel="stylesheet" href="./style.css?v=13">
+</head>
+
+<body>
+
+  <div id="nav-placeholder"></div>
+
+  <main>
+
+    <div class="rg_record_page" id="rearguard">
+      <div class="rgr_frame">
+
+        <header class="rgr_header">
+          <div>
+            <div class="rgr_label">ARC FRONTLINE RECORD</div>
+
+            <h1 class="rgr_title">REARGUARD</h1>
+
+            <p class="rgr_intro">
+              대한민국 북부 해안 격리 전선에서 형성된 장기 잔류 부대.
+              잦은 몬스터 웨이브와 접근 난이도 때문에 일반 순환 배치가 불가능해진 구역의 기록을 정리한다.
+            </p>
+          </div>
+
+          <aside class="rgr_stamp">
+            <strong>UNIT RECORD</strong>
+            <span>northern coastal front<br>long term defense file</span>
+          </aside>
+        </header>
+
+        <div class="rgr_meta">
+          <div class="rgr_meta_item">
+            <b>AREA</b>
+            <span>대한민국 북부 해안</span>
+          </div>
+
+          <div class="rgr_meta_item">
+            <b>ZONE</b>
+            <span>흑조 해안 격리구역</span>
+          </div>
+
+          <div class="rgr_meta_item">
+            <b>THREAT</b>
+            <span>몬스터 웨이브 다발</span>
+          </div>
+
+          <div class="rgr_meta_item">
+            <b>STATUS</b>
+            <span>6년 장기 주둔 후 복귀</span>
+          </div>
+        </div>
+
+        <section class="rgr_section">
+          <div class="rgr_section_head">
+            <h2 class="rgr_section_title">DEPLOYMENT ZONE</h2>
+            <div class="rgr_section_code">FILE 01</div>
+          </div>
+
+          <div class="rgr_body">
+            <div class="rgr_two_col">
+              <div>
+                <table class="rgr_table">
+                  <tr>
+                    <th>기록명</th>
+                    <td>흑조 해안 격리구역. 대한민국 북부 해안에 위치한 가상의 침식 전선.</td>
+                  </tr>
+
+                  <tr>
+                    <th>지형</th>
+                    <td>
+                      바다와 맞닿은 절벽형 해안, 폐쇄된 항만, 침식된 방파제,
+                      군사 통제 도로와 해안 산악 지형으로 구성된다.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th>접근 난이도</th>
+                    <td>
+                      육로 진입로가 좁고 불안정하며, 해상 접근 역시 파도와 침식체 출몰 때문에 제한된다.
+                      대규모 병력 교대와 보급이 어렵다.
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th>위험 요소</th>
+                    <td>
+                      해안선을 따라 반복적으로 몬스터 웨이브가 발생한다.
+                      웨이브 발생 시 내륙 방어선보다 해안 관측소와 방파제 방어선이 먼저 붕괴된다.
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <aside class="rgmap_pro_card">
+                <div class="rgmap_pro_head">
+                  <span>COASTAL OPERATION MAP</span>
+                  <span>BLACKSHORE FRONT</span>
+                </div>
+
+                <div class="rgmap_pro">
+                  <svg class="rgmap_svg" viewBox="0 0 420 260" preserveAspectRatio="none" aria-hidden="true">
+                    <defs>
+                      <pattern id="rgmap_grid" width="24" height="24" patternUnits="userSpaceOnUse">
+                        <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(148,163,184,0.10)" stroke-width="1"/>
+                      </pattern>
+
+                      <linearGradient id="rgmap_sea_grad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#16212c"/>
+                        <stop offset="55%" stop-color="#101822"/>
+                        <stop offset="100%" stop-color="#080d13"/>
+                      </linearGradient>
+
+                      <linearGradient id="rgmap_land_grad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#2b333d"/>
+                        <stop offset="52%" stop-color="#1a222b"/>
+                        <stop offset="100%" stop-color="#0e141b"/>
+                      </linearGradient>
+                    </defs>
+
+                    <rect width="420" height="260" fill="#080d13"/>
+                    <rect width="420" height="260" fill="url(#rgmap_sea_grad)"/>
+                    <rect width="420" height="260" fill="url(#rgmap_grid)" opacity="0.65"/>
+
+                    <path class="rgmap_land_shape"
+                      d="M0,0 L206,0
+                      C198,20 210,34 194,50
+                      C174,70 185,82 169,101
+                      C150,124 165,140 146,160
+                      C122,186 138,206 115,228
+                      C103,241 92,250 87,260
+                      L0,260 Z"
+                      fill="url(#rgmap_land_grad)"/>
+
+                    <path class="rgmap_coastline"
+                      d="M206,0
+                      C198,20 210,34 194,50
+                      C174,70 185,82 169,101
+                      C150,124 165,140 146,160
+                      C122,186 138,206 115,228
+                      C103,241 92,250 87,260"/>
+
+                    <path class="rgmap_contour" d="M28,38 C68,32 102,42 135,65 C112,70 78,64 42,78"/>
+                    <path class="rgmap_contour" d="M24,112 C60,100 91,112 126,132 C92,142 61,136 30,150"/>
+                    <path class="rgmap_contour" d="M20,190 C50,180 82,190 112,214 C82,220 52,214 22,226"/>
+
+                    <path class="rgmap_sea_line" d="M238,34 C278,24 326,27 394,46"/>
+                    <path class="rgmap_sea_line" d="M226,78 C270,66 322,72 410,92"/>
+                    <path class="rgmap_sea_line" d="M210,122 C258,112 318,119 398,143"/>
+                    <path class="rgmap_sea_line" d="M188,170 C245,164 310,174 405,204"/>
+
+                    <circle class="rgmap_station" cx="178" cy="112" r="4"/>
+                    <circle class="rgmap_station" cx="143" cy="164" r="4"/>
+                    <circle class="rgmap_station" cx="112" cy="218" r="4"/>
+
+                    <path class="rgmap_route" d="M92,231 L119,207 L143,164 L178,112"/>
+
+                    <text class="rgmap_text rgmap_text_land" x="28" y="28">NORTHERN COAST</text>
+                    <text class="rgmap_text" x="234" y="30">SEA ACCESS RESTRICTED</text>
+                    <text class="rgmap_text" x="205" y="116">WAVE DETECTED</text>
+                    <text class="rgmap_text" x="42" y="244">GROUND ROUTE LIMITED</text>
+                  </svg>
+
+                  <div class="rgmap_radar_origin">
+                    <span class="rgmap_ping p1"></span>
+                    <span class="rgmap_ping p2"></span>
+                    <span class="rgmap_ping p3"></span>
+                    <span class="rgmap_dot"></span>
+                  </div>
+
+                  <div class="rgmap_scan_arc arc1"></div>
+                  <div class="rgmap_scan_arc arc2"></div>
+
+                  <div class="rgmap_caption">
+                    <b>흑조 해안 격리구역</b>
+                    <span>북부 해안 최전방 · 해상 접근 제한 · 웨이브 다발 구역</span>
+                  </div>
+                </div>
+
+                <div class="rgmap_pro_note">
+                  레이더 파형은 해안선 바깥에서 반복 감지되는 몬스터 웨이브 신호를 의미한다.
+                  리어가드는 해당 구역의 잔류 방어 전력으로 고정되며 부대 정체성이 형성되었다.
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
+
+        <section class="rgr_section">
+          <div class="rgr_section_head">
+            <h2 class="rgr_section_title">FORMATION HISTORY</h2>
+            <div class="rgr_section_code">FILE 02</div>
+          </div>
+
+          <div class="rgr_body">
+            <p class="rgr_text">
+              리어가드는 처음부터 정규 특수부대로 창설된 조직이 아니었다.
+              흑조 해안 격리구역에서 몬스터 웨이브가 잦아지자 ARC는 다수의 센티넬과 가이드를 긴급 투입했고,
+              초기 임무는 어디까지나 전선 붕괴를 막기 위한 임시 방어 작전에 가까웠다.
+            </p>
+
+            <p class="rgr_text">
+              그러나 해당 구역은 진입과 철수가 모두 어렵고, 웨이브 발생 주기가 불규칙했기 때문에 단기 순환 배치가 사실상 불가능해졌다.
+              시간이 지나면서 일부 인원은 전선에 장기 잔류하게 되었고, 이들이 흑조 해안 방어선의 실질적인 고정 전력으로 남았다.
+            </p>
+
+            <p class="rgr_text">
+              이후 장기 임무가 반복되면서 잔류 인원들은 독자적인 지휘 체계와 작전 방식을 갖추게 되었고,
+              그 시점부터 리어가드라는 이름이 부대명으로 굳어졌다.
+              즉 리어가드는 선발되어 만들어진 부대가 아니라, 최전방에 남겨진 인원들이 살아남으며 형성한 부대다.
+            </p>
+          </div>
+        </section>
+
+        <section class="rgr_section">
+          <div class="rgr_section_head">
+            <h2 class="rgr_section_title">IDENTITY SHIFT</h2>
+            <div class="rgr_section_code">FILE 03</div>
+          </div>
+
+          <div class="rgr_body">
+            <div class="rgr_flow">
+              <div class="rgr_flow_item">
+                <div class="rgr_flow_phase">PHASE 01</div>
+
+                <div class="rgr_flow_text">
+                  <b>대규모 긴급 투입</b>
+                  <span>
+                    북부 해안 전선의 웨이브 빈도가 급증하면서 다수의 ARC 인원이 임시 방어 작전에 투입되었다.
+                  </span>
+                </div>
+              </div>
+
+              <div class="rgr_flow_item">
+                <div class="rgr_flow_phase">PHASE 02</div>
+
+                <div class="rgr_flow_text">
+                  <b>교대 실패와 장기 잔류</b>
+                  <span>
+                    접근 난이도, 보급 불안정, 웨이브 재발 때문에 일부 인원이 철수하지 못하고 계속 전선을 유지했다.
+                  </span>
+                </div>
+              </div>
+
+              <div class="rgr_flow_item">
+                <div class="rgr_flow_phase">PHASE 03</div>
+
+                <div class="rgr_flow_text">
+                  <b>리어가드 정체성 형성</b>
+                  <span>
+                    살아남은 잔류 인원들이 고정 전력으로 인정되며 리어가드라는 이름과 독자적 운용 방식이 굳어졌다.
+                  </span>
+                </div>
+              </div>
+
+              <div class="rgr_flow_item">
+                <div class="rgr_flow_phase">PHASE 04</div>
+
+                <div class="rgr_flow_text">
+                  <b>고위험 인원 선발 배치</b>
+                  <span>
+                    이후 본부는 리어가드를 장기 최전방 운용 부대로 재분류했고,
+                    폭주 이력이나 통제 난이도가 높은 인원들을 의도적으로 이 전선에 배치하기 시작했다.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="rgr_section">
+          <div class="rgr_section_head">
+            <h2 class="rgr_section_title">OPERATION PROFILE</h2>
+            <div class="rgr_section_code">FILE 04</div>
+          </div>
+
+          <div class="rgr_body">
+            <div class="rgr_cards">
+              <div class="rgr_card">
+                <strong>장기 방어</strong>
+                <span>
+                  해안선을 따라 발생하는 웨이브를 막기 위해 방파제, 관측소, 폐쇄 항만을 중심으로 방어선을 유지한다.
+                </span>
+              </div>
+
+              <div class="rgr_card">
+                <strong>잔류 작전</strong>
+                <span>
+                  철수보다 잔류가 우선되는 임무가 많다.
+                  리어가드는 지원이 끊긴 상황에서도 일정 시간 이상 전선을 붙잡는 것을 전제로 운용된다.
+                </span>
+              </div>
+
+              <div class="rgr_card">
+                <strong>고위험 편입</strong>
+                <span>
+                  부대의 정체성이 굳어진 뒤부터는 통제 난이도가 높은 S급 전력들이 리어가드로 배치되는 관행이 생겼다.
+                </span>
+              </div>
+            </div>
+
+            <div class="rgr_note">
+              리어가드는 처음부터 문제 인원을 모아 만든 부대가 아니다.
+              먼저 전선이 있었고, 그 전선에 남은 사람들이 있었으며,
+              그 사람들이 살아남은 뒤에야 본부가 리어가드를 고위험 전력 수용지처럼 사용하기 시작했다.
+            </div>
+          </div>
+        </section>
+
+        <section class="rgr_section">
+          <div class="rgr_section_head">
+            <h2 class="rgr_section_title">INTERNAL ASSESSMENT</h2>
+            <div class="rgr_section_code">FILE 05</div>
+          </div>
+
+          <div class="rgr_body">
+            <p class="rgr_text">
+              ARC 내부에서 리어가드는 필요성과 불편함을 동시에 가진 부대다.
+              그들은 접근하기 어려운 해안 전선을 장기간 유지했고,
+              다른 부대가 순환 배치로 버티지 못한 구역에서 살아남았다.
+            </p>
+
+            <p class="rgr_text">
+              하지만 그 기록은 동시에 본부가 리어가드를 어떻게 이용해 왔는지를 보여준다.
+              리어가드는 최전방 생존자들의 이름이었으나,
+              시간이 흐르며 통제하기 어려운 고위험 인원을 밀어 넣는 장소로도 기능하게 되었다.
+            </p>
+          </div>
+        </section>
+
+        <div class="rgr_footer">
+          <span>REARGUARD UNIT RECORD</span>
+          <span>BLACKSHORE FRONT FILE</span>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <script src="./script.js?v=13"></script>
+
+</body>
+</html>
