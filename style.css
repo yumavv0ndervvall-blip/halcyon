@@ -16,40 +16,30 @@
 
   --white_glow: rgba(255, 255, 255, 0.18);
 
-  --max_width: 816px;
+  --max_width: 760px;
 }
 
 html {
   min-height: 100%;
-  background: #111827;
-}
-
-body {
-  position: relative;
-  min-height: 100vh;
-  margin: 0;
-  padding: 24px 0 0;
-  color: var(--text_main);
-  font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
-  overflow-x: hidden;
-  background: transparent;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
   background:
     radial-gradient(circle at top left, rgba(45, 52, 66, 0.28), transparent 34%),
     radial-gradient(circle at top right, rgba(32, 38, 49, 0.20), transparent 32%),
     linear-gradient(180deg, var(--bg_top) 0%, var(--bg_mid) 55%, var(--bg_bottom) 100%);
+  background-attachment: fixed;
 }
 
-body > * {
-  position: relative;
-  z-index: 1;
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  color: var(--text_main);
+  font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(45, 52, 66, 0.28), transparent 34%),
+    radial-gradient(circle at top right, rgba(32, 38, 49, 0.20), transparent 32%),
+    linear-gradient(180deg, var(--bg_top) 0%, var(--bg_mid) 55%, var(--bg_bottom) 100%);
+  background-attachment: fixed;
 }
 
 body.home_center {
@@ -155,7 +145,7 @@ body.home_center main {
   width: 100%;
   max-width: var(--max_width);
   margin: 0 auto 34px;
-  padding: 0;
+  padding: 24px 0 0;
   background: transparent;
 }
 
@@ -163,6 +153,7 @@ body.home_center main {
   width: 100%;
   max-width: var(--max_width);
   margin: 0 0 34px;
+  padding: 0;
 }
 
 .site_header {
@@ -1163,14 +1154,6 @@ body.home_center .brief_home_alt {
 }
 
 @media (max-width: 740px) {
-  body {
-    padding-top: 16px;
-  }
-
-  body.home_center {
-    padding: 0;
-  }
-
   .home_stage {
     min-height: auto;
     justify-content: flex-start;
@@ -1187,6 +1170,14 @@ body.home_center .brief_home_alt {
   .home_stage #nav-placeholder {
     width: 100%;
     margin: 0 0 22px;
+  }
+
+  #nav-placeholder {
+    padding: 16px 0 0;
+  }
+
+  .home_stage #nav-placeholder {
+    padding: 0;
   }
 
   .site_header {
