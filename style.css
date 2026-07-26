@@ -67,7 +67,7 @@ button {
 
 main {
   width: 100%;
-  max-width: var(--max_width);
+  max-width: 760px !important;
   margin: 0 auto;
   padding: 0 0 80px;
 }
