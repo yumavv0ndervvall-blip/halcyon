@@ -1,4 +1,4 @@
-fetch("./nav.html?v=18")
+fetch("./nav.html?v=21")
   .then(function(response) {
     return response.text();
   })
