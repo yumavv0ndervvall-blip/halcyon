@@ -2906,68 +2906,37 @@ body {
   margin-top: 3px;
 }
 
-/* 커스텀 마우스 커서 */
+
+
+/* HOME tag buttons hidden */
+.brief_home_alt .bha_tags {
+  display: none !important;
+}
+
+/* ==============================
+   STABLE CSS CURSOR
+   JS로 따라오는 커서 대신 실제 커서 이미지로 처리
+============================== */
+
 @media (hover: hover) and (pointer: fine) {
   html,
   body,
-  body *,
+  body * {
+    cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%227.5%22%20fill%3D%22none%22%20stroke%3D%22rgba%28248%2C250%2C252%2C0.85%29%22%20stroke-width%3D%221.3%22/%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%222%22%20fill%3D%22rgba%28248%2C250%2C252%2C0.9%29%22/%3E%3C/svg%3E") 16 16, auto !important;
+  }
+
   a,
   button,
   input,
   textarea,
   select,
   label,
-  summary {
-    cursor: none !important;
+  summary,
+  .arch-card,
+  .sfs_photo,
+  .rgr_photo,
+  .nav_dropdown,
+  .nav_dropdown * {
+    cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%220%200%2040%2040%22%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%2212%22%20fill%3D%22none%22%20stroke%3D%22rgba%28248%2C250%2C252%2C0.62%29%22%20stroke-width%3D%221.2%22/%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%222.2%22%20fill%3D%22rgba%28248%2C250%2C252%2C0.95%29%22/%3E%3C/svg%3E") 20 20, pointer !important;
   }
-
-  .custom_cursor {
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 9999;
-    width: 18px;
-    height: 18px;
-    border: 1px solid rgba(248,250,252,0.72);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    opacity: 0;
-    mix-blend-mode: screen;
-    box-shadow:
-      0 0 8px rgba(248,250,252,0.20),
-      0 0 18px rgba(248,250,252,0.10);
-    transition:
-      width 0.14s ease,
-      height 0.14s ease,
-      border-color 0.14s ease,
-      opacity 0.14s ease;
-  }
-
-  .custom_cursor::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background: rgba(248,250,252,0.85);
-    transform: translate(-50%, -50%);
-  }
-
-  .custom_cursor.is_active {
-    opacity: 1;
-  }
-
-  .custom_cursor.is_hover {
-    width: 30px;
-    height: 30px;
-    border-color: rgba(248,250,252,0.42);
-  }
-}
-
-/* HOME tag buttons hidden */
-.brief_home_alt .bha_tags {
-  display: none !important;
 }
