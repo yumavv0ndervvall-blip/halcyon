@@ -16,7 +16,7 @@
 
   --white_glow: rgba(255, 255, 255, 0.18);
 
-  --max_width: 720px;
+  --max_width: 816px;
 }
 
 html {
@@ -67,7 +67,7 @@ button {
 
 main {
   width: 100%;
-  max-width: 720px !important;
+  max-width: var(--max_width);
   margin: 0 auto;
   padding: 0 0 80px;
 }
