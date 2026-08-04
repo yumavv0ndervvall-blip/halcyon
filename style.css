@@ -3052,7 +3052,7 @@ body {
       position: absolute;
       inset: 0;
       opacity: 1;
-      background: url("./images/kain.png") center 20% / cover no-repeat;
+      background: url("/halcyon/images/kain.png") center 20% / cover no-repeat;
       filter: none;
     }
 
@@ -3765,7 +3765,7 @@ body {
       border-bottom: 1px solid rgba(255,255,255,0.08);
       background:
         linear-gradient(180deg, rgba(4,6,10,0.04), rgba(4,6,10,0.56) 78%, rgba(4,6,10,0.82)),
-        url("./images/kain.png") center 24% / cover no-repeat;
+        url("/halcyon/images/kain.png") center 24% / cover no-repeat;
     }
 
     .backlog_novel_visual::after {
@@ -3958,4 +3958,183 @@ body {
   .backlog_pager { display: grid; grid-template-columns: 1fr; gap: 12px; align-items: stretch; }
   .backlog_pager_buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; }
   .backlog_btn { width: 100%; min-height: 44px; padding: 13px 12px; }
+}
+
+
+/* ===== KAIN GITHUB FIX ===== */
+
+/* 미리보기용 메뉴가 HTML에 남아 있어도 절대 안 보이게 처리 */
+.preview_nav {
+  display: none !important;
+}
+
+/* 카인 프로필 전체 폭 고정 */
+.profile_shell {
+  width: min(100%, 760px) !important;
+  max-width: 760px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.profile_shell *,
+.profile_shell *::before,
+.profile_shell *::after {
+  box-sizing: border-box !important;
+}
+
+/* PROFILE 영역이 오른쪽으로 터지는 문제 방지 */
+.profile_grid {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.18fr) minmax(260px, 0.82fr) !important;
+  gap: 12px !important;
+  align-items: stretch !important;
+  overflow: visible !important;
+}
+
+.profile_statement,
+.profile_panel {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.profile_panel {
+  display: block !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  background: rgba(255,255,255,0.012) !important;
+}
+
+.profile_panel .info_row {
+  display: grid !important;
+  grid-template-columns: 106px minmax(0, 1fr) !important;
+  width: 100% !important;
+}
+
+.profile_panel .info_value {
+  min-width: 0 !important;
+  overflow-wrap: anywhere !important;
+}
+
+/* 모바일에서는 1열 */
+@media (max-width: 900px) {
+  .profile_shell {
+    width: min(100%, 760px) !important;
+    padding: 0 14px !important;
+  }
+
+  .profile_grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .profile_statement {
+    order: 1 !important;
+  }
+
+  .profile_panel {
+    order: 2 !important;
+  }
+}
+
+
+/* ===== KAIN PROFILE IDENTITY FIX FINAL ===== */
+
+.preview_nav {
+  display: none !important;
+}
+
+.profile_shell {
+  width: min(100%, 760px) !important;
+  max-width: 760px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.profile_shell *,
+.profile_shell *::before,
+.profile_shell *::after {
+  box-sizing: border-box !important;
+}
+
+.profile_shell .profile_grid {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.18fr) minmax(260px, 0.82fr) !important;
+  gap: 12px !important;
+  align-items: stretch !important;
+  overflow: visible !important;
+}
+
+.profile_shell .profile_statement {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.profile_shell .profile_panel {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  grid-template-columns: none !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  background: rgba(255,255,255,0.012) !important;
+}
+
+.profile_shell .profile_panel_head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  width: 100% !important;
+  padding: 12px 14px !important;
+  border-bottom: 1px solid rgba(255,255,255,0.07) !important;
+}
+
+.profile_shell .profile_panel .info_list {
+  display: block !important;
+  width: 100% !important;
+}
+
+.profile_shell .profile_panel .info_row {
+  display: grid !important;
+  grid-template-columns: 106px minmax(0, 1fr) !important;
+  width: 100% !important;
+  min-height: 38px !important;
+}
+
+.profile_shell .profile_panel .info_key {
+  padding: 11px 12px 10px !important;
+}
+
+.profile_shell .profile_panel .info_value {
+  min-width: 0 !important;
+  padding: 10px 12px !important;
+  overflow-wrap: anywhere !important;
+}
+
+@media (max-width: 900px) {
+  .profile_shell {
+    width: min(100%, 760px) !important;
+    padding: 0 14px !important;
+  }
+
+  .profile_shell .profile_grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .profile_shell .profile_statement {
+    order: 1 !important;
+  }
+
+  .profile_shell .profile_panel {
+    order: 2 !important;
+  }
 }
