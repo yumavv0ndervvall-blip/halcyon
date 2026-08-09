@@ -1,4 +1,5 @@
-/* ===== LEXI ONLY BACKLOG ERROR SEQUENCE V67 ===== */
+
+/* ===== LEXI ONLY BACKLOG ERROR SEQUENCE V68 ===== */
 document.addEventListener("DOMContentLoaded", function () {
   var reader = document.getElementById("lexiBacklogReader");
   var page = document.getElementById("lexiBacklogPage");
@@ -10,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var image = document.getElementById("lexiBacklogImage");
   var prev = document.getElementById("lexiPrev");
   var next = document.getElementById("lexiNext");
+  var age = document.getElementById("lexiAgeValue");
 
   if (!reader || !page || !access || !count || !title || !text || !prev || !next) return;
 
@@ -97,11 +99,12 @@ document.addEventListener("DOMContentLoaded", function () {
       page.textContent = "Page ?? / ??";
       access.textContent = "RECORD COLLISION";
       count.textContent = "Page 00 / 00";
+      if (age) age.textContent = ["??세", "██세", "0?세", "###"][Math.floor(Math.random() * 4)];
 
       if (Date.now() - started > duration) {
         clearInterval(timer);
       }
-    }, 82);
+    }, 68);
   }
 
   function popup(message, delay, danger) {
@@ -109,17 +112,40 @@ document.addEventListener("DOMContentLoaded", function () {
       var p = document.createElement("div");
       p.className = "lexi-error-popup" + (danger ? " is-danger" : "");
       p.innerHTML = "<span>" + message + "</span>";
-      p.style.left = (14 + Math.random() * 72) + "vw";
-      p.style.top = (16 + Math.random() * 64) + "vh";
+      p.style.left = (12 + Math.random() * 76) + "vw";
+      p.style.top = (14 + Math.random() * 66) + "vh";
       document.body.appendChild(p);
 
       setTimeout(function () {
         p.classList.add("is-dead");
         setTimeout(function () {
           if (p.parentNode) p.parentNode.removeChild(p);
-        }, 260);
-      }, 720 + Math.random() * 520);
+        }, 220);
+      }, 680 + Math.random() * 480);
     }, delay);
+  }
+
+  function burstPopups() {
+    var messages = [
+      "ERROR CODE 0xLXI-772",
+      "DATA FRAGMENT DETECTED",
+      "UNAUTHORIZED ACCESS",
+      "MEMORY INDEX COLLISION",
+      "RECORD LOCK FAILURE",
+      "IDENTITY MISMATCH",
+      "BIOLOGICAL AGE FIELD DAMAGED",
+      "RECONSTRUCTING PAGE 01",
+      "PRIVATE KEY FOUND",
+      "ARCHIVE OVERRIDE"
+    ];
+
+    messages.forEach(function (msg, i) {
+      popup(msg, i * 95, i % 2 === 0);
+    });
+
+    setTimeout(function () { popup("ERROR CODE 0x000-AGE", 0, true); }, 420);
+    setTimeout(function () { popup("AGE VALUE REDACTED", 0, true); }, 620);
+    setTimeout(function () { popup("ACCESS TOKEN ACCEPTED", 0, false); }, 1120);
   }
 
   function approved() {
@@ -146,40 +172,35 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.classList.add("lexi-glitch-mode");
     reader.classList.add("is-corrupting");
 
-    [
-      "ERROR CODE 0xLXI-772",
-      "DATA FRAGMENT DETECTED",
-      "UNAUTHORIZED ACCESS",
-      "MEMORY INDEX COLLISION",
-      "RECORD LOCK FAILURE",
-      "IDENTITY MISMATCH",
-      "RECONSTRUCTING PAGE 01",
-      "PRIVATE KEY FOUND"
-    ].forEach(function (msg, i) {
-      popup(msg, i * 135, i % 2 === 0);
-    });
-
-    scrambleText(1750);
+    burstPopups();
+    scrambleText(1900);
 
     setTimeout(function () {
       document.body.classList.remove("lexi-glitch-mode");
       reader.classList.remove("is-corrupting");
       approved();
-    }, 1900);
+    }, 2050);
 
     setTimeout(function () {
       unlocked = true;
       running = false;
       reader.classList.add("is-unsealed");
+
       if (image) {
         image.src = "/halcyon/images/lexi_backlog_secret.jpg";
         image.alt = "렉시 비공개 백로그 이미지";
       }
-      index = 0;
+
       setPage(secret);
+
+      if (age) {
+        age.textContent = "???세";
+        age.classList.add("is-redacted");
+      }
+
       prev.disabled = true;
       next.disabled = true;
-    }, 3200);
+    }, 3400);
   }
 
   prev.addEventListener("click", function () {
