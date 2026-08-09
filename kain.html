@@ -2,17 +2,17 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>KAIN | ARCH ROSTER</title>
-  <link rel="stylesheet" href="/halcyon/style.css?v=62">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>KAIN | HALCYON ARCHIVE</title>
+  <link rel="stylesheet" href="/halcyon/style.css?v=65">
 </head>
-
 <body>
+<div id="nav-placeholder"></div>
 
-  <div id="nav-placeholder"></div>
 
-  <div class="profile_shell">
+  
+
+  <div class="profile_shell char_kain" style="--hero-img:url('/halcyon/images/kain.png'); --backlog-img:url('/halcyon/images/kain_backlog.jpg');">
 <header class="hero_card">
       <div class="hero_img" aria-hidden="true"></div>
 
@@ -328,6 +328,90 @@
           <li>자신을 영웅으로 부르는 말을 불편해한다. 대신 “리더”라고 불리는 것에는 책임감을 느낀다.</li>
         </ul>
       </section>
+      <section class="kain-mid-record">
+        <div class="kain-mid-grid">
+          <div class="kain-mid-col kain-mid-left">
+            <div class="kain-mid-col-head">
+              <span class="kain-section-title">PROMPT</span>
+              <span class="kain-section-side">CHARACTER REFERENCE</span>
+            </div>
+
+            <button type="button" class="kain-prompt-card" id="openIdCard" aria-label="카인 프롬프트 카드 열기">
+              <div class="kain-prompt-corner top-left"></div>
+              <div class="kain-prompt-corner bottom-right"></div>
+
+              <div class="kain-prompt-card-top">
+                <span class="kain-prompt-mark">ARCH</span>
+                <span class="kain-prompt-num">RG 01</span>
+              </div>
+
+              <div class="kain-prompt-photo-frame">
+                <img src="/halcyon/images/kain_id.jpg" alt="카인 증명사진" class="kain-prompt-photo">
+              </div>
+
+              <div class="kain-prompt-name">KAIN</div>
+              <div class="kain-prompt-sub">REARGUARD LEADER</div>
+
+              <div class="kain-prompt-lines">
+                <div><span>REAL NAME</span><b>차도윤</b></div>
+                <div><span>CLASS</span><b>S CLASS SENTINEL</b></div>
+                <div><span>ATTRIBUTE</span><b>PYRE</b></div>
+              </div>
+
+              <div class="kain-prompt-barcode" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+
+              <div class="kain-prompt-open">OPEN PROMPT</div>
+            </button>
+          </div>
+
+          <div class="kain-mid-divider" aria-hidden="true"></div>
+
+          <div class="kain-mid-col kain-mid-right">
+            <div class="kain-mid-col-head">
+              <span class="kain-section-title">INTERVIEW LOG</span>
+              <span class="kain-section-side">PERSONAL RECORD</span>
+            </div>
+
+            <div class="kain-interview-box">
+              <div class="kain-chat-log">
+                <div class="kain-chat q">
+                  <div class="kain-chat-name">Q.</div>
+                  <div class="kain-chat-bubble">리어가드는 당신에게 어떤 의미입니까?</div>
+                </div>
+
+                <div class="kain-chat a">
+                  <div class="kain-chat-name">KAIN</div>
+                  <div class="kain-chat-bubble">버려진 전력이 아니라, 끝까지 살아남은 사람들이다. 적어도 나는 그렇게 부른다.</div>
+                </div>
+
+                <div class="kain-chat q">
+                  <div class="kain-chat-name">Q.</div>
+                  <div class="kain-chat-bubble">스스로를 영웅이라 생각합니까?</div>
+                </div>
+
+                <div class="kain-chat a">
+                  <div class="kain-chat-name">KAIN</div>
+                  <div class="kain-chat-bubble">그런 말은 질색이다. 대신 내가 선 자리가 무너지지 않게는 할 수 있다.</div>
+                </div>
+
+                <div class="kain-chat q">
+                  <div class="kain-chat-name">Q.</div>
+                  <div class="kain-chat-bubble">지휘관으로서 가장 경계하는 순간은 언제입니까?</div>
+                </div>
+
+                <div class="kain-chat a">
+                  <div class="kain-chat-name">KAIN</div>
+                  <div class="kain-chat-bubble">누군가 조용해질 때. 살려달라는 말보다, 괜찮다는 말이 더 위험할 때가 있다.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="section">
         <div class="section_head">
           <h2 class="section_title">BACKLOG</h2>
@@ -401,81 +485,42 @@
     <img class="backlog_lightbox_img" src="/halcyon/images/kain_backlog.jpg" alt="카인 백로그 이미지 확대본">
   </div>
 
-  <script src="/halcyon/script.js?v=62"></script>
+  
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      var reader = document.querySelector("[data-backlog-reader]");
+  
 
-      if (reader) {
-        var pages = Array.prototype.slice.call(reader.querySelectorAll(".backlog_page"));
-        var prev = reader.querySelector("[data-backlog-prev]");
-        var next = reader.querySelector("[data-backlog-next]");
-        var count = reader.querySelector("[data-backlog-count]");
-        var index = 0;
 
-        function renderPage() {
-          pages.forEach(function (page, pageIndex) {
-            page.classList.toggle("is_active", pageIndex === index);
-          });
+  <div class="kain-modal" id="kainIdModal" aria-hidden="true">
+    <div class="kain-modal-dim" id="closeIdCardDim"></div>
 
-          if (count) {
-            count.textContent = "Page " + String(index + 1).padStart(2, "0") + " / " + String(pages.length).padStart(2, "0");
-          }
+    <div class="kain-modal-panel" role="dialog" aria-modal="true" aria-labelledby="kainModalTitle">
+      <button type="button" class="kain-modal-close" id="closeIdCardBtn">×</button>
 
-          if (prev) prev.disabled = index === 0;
-          if (next) next.disabled = index === pages.length - 1;
-        }
+      <div class="kain-modal-grid">
+        <div class="kain-modal-imagebox">
+          <div class="kain-modal-label">ORIGINAL PHOTO</div>
+          <img src="/halcyon/images/kain_id.jpg" alt="카인 원본 증명사진" class="kain-modal-image">
+        </div>
 
-        function goPrev() {
-          if (index > 0) {
-            index -= 1;
-            renderPage();
-          }
-        }
+        <div class="kain-modal-textbox">
+          <div class="kain-modal-label" id="kainModalTitle">CHARACTER PROMPT</div>
+          
+          <div class="kain-modal-scroll">
+            <p><strong>Appearance</strong><br>외형 어쩌구저쩌구. 체형, 키, 전체적인 실루엣, 첫인상에 보이는 분위기를 여기에 적습니다.</p>
+            <p><strong>Face</strong><br>얼굴 어쩌구저쩌구. 얼굴형, 흉터, 눈썹, 입매, 표정, 인상적인 특징을 여기에 정리합니다.</p>
+            <p><strong>Eyes</strong><br>눈 어쩌구저쩌구. 눈동자 색, 눈매, 시선, 안광 여부, 캐릭터 특유의 분위기를 적습니다.</p>
+            <p><strong>Hair</strong><br>머리 어쩌구저쩌구. 머리색, 헤어스타일, 앞머리, 길이, 질감, 정돈된 정도를 적습니다.</p>
+            <p><strong>Outfit</strong><br>의상 어쩌구저쩌구. 제복, 코트, 장갑, 장신구, 색감, 소재감, 전체 스타일을 적습니다.</p>
+            <p><strong>Pose</strong><br>포즈 어쩌구저쩌구. 정면 증명사진, 무표정, 시선 방향, 어깨 각도, 손 위치 등을 적습니다.</p>
+            <p><strong>Mood</strong><br>분위기 어쩌구저쩌구. 위압감, 차분함, 피곤함, 냉정함, 다정함 같은 감정 톤을 적습니다.</p>
+            <p><strong>Lighting</strong><br>조명 어쩌구저쩌구. 흰색 역광, 어두운 전면, 낮은 채도, 차가운 명암 같은 화면 연출을 적습니다.</p>
+            <p><strong>Keywords</strong><br>키워드 어쩌구저쩌구. 마지막에 복붙용 핵심 태그를 한 줄로 정리합니다.</p>
+          </div>
 
-        function goNext() {
-          if (index < pages.length - 1) {
-            index += 1;
-            renderPage();
-          }
-        }
-
-        if (prev) {
-          prev.addEventListener("click", goPrev);
-          prev.addEventListener("touchend", function (event) {
-            event.preventDefault();
-            goPrev();
-          }, { passive: false });
-        }
-
-        if (next) {
-          next.addEventListener("click", goNext);
-          next.addEventListener("touchend", function (event) {
-            event.preventDefault();
-            goNext();
-          }, { passive: false });
-        }
-
-        renderPage();
-      }
-
-      var visual = document.querySelector(".backlog_novel_visual");
-      var lightbox = document.getElementById("backlogLightbox");
-
-      if (visual && lightbox) {
-        visual.addEventListener("click", function () {
-          lightbox.classList.add("is_open");
-          lightbox.setAttribute("aria-hidden", "false");
-        });
-
-        lightbox.addEventListener("click", function () {
-          lightbox.classList.remove("is_open");
-          lightbox.setAttribute("aria-hidden", "true");
-        });
-      }
-    });
-  </script>
-
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/halcyon/script.js?v=65"></script>
 </body>
 </html>
