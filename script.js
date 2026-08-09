@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   var nav = document.getElementById("nav-placeholder");
   if (nav) {
-    fetch("/halcyon/nav.html?v=67")
+    fetch("/halcyon/nav.html?v=68")
       .then(function (res) { return res.text(); })
       .then(function (html) { nav.innerHTML = html; })
       .catch(function () {});
