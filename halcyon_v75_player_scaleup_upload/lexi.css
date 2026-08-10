@@ -1,0 +1,359 @@
+
+/* ===== LEXI ONLY FILE ===== */
+/* 이 파일은 lexi.html에서만 불러와. 카인/다른 캐릭터랑 분리용. */
+
+.char_lexi {
+  --hero-img: url("/halcyon/images/lexi.png");
+  --backlog-img: url("/halcyon/images/lexi_backlog.jpg");
+  --secret-backlog-img: url("/halcyon/images/lexi_backlog_secret.jpg");
+}
+
+.lexi-backlog-reader {
+  position: relative;
+  overflow: hidden;
+}
+
+.lexi-backlog-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  color: rgba(230,236,244,0.44);
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.lexi-corrupt-line {
+  min-height: 16px;
+  margin: -4px 0 12px;
+  color: rgba(230,236,244,0.28);
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.lexi-backlog-reader.is-corrupting {
+  border-color: rgba(255,255,255,0.18);
+}
+
+.lexi-backlog-reader.is-corrupting .backlog_novel_img {
+  animation: lexiImageFlicker 0.15s steps(2,end) infinite;
+  filter: contrast(1.6) brightness(0.72) saturate(0.45);
+}
+
+.lexi-backlog-reader.is-corrupting .backlog_novel_title,
+.lexi-backlog-reader.is-corrupting .backlog_prose,
+.lexi-backlog-reader.is-corrupting .lexi-backlog-meta,
+.lexi-backlog-reader.is-corrupting .lexi-corrupt-line {
+  animation: lexiTextJitter 0.10s steps(2,end) infinite;
+}
+
+.lexi-page.lexi-glitch-mode::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9997;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      180deg,
+      rgba(255,255,255,0.035) 0,
+      rgba(255,255,255,0.035) 1px,
+      rgba(0,0,0,0.22) 2px,
+      rgba(0,0,0,0.22) 4px
+    );
+  mix-blend-mode: screen;
+  opacity: 0.65;
+  animation: lexiScreenJitter 0.13s steps(2,end) infinite;
+}
+
+.lexi-error-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+.lexi-error-popup {
+  position: fixed;
+  min-width: 190px;
+  max-width: 280px;
+  border: 1px solid rgba(255,255,255,0.20);
+  background: rgba(7,9,13,0.94);
+  box-shadow: 0 18px 42px rgba(0,0,0,0.48);
+  color: rgba(245,248,252,0.90);
+  transform: translate(-50%,-50%);
+  animation: lexiPopupIn 0.12s steps(2,end), lexiPopupShake 0.12s steps(2,end) infinite;
+}
+
+.lexi-error-popup::before {
+  content: "SYSTEM NOTICE";
+  display: block;
+  padding: 7px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.11);
+  color: rgba(245,248,252,0.42);
+  font-size: 8px;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  font-weight: 950;
+}
+
+.lexi-error-popup span {
+  display: block;
+  padding: 12px 11px 11px;
+  font-size: 10px;
+  line-height: 1.35;
+  letter-spacing: 0.10em;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.lexi-error-popup.is-danger {
+  border-color: rgba(255,72,96,0.42);
+}
+
+.lexi-error-popup.is-danger span {
+  color: rgba(255,220,226,0.96);
+}
+
+.lexi-error-popup.is-dead {
+  opacity: 0;
+  transform: translate(-50%,-50%) scale(0.96);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.lexi-approved-popup {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 10000;
+  width: min(380px, calc(100vw - 40px));
+  transform: translate(-50%,-50%);
+  border: 1px solid rgba(255,255,255,0.24);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.014)),
+    rgba(6,9,14,0.97);
+  box-shadow: 0 28px 80px rgba(0,0,0,0.62);
+  padding: 24px 20px 22px;
+  text-align: center;
+  animation: lexiApprovedIn 0.22s ease;
+}
+
+.lexi-approved-popup b {
+  display: block;
+  margin-bottom: 10px;
+  color: rgba(250,252,255,0.96);
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 950;
+  letter-spacing: 0.18em;
+}
+
+.lexi-approved-popup span {
+  display: block;
+  color: rgba(235,240,248,0.56);
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 950;
+  letter-spacing: 0.16em;
+}
+
+.lexi-approved-popup.is-dead {
+  opacity: 0;
+  transform: translate(-50%,-50%) scale(0.98);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.lexi-backlog-reader.is-unsealed {
+  border-color: rgba(255,255,255,0.20);
+}
+
+.lexi-backlog-reader.is-unsealed #lexiBacklogAccess,
+.lexi-backlog-reader.is-unsealed #lexiBacklogCount {
+  color: rgba(245,248,252,0.72);
+}
+
+@keyframes lexiImageFlicker {
+  0% { transform: translate(0,0) scale(1.01); opacity: 0.92; }
+  50% { transform: translate(2px,-1px) scale(1.012); opacity: 0.72; }
+  100% { transform: translate(-1px,1px) scale(1.01); opacity: 0.98; }
+}
+
+@keyframes lexiTextJitter {
+  0% { transform: translate(0,0); opacity: 1; }
+  50% { transform: translate(1px,0); opacity: 0.62; }
+  100% { transform: translate(-1px,0); opacity: 0.9; }
+}
+
+@keyframes lexiScreenJitter {
+  0% { transform: translate(0,0); }
+  50% { transform: translate(1px,-1px); }
+  100% { transform: translate(-1px,1px); }
+}
+
+@keyframes lexiPopupIn {
+  from { opacity: 0; transform: translate(-50%,-50%) scale(0.92); }
+  to { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+}
+
+@keyframes lexiPopupShake {
+  0% { margin-left: 0; }
+  50% { margin-left: 2px; }
+  100% { margin-left: -1px; }
+}
+
+@keyframes lexiApprovedIn {
+  from { opacity: 0; transform: translate(-50%,-50%) scale(0.94); }
+  to { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+}
+
+@media (max-width: 900px) {
+  .lexi-error-popup {
+    min-width: 160px;
+    max-width: 220px;
+  }
+}
+
+
+/* ===== LEXI V67 CLEAN GLITCH OVERRIDE ===== */
+
+.lexi-error-popup {
+  border-radius: 2px !important;
+  backdrop-filter: blur(2px) !important;
+}
+
+.lexi-approved-popup {
+  border-radius: 2px !important;
+}
+
+.lexi-backlog-reader.is-corrupting {
+  outline: 1px solid rgba(255,255,255,0.12) !important;
+  outline-offset: -1px !important;
+}
+
+
+/* ===== LEXI V68 RED GLITCH + POPUP RESTORE ===== */
+
+.lexi-page.lexi-glitch-mode {
+  animation: lexiBodyRedPulse 0.12s steps(2,end) infinite !important;
+}
+
+.lexi-page.lexi-glitch-mode::before {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9996 !important;
+  pointer-events: none !important;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(160, 0, 26, 0.18), rgba(15, 0, 0, 0.44) 74%),
+    repeating-linear-gradient(
+      180deg,
+      rgba(255, 40, 60, 0.10) 0,
+      rgba(255, 40, 60, 0.10) 1px,
+      rgba(0,0,0,0.38) 2px,
+      rgba(0,0,0,0.38) 5px
+    ) !important;
+  mix-blend-mode: screen !important;
+  opacity: 0.95 !important;
+  animation: lexiScreenJijik 0.085s steps(2,end) infinite !important;
+}
+
+.lexi-page.lexi-glitch-mode::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: -3vh -3vw !important;
+  z-index: 9995 !important;
+  pointer-events: none !important;
+  background:
+    linear-gradient(90deg, transparent, rgba(255,0,50,0.14), transparent),
+    linear-gradient(180deg, transparent 0 42%, rgba(255,255,255,0.08) 43%, transparent 45% 100%) !important;
+  transform: translateX(-6px) !important;
+  filter: blur(0.3px) !important;
+  animation: lexiRedSweep 0.16s steps(2,end) infinite !important;
+}
+
+.lexi-backlog-reader.is-corrupting {
+  box-shadow: 0 0 0 1px rgba(255,70,95,0.16), 0 0 34px rgba(140,0,24,0.18) !important;
+}
+
+.lexi-backlog-reader.is-corrupting .backlog_novel_img {
+  animation: lexiImageFlicker 0.08s steps(2,end) infinite !important;
+  filter: contrast(1.95) brightness(0.52) saturate(0.22) hue-rotate(-18deg) !important;
+}
+
+.lexi-backlog-reader.is-corrupting .backlog_novel_title,
+.lexi-backlog-reader.is-corrupting .backlog_prose,
+.lexi-backlog-reader.is-corrupting .lexi-backlog-meta,
+.lexi-backlog-reader.is-corrupting .lexi-corrupt-line {
+  color: rgba(255,230,234,0.92) !important;
+  text-shadow: 1px 0 rgba(255,0,60,0.7), -1px 0 rgba(0,255,255,0.32) !important;
+  animation: lexiTextJitter 0.07s steps(2,end) infinite !important;
+}
+
+.lexi-error-popup {
+  z-index: 10001 !important;
+  min-width: 210px !important;
+  max-width: 300px !important;
+  border: 1px solid rgba(255, 72, 96, 0.42) !important;
+  background: rgba(8, 5, 8, 0.96) !important;
+  box-shadow: 0 20px 55px rgba(0,0,0,0.58), 0 0 26px rgba(150,0,30,0.16) !important;
+}
+
+.lexi-error-popup::before {
+  content: "ERROR WINDOW" !important;
+  color: rgba(255,225,230,0.46) !important;
+  background: rgba(255,60,80,0.045) !important;
+}
+
+.lexi-error-popup span {
+  color: rgba(255,230,234,0.96) !important;
+}
+
+.lexi-error-popup.is-dead {
+  opacity: 0 !important;
+  transform: translate(-50%,-50%) scale(0.92) !important;
+  transition: opacity 0.18s ease, transform 0.18s ease !important;
+}
+
+.lexi-approved-popup {
+  z-index: 10002 !important;
+  border-color: rgba(255,255,255,0.32) !important;
+  box-shadow: 0 28px 90px rgba(0,0,0,0.72), 0 0 40px rgba(255,255,255,0.04) !important;
+}
+
+#lexiAgeValue.is-redacted {
+  letter-spacing: 0.02em !important;
+  color: rgba(255,235,238,0.95) !important;
+  text-shadow: 1px 0 rgba(255,0,60,0.55), -1px 0 rgba(0,255,255,0.22) !important;
+  animation: lexiAgeBlink 0.45s steps(2,end) 3 !important;
+}
+
+@keyframes lexiBodyRedPulse {
+  0% { filter: none; }
+  50% { filter: saturate(0.8) brightness(0.82); }
+  100% { filter: contrast(1.08) brightness(0.9); }
+}
+
+@keyframes lexiScreenJijik {
+  0% { transform: translate(0,0); opacity: 0.86; }
+  33% { transform: translate(2px,-1px); opacity: 1; }
+  66% { transform: translate(-2px,1px); opacity: 0.74; }
+  100% { transform: translate(1px,0); opacity: 0.96; }
+}
+
+@keyframes lexiRedSweep {
+  0% { transform: translateX(-14px) skewX(-1deg); opacity: 0.45; }
+  50% { transform: translateX(8px) skewX(1deg); opacity: 0.85; }
+  100% { transform: translateX(-4px); opacity: 0.52; }
+}
+
+@keyframes lexiAgeBlink {
+  0% { opacity: 1; }
+  50% { opacity: 0.28; }
+  100% { opacity: 1; }
+}
