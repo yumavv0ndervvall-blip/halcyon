@@ -5327,3 +5327,92 @@ body.prompt-modal-open {
     width: min(262px, 100%) !important;
   }
 }
+
+
+/* v76: Kain/Lexi image song player final ratio */
+.kain-mid-grid{
+  grid-template-columns: 340px 1px minmax(0, 1fr) !important;
+  gap: 28px !important;
+  align-items: start !important;
+}
+
+.kain-mid-left,
+.kain-mid-right{
+  min-width: 0 !important;
+}
+
+.kain-mid-divider{
+  align-self: stretch !important;
+}
+
+.kain-image-song-card{
+  width: 280px !important;
+  max-width: 100% !important;
+  min-height: 0 !important;
+  height: auto !important;
+  flex: 0 0 auto !important;
+  display: block !important;
+  padding: 22px 22px 18px !important;
+  border-radius: 30px !important;
+  margin-top: 8px !important;
+}
+
+.kain-song-cover{
+  border-radius: 18px !important;
+  margin-bottom: 16px !important;
+}
+
+.kain-song-title{
+  font-size: 18px !important;
+  line-height: 1.18 !important;
+}
+
+.kain-song-artist{
+  font-size: 10.5px !important;
+}
+
+.kain-song-time{
+  margin-top: 12px !important;
+  font-size: 9px !important;
+}
+
+.kain-song-controls{
+  margin-top: 13px !important;
+  gap: 18px !important;
+}
+
+.kain-song-btn.play{
+  width: 46px !important;
+  height: 46px !important;
+  font-size: 15px !important;
+}
+
+.kain-lyrics-btn{
+  height: 28px !important;
+  padding: 0 15px !important;
+  font-size: 8.5px !important;
+}
+
+.kain-song-wave{
+  height: 24px !important;
+  margin-top: 14px !important;
+}
+
+.kain-chat-bubble{
+  max-width: 96% !important;
+  line-height: 1.58 !important;
+}
+
+@media (max-width: 900px){
+  .kain-mid-grid{
+    grid-template-columns: 1fr !important;
+  }
+
+  .kain-mid-divider{
+    display:none !important;
+  }
+
+  .kain-image-song-card{
+    width: min(280px, 100%) !important;
+  }
+}

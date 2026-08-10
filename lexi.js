@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
       reader.classList.add("is-unsealed");
 
       if (image) {
-        image.src = "/halcyon/images/lexi_backlog_secret.jpg";
+        image.src = "/halcyon/images/lexi_backlog_secret.png";
         image.alt = "렉시 비공개 백로그 이미지";
       }
 

@@ -145,3 +145,140 @@ document.addEventListener("DOMContentLoaded", function () {
   lyricsOverlay.addEventListener("click",e=>{if(e.target===lyricsOverlay){lyricsOverlay.classList.remove("is-open");lyricsOverlay.setAttribute("aria-hidden","true")}});
   updateProgress();
 })();
+
+
+/* v76 Image Song Player */
+function initHalcyonImageSongPlayers(){
+  document.querySelectorAll("[data-image-song-player]").forEach((card) => {
+    if(card.dataset.songReady === "true") return;
+    card.dataset.songReady = "true";
+
+    const audio = card.querySelector("[data-song-audio]");
+    const playBtn = card.querySelector("[data-song-play]");
+    const progress = card.querySelector("[data-song-progress]");
+    const current = card.querySelector("[data-song-current]");
+    const duration = card.querySelector("[data-song-duration]");
+    const lyricsOpen = card.querySelector("[data-lyrics-open]");
+    const lyricsClose = card.querySelector("[data-lyrics-close]");
+    const lyricsOverlay = card.querySelector("[data-lyrics-overlay]");
+    const waveBars = Array.from(card.querySelectorAll(".kain-song-wave span"));
+
+    let audioCtx = null;
+    let analyser = null;
+    let dataArray = null;
+    let sourceNode = null;
+    let rafId = null;
+
+    const formatTime = (sec) => {
+      if(!Number.isFinite(sec)) return "00:00";
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
+    };
+
+    const updateProgress = () => {
+      const d = audio?.duration || 0;
+      const c = audio?.currentTime || 0;
+      if(current) current.textContent = formatTime(c);
+      if(duration) duration.textContent = formatTime(d);
+      const ratio = d ? c / d : 0;
+      if(progress){
+        progress.value = Math.max(0, Math.min(1000, ratio * 1000));
+        progress.style.setProperty("--p", (ratio * 100).toFixed(2) + "%");
+      }
+    };
+
+    const connectAnalyser = () => {
+      if(sourceNode || !audio) return;
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 64;
+      analyser.smoothingTimeConstant = .72;
+      dataArray = new Uint8Array(analyser.frequencyBinCount);
+      sourceNode = audioCtx.createMediaElementSource(audio);
+      sourceNode.connect(analyser);
+      analyser.connect(audioCtx.destination);
+    };
+
+    const renderWave = () => {
+      if(!analyser || !audio || audio.paused || audio.ended){
+        rafId = null;
+        return;
+      }
+      analyser.getByteFrequencyData(dataArray);
+      waveBars.forEach((bar, i) => {
+        const idx = Math.floor(i / waveBars.length * dataArray.length);
+        const value = dataArray[idx] || 0;
+        bar.style.height = (4 + value / 255 * 20).toFixed(1) + "px";
+        bar.style.opacity = (.24 + value / 255 * .66).toFixed(2);
+      });
+      rafId = requestAnimationFrame(renderWave);
+    };
+
+    const pauseSong = () => {
+      if(audio) audio.pause();
+      card.classList.remove("is-fake-playing");
+      if(playBtn) playBtn.textContent = "▶";
+      waveBars.forEach(bar => {
+        bar.style.height = "4px";
+        bar.style.opacity = ".24";
+      });
+    };
+
+    const playSong = async () => {
+      try{
+        connectAnalyser();
+        if(audioCtx?.state === "suspended") await audioCtx.resume();
+        await audio.play();
+        card.classList.remove("is-fake-playing");
+        if(playBtn) playBtn.textContent = "Ⅱ";
+        if(!rafId) renderWave();
+      }catch(error){
+        card.classList.toggle("is-fake-playing");
+        if(playBtn) playBtn.textContent = card.classList.contains("is-fake-playing") ? "Ⅱ" : "▶";
+      }
+    };
+
+    playBtn?.addEventListener("click", () => {
+      if(!audio || audio.paused) playSong();
+      else pauseSong();
+    });
+
+    audio?.addEventListener("loadedmetadata", updateProgress);
+    audio?.addEventListener("timeupdate", updateProgress);
+    audio?.addEventListener("ended", () => {
+      if(playBtn) playBtn.textContent = "▶";
+      if(progress){
+        progress.value = 0;
+        progress.style.setProperty("--p","0%");
+      }
+    });
+
+    progress?.addEventListener("input", () => {
+      if(!audio?.duration) return;
+      audio.currentTime = Number(progress.value) / 1000 * audio.duration;
+      updateProgress();
+    });
+
+    lyricsOpen?.addEventListener("click", () => {
+      lyricsOverlay?.classList.add("is-open");
+      lyricsOverlay?.setAttribute("aria-hidden","false");
+    });
+
+    lyricsClose?.addEventListener("click", () => {
+      lyricsOverlay?.classList.remove("is-open");
+      lyricsOverlay?.setAttribute("aria-hidden","true");
+    });
+
+    lyricsOverlay?.addEventListener("click", (event) => {
+      if(event.target === lyricsOverlay){
+        lyricsOverlay.classList.remove("is-open");
+        lyricsOverlay.setAttribute("aria-hidden","true");
+      }
+    });
+
+    updateProgress();
+  });
+}
+
+document.addEventListener("DOMContentLoaded", initHalcyonImageSongPlayers);

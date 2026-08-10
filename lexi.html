@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>DR. LEXI | HALCYON ARCHIVE</title>
-  <link rel="stylesheet" href="/halcyon/style.css?v=75">
-  <link rel="stylesheet" href="/halcyon/lexi.css?v=75">
+  <link rel="stylesheet" href="/halcyon/style.css?v=76">
+  <link rel="stylesheet" href="/halcyon/lexi.css?v=76">
 </head>
 <body class="lexi-page">
 <div id="nav-placeholder"></div>
@@ -13,7 +13,7 @@
 
   
 
-  <div class="profile_shell char_lexi" style="--hero-img:url('/halcyon/images/lexi.png'); --backlog-img:url('/halcyon/images/lexi_backlog.jpg'); --secret-backlog-img:url('/halcyon/images/lexi_backlog_secret.jpg');">
+  <div class="profile_shell char_lexi" style="--hero-img:url('/halcyon/images/lexi.png'); --backlog-img:url('/halcyon/images/lexi_backlog.png'); --secret-backlog-img:url('/halcyon/images/lexi_backlog_secret.png');">
 <header class="hero_card">
       <div class="hero_img" aria-hidden="true"></div>
 
@@ -337,35 +337,58 @@
               <span class="kain-section-side">CHARACTER REFERENCE</span>
             </div>
 
-            <button type="button" class="kain-prompt-card" id="openIdCard" data-open-prompt aria-label="렉시 프롬프트 카드 열기">
-              <div class="kain-prompt-corner top-left"></div>
-              <div class="kain-prompt-corner bottom-right"></div>
+            <article class="kain-image-song-card" data-image-song-player aria-label="lexi 이미지송 플레이어">
+              <div class="kain-song-cover" style="background-image:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.38)),url('/halcyon/images/lexi_song.png')" aria-label="lexi 이미지송 커버"></div>
 
-              <div class="kain-prompt-card-top">
-                <span class="kain-prompt-mark">ARCH</span>
-                <span class="kain-prompt-num">CR 01</span>
+              <div class="kain-song-meta">
+                <h3 class="kain-song-title">Redacted Pulse</h3>
+                <div class="kain-song-artist">LEXI Image Song</div>
               </div>
 
-              <div class="kain-prompt-photo-frame">
-                <img src="/halcyon/images/lexi_id.jpg" alt="렉시 증명사진" class="kain-prompt-photo">
+              <div class="kain-song-time">
+                <span data-song-current>00:00</span>
+                <span data-song-duration>00:00</span>
               </div>
 
-              <div class="kain-prompt-name">DR. LEXI</div>
-              <div class="kain-prompt-sub">CORE RESEARCHER</div>
-
-              <div class="kain-prompt-lines">
-                <div><span>REAL NAME</span><b>알렉산드라 언더힐</b></div>
-                <div><span>CLASS</span><b>S CLASS GUIDE</b></div>
-                <div><span>ATTRIBUTE</span><b>LIFE ANALYSIS</b></div>
+              <div class="kain-song-progress">
+                <input data-song-progress type="range" min="0" max="1000" value="0" aria-label="lexi 이미지송 진행 바">
               </div>
 
-              <div class="kain-prompt-barcode" aria-hidden="true">
-                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                <span></span><span></span><span></span><span></span><span></span>
+              <div class="kain-song-controls">
+                <button type="button" class="kain-song-btn" aria-label="previous">‹</button>
+                <button type="button" class="kain-song-btn play" data-song-play aria-label="play or pause">▶</button>
+                <button type="button" class="kain-song-btn" aria-label="next">›</button>
               </div>
 
-              <div class="kain-prompt-open">OPEN PROMPT</div>
-            </button>
+              <div class="kain-song-sub-controls">
+                <button type="button" class="kain-lyrics-btn" data-lyrics-open>Lyrics</button>
+              </div>
+
+              <div class="kain-song-wave" aria-label="lexi 이미지송 음파">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+
+              <div class="kain-lyrics-overlay" data-lyrics-overlay aria-hidden="true">
+                <div class="kain-lyrics-head">
+                  <b>Lyrics</b>
+                  <button type="button" class="kain-lyrics-close" data-lyrics-close aria-label="close lyrics">×</button>
+                </div>
+                <div class="kain-lyrics-body">실험실의 불빛 아래
+숨소리까지 데이터가 되고
+너는 나를 사람이라 부르지만
+나는 아직 기록되지 않은 이름
+
+Redacted pulse
+Keep it alive
+차가운 손끝에서
+생명은 다시 숫자로 깨어난다
+
+샘플 가사입니다.
+렉시 이미지송 분위기 확인용.</div>
+              </div>
+
+              <audio class="kain-song-audio" data-song-audio src="/halcyon/audio/lexi_song.mp3"></audio>
+            </article>
           </div>
 
           <div class="kain-mid-divider" aria-hidden="true"></div>
@@ -421,7 +444,7 @@
 
         <div class="backlog_novel lexi-backlog-reader" id="lexiBacklogReader">
           <div class="backlog_novel_visual lexi-backlog-visual" aria-label="렉시 백로그 대표 이미지">
-            <img class="backlog_novel_img" id="lexiBacklogImage" src="/halcyon/images/lexi_backlog.jpg" alt="렉시 백로그 이미지">
+            <img class="backlog_novel_img" id="lexiBacklogImage" src="/halcyon/images/lexi_backlog.png" alt="렉시 백로그 이미지">
           </div>
 
           <div class="backlog_novel_body">
@@ -456,44 +479,10 @@
     </footer>
   </div>
 <div class="backlog_lightbox" id="backlogLightbox" aria-hidden="true">
-    <img class="backlog_lightbox_img" src="/halcyon/images/lexi_backlog.jpg" alt="렉시 백로그 이미지 확대본">
+    <img class="backlog_lightbox_img" src="/halcyon/images/lexi_backlog.png" alt="렉시 백로그 이미지 확대본">
   </div>
 
-  
-
-  
-
-
-  <div class="kain-modal" id="characterPromptModal" data-prompt-modal aria-hidden="true">
-    <div class="kain-modal-dim" id="closePromptDim"></div>
-
-    <div class="kain-modal-panel" role="dialog" aria-modal="true" aria-labelledby="kainModalTitle">
-      <button type="button" class="kain-modal-close" id="closePromptBtn">×</button>
-
-      <div class="kain-modal-grid">
-        <div class="kain-modal-imagebox">
-          <div class="kain-modal-label">ORIGINAL PHOTO</div>
-          <img src="/halcyon/images/lexi_id.jpg" alt="렉시 원본 증명사진" class="kain-modal-image">
-        </div>
-
-        <div class="kain-modal-textbox">
-          <div class="kain-modal-label" id="kainModalTitle">CHARACTER PROMPT</div>
-          
-          <div class="kain-modal-scroll">
-            <p><strong>Appearance</strong><br>창백한 피부, 슬렌더한 체형, 나른하고 고혹적인 인상, 연구자 특유의 정돈된 분위기.</p>
-            <p><strong>Face</strong><br>서늘한 미인상, 얇고 또렷한 얼굴선, 감정이 적게 드러나는 표정, 어딘가 섬뜩한 분위기.</p>
-            <p><strong>Eyes</strong><br>루비색 적안, 안광이 낮은 눈, 관찰하듯 가라앉은 시선, 사람보다 데이터를 먼저 보는 듯한 눈빛.</p>
-            <p><strong>Hair</strong><br>검은 레이어드 웨이브, 허리까지 오는 긴 머리, 연구 중에는 하나로 묶은 스타일.</p>
-            <p><strong>Outfit</strong><br>검은 계열 이너, 흰 연구복, 얇은 장갑, 차갑고 전문적인 CORE 연구원 분위기.</p>
-            <p><strong>Mood</strong><br>우아하지만 위험한 연구자, 나른함, 지적인 압박감, 통제된 광기, 생명과 데이터를 해부하는 듯한 분위기.</p>
-            <p><strong>Keywords</strong><br>cold scientist, ruby eyes, black long hair, white lab coat, life analysis, elegant horror, clinical atmosphere</p>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <script src="/halcyon/script.js?v=75"></script>
-  <script src="/halcyon/lexi.js?v=75"></script>
+  <script src="/halcyon/script.js?v=76"></script>
+  <script src="/halcyon/lexi.js?v=76"></script>
 </body>
 </html>
