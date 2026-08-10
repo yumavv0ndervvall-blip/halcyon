@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>KAIN | HALCYON ARCHIVE</title>
-  <link rel="stylesheet" href="/halcyon/style.css?v=67">
+  <link rel="stylesheet" href="/halcyon/style.css?v=75">
 </head>
 <body>
 <div id="nav-placeholder"></div>
@@ -332,39 +332,71 @@
         <div class="kain-mid-grid">
           <div class="kain-mid-col kain-mid-left">
             <div class="kain-mid-col-head">
-              <span class="kain-section-title">PROMPT</span>
-              <span class="kain-section-side">CHARACTER REFERENCE</span>
+              <span class="kain-section-title">IMAGE SONG</span>
+              <span class="kain-section-side">NOW PLAYING</span>
             </div>
 
-            <button type="button" class="kain-prompt-card" id="openIdCard" data-open-prompt aria-label="카인 프롬프트 카드 열기">
-              <div class="kain-prompt-corner top-left"></div>
-              <div class="kain-prompt-corner bottom-right"></div>
+            <article class="kain-image-song-card" id="kainImageSongPlayer" aria-label="카인 이미지송 플레이어">
+              <div class="kain-song-cover" aria-label="카인 이미지송 커버"></div>
 
-              <div class="kain-prompt-card-top">
-                <span class="kain-prompt-mark">ARCH</span>
-                <span class="kain-prompt-num">RG 01</span>
+              <div class="kain-song-meta">
+                <h3 class="kain-song-title">Last Bastion</h3>
+                <div class="kain-song-artist">KAIN Image Song</div>
               </div>
 
-              <div class="kain-prompt-photo-frame">
-                <img src="/halcyon/images/kain_pf.png" alt="카인 증명사진" class="kain-prompt-photo">
+              <div class="kain-song-time">
+                <span id="kainSongCurrent">00:00</span>
+                <span id="kainSongDuration">00:00</span>
               </div>
 
-              <div class="kain-prompt-name">KAIN</div>
-              <div class="kain-prompt-sub">REARGUARD LEADER</div>
-
-              <div class="kain-prompt-lines">
-                <div><span>REAL NAME</span><b>차도윤</b></div>
-                <div><span>CLASS</span><b>S CLASS SENTINEL</b></div>
-                <div><span>ATTRIBUTE</span><b>PYRE</b></div>
+              <div class="kain-song-progress">
+                <input id="kainSongProgress" type="range" min="0" max="1000" value="0" aria-label="카인 이미지송 진행 바">
               </div>
 
-              <div class="kain-prompt-barcode" aria-hidden="true">
-                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              <div class="kain-song-controls">
+                <button type="button" class="kain-song-btn" aria-label="previous">‹</button>
+                <button type="button" class="kain-song-btn play" id="kainSongPlay" aria-label="play or pause">▶</button>
+                <button type="button" class="kain-song-btn" aria-label="next">›</button>
+              </div>
+
+              <div class="kain-song-sub-controls">
+                <button type="button" class="kain-lyrics-btn" id="kainLyricsOpen">Lyrics</button>
+              </div>
+
+              <div class="kain-song-wave" id="kainSongWave" aria-label="카인 이미지송 음파">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
                 <span></span><span></span><span></span><span></span><span></span>
               </div>
 
-              <div class="kain-prompt-open">OPEN PROMPT</div>
-            </button>
+              <div class="kain-lyrics-overlay" id="kainLyricsOverlay" aria-hidden="true">
+                <div class="kain-lyrics-head">
+                  <b>Lyrics</b>
+                  <button type="button" class="kain-lyrics-close" id="kainLyricsClose" aria-label="close lyrics">×</button>
+                </div>
+                <div class="kain-lyrics-body">
+모든 불길이 무너질 때
+나는 가장 마지막에 남아
+검게 탄 하늘 아래서
+너의 이름을 방벽처럼 세운다
+
+숨이 꺼지는 전선 위
+뒤돌아보지 않는 발걸음
+타오르는 건 분노가 아니라
+돌아가야 할 사람들의 약속
+
+Hold the line
+Break the night
+푸른 불꽃 끝에 서서
+I will be your last bastion
+끝내 무너지지 않는 이름
+                </div>
+              </div>
+
+              <audio class="kain-song-audio" id="kainSongAudio" src="/halcyon/audio/kain_song.mp3"></audio>
+            </article>
           </div>
 
           <div class="kain-mid-divider" aria-hidden="true"></div>
@@ -484,43 +516,6 @@
 <div class="backlog_lightbox" id="backlogLightbox" aria-hidden="true">
     <img class="backlog_lightbox_img" src="/halcyon/images/kain_backlog.png" alt="카인 백로그 이미지 확대본">
   </div>
-
-  
-
-  
-
-
-  <div class="kain-modal" id="kainIdModal" data-prompt-modal aria-hidden="true">
-    <div class="kain-modal-dim" id="closeIdCardDim"></div>
-
-    <div class="kain-modal-panel" role="dialog" aria-modal="true" aria-labelledby="kainModalTitle">
-      <button type="button" class="kain-modal-close" id="closeIdCardBtn">×</button>
-
-      <div class="kain-modal-grid">
-        <div class="kain-modal-imagebox">
-          <div class="kain-modal-label">ORIGINAL PHOTO</div>
-          <img src="/halcyon/images/kain_pf.png" alt="카인 원본 증명사진" class="kain-modal-image">
-        </div>
-
-        <div class="kain-modal-textbox">
-          <div class="kain-modal-label" id="kainModalTitle">CHARACTER PROMPT</div>
-          
-          <div class="kain-modal-scroll">
-            <p><strong>Appearance</strong><br>외형 어쩌구저쩌구. 체형, 키, 전체적인 실루엣, 첫인상에 보이는 분위기를 여기에 적습니다.</p>
-            <p><strong>Face</strong><br>얼굴 어쩌구저쩌구. 얼굴형, 흉터, 눈썹, 입매, 표정, 인상적인 특징을 여기에 정리합니다.</p>
-            <p><strong>Eyes</strong><br>눈 어쩌구저쩌구. 눈동자 색, 눈매, 시선, 안광 여부, 캐릭터 특유의 분위기를 적습니다.</p>
-            <p><strong>Hair</strong><br>머리 어쩌구저쩌구. 머리색, 헤어스타일, 앞머리, 길이, 질감, 정돈된 정도를 적습니다.</p>
-            <p><strong>Outfit</strong><br>의상 어쩌구저쩌구. 제복, 코트, 장갑, 장신구, 색감, 소재감, 전체 스타일을 적습니다.</p>
-            <p><strong>Pose</strong><br>포즈 어쩌구저쩌구. 정면 증명사진, 무표정, 시선 방향, 어깨 각도, 손 위치 등을 적습니다.</p>
-            <p><strong>Mood</strong><br>분위기 어쩌구저쩌구. 위압감, 차분함, 피곤함, 냉정함, 다정함 같은 감정 톤을 적습니다.</p>
-            <p><strong>Lighting</strong><br>조명 어쩌구저쩌구. 흰색 역광, 어두운 전면, 낮은 채도, 차가운 명암 같은 화면 연출을 적습니다.</p>
-            <p><strong>Keywords</strong><br>키워드 어쩌구저쩌구. 마지막에 복붙용 핵심 태그를 한 줄로 정리합니다.</p>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <script src="/halcyon/script.js?v=67"></script>
+  <script src="/halcyon/script.js?v=75"></script>
 </body>
 </html>

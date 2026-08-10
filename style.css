@@ -4881,7 +4881,7 @@ body {
 /* ===== CHARACTER PROFILE COMMON IMAGE VARIABLES ===== */
 .profile_shell {
   --hero-img: url("/halcyon/images/kain.png");
-  --backlog-img: url("/halcyon/images/kain_backlog.jpg");
+  --backlog-img: url("/halcyon/images/kain_backlog.png");
 }
 
 
@@ -5037,5 +5037,293 @@ body.prompt-modal-open {
 
   .kain-modal-scroll {
     max-height: none !important;
+  }
+}
+
+
+/* v71 profile title readability */
+.hero_title{
+  font-size:clamp(46px, 9.2vw, 78px) !important;
+  letter-spacing:-0.018em !important;
+  line-height:.92 !important;
+  font-family:Arial,"Noto Sans KR",sans-serif !important;
+}
+@media (max-width:760px){
+  .hero_title{font-size:clamp(40px, 14vw, 62px) !important;letter-spacing:-0.01em !important;}
+}
+
+/* v71 image song player */
+.kain-image-song-card{
+  position:relative;
+  width:214px;
+  max-width:100%;
+  margin:0 auto;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:24px;
+  overflow:hidden;
+  background:radial-gradient(circle at 28% 0%,rgba(255,255,255,.075),transparent 36%),linear-gradient(180deg,#2b3039,#181b20 60%,#111318);
+  padding:16px;
+  color:rgba(248,250,255,.92);
+}
+.kain-song-cover{
+  position:relative;
+  width:100%;
+  aspect-ratio:1/1;
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.14);
+  background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.38)),url('/halcyon/images/kain_song.png'),linear-gradient(135deg,#cfd9e7,#7f8c9f 54%,#30343c);
+  background-size:cover;
+  background-position:center;
+}
+.kain-song-cover::after{content:"";position:absolute;inset:9px;border:1px solid rgba(255,255,255,.18);border-radius:10px;opacity:.28;pointer-events:none;}
+.kain-song-meta{margin-top:13px;min-width:0}.kain-song-title{margin:0;color:#fff;font-size:15px;line-height:1.18;font-weight:800;letter-spacing:-.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.kain-song-artist{margin-top:3px;color:rgba(230,236,245,.50);font-size:9px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kain-song-time{display:flex;justify-content:space-between;margin-top:10px;color:rgba(230,236,245,.30);font-size:8px;font-variant-numeric:tabular-nums}.kain-song-progress{position:relative;height:14px;margin-top:1px;display:flex;align-items:center}.kain-song-progress input{width:100%;height:14px;margin:0;padding:0;appearance:none;background:transparent;cursor:pointer}.kain-song-progress input::-webkit-slider-runnable-track{height:2px;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,.80) var(--p,0%),rgba(255,255,255,.13) var(--p,0%))}.kain-song-progress input::-webkit-slider-thumb{appearance:none;width:7px;height:7px;margin-top:-2.5px;border-radius:999px;background:rgba(255,255,255,.92)}
+.kain-song-controls{display:flex;align-items:center;justify-content:center;gap:15px;margin-top:9px}.kain-song-btn{border:0;background:transparent;color:rgba(255,255,255,.68);width:20px;height:20px;display:grid;place-items:center;padding:0;cursor:pointer;font-size:13px;line-height:1}.kain-song-btn.play{width:38px;height:38px;border-radius:999px;background:rgba(255,255,255,.88);color:#14161a;font-size:14px;font-weight:900}.kain-song-sub-controls{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px}.kain-lyrics-btn{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.055);color:rgba(245,248,252,.76);height:24px;border-radius:999px;padding:0 11px;font-size:8px;letter-spacing:.12em;font-weight:800;cursor:pointer;text-transform:uppercase}
+.kain-song-wave{height:20px;margin-top:12px;display:flex;align-items:center;justify-content:center;gap:2px;overflow:hidden}.kain-song-wave span{width:2px;height:4px;border-radius:999px;background:rgba(255,255,255,.64);opacity:.36;transition:height .06s linear,opacity .06s linear}.kain-image-song-card.is-fake-playing .kain-song-wave span{animation:kainFakeWave 1s ease-in-out infinite}.kain-image-song-card.is-fake-playing .kain-song-wave span:nth-child(2n){animation-duration:.72s;opacity:.45}.kain-image-song-card.is-fake-playing .kain-song-wave span:nth-child(3n){animation-duration:1.3s;opacity:.72}.kain-image-song-card.is-fake-playing .kain-song-wave span:nth-child(4n){animation-duration:.9s;opacity:.38}.kain-image-song-card.is-fake-playing .kain-song-wave span:nth-child(5n){animation-duration:1.5s;opacity:.8}@keyframes kainFakeWave{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(2.25)}}
+.kain-lyrics-overlay{position:absolute;inset:0;z-index:5;background:rgba(8,10,14,.70);backdrop-filter:blur(7px);opacity:0;pointer-events:none;transition:.22s ease;padding:15px;display:flex;flex-direction:column}.kain-lyrics-overlay.is-open{opacity:1;pointer-events:auto}.kain-lyrics-head{display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:9px;margin-bottom:10px}.kain-lyrics-head b{font-size:9px;letter-spacing:.16em;color:rgba(255,255,255,.58);text-transform:uppercase}.kain-lyrics-close{width:24px;height:24px;border:1px solid rgba(255,255,255,.12);border-radius:999px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.82);cursor:pointer;line-height:1;padding:0}.kain-lyrics-body{flex:1;overflow-y:auto;padding-right:6px;color:rgba(245,248,252,.86);font-size:11px;line-height:1.72;white-space:pre-wrap}.kain-lyrics-body::-webkit-scrollbar{width:4px}.kain-lyrics-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);border-radius:999px}.kain-song-audio{display:none}
+
+
+/* ===== V72 IMAGE SONG GAP FIX ===== */
+.kain-mid-grid {
+  align-items: stretch !important;
+}
+
+.kain-mid-col {
+  min-width: 0 !important;
+}
+
+.kain-image-song-card {
+  flex: 1 1 auto !important;
+  min-height: 408px !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.kain-song-wave {
+  margin-top: auto !important;
+}
+
+.kain-song-cover {
+  flex: 0 0 auto !important;
+}
+
+.kain-song-meta,
+.kain-song-time,
+.kain-song-progress,
+.kain-song-controls,
+.kain-song-sub-controls {
+  flex: 0 0 auto !important;
+}
+
+@media (max-width: 900px) {
+  .kain-image-song-card {
+    min-height: 0 !important;
+    height: auto !important;
+    flex: 0 0 auto !important;
+  }
+
+  .kain-song-wave {
+    margin-top: 12px !important;
+  }
+}
+
+
+/* ===== V73 INTERVIEW WIDE BALANCE ===== */
+/* 왼쪽 음악카드를 억지로 늘리지 않고, 인터뷰 영역 비율을 넓혀서 하단 공백을 줄이는 버전 */
+.kain-mid-grid {
+  grid-template-columns: 220px minmax(0, 1fr) !important;
+  gap: 30px !important;
+  align-items: start !important;
+}
+
+.kain-mid-left {
+  align-self: start !important;
+}
+
+.kain-image-song-card {
+  width: 188px !important;
+  min-height: 0 !important;
+  height: auto !important;
+  flex: 0 0 auto !important;
+  padding: 14px !important;
+  border-radius: 22px !important;
+}
+
+.kain-song-cover {
+  width: 100% !important;
+  flex: 0 0 auto !important;
+}
+
+.kain-song-title {
+  font-size: 14px !important;
+}
+
+.kain-song-wave {
+  margin-top: 12px !important;
+}
+
+.kain-interview-box {
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+.kain-chat-log {
+  align-content: start !important;
+  padding: 16px 18px !important;
+  gap: 9px !important;
+}
+
+.kain-chat-bubble {
+  max-width: 96% !important;
+  line-height: 1.58 !important;
+}
+
+@media (max-width: 900px) {
+  .kain-mid-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+  .kain-image-song-card {
+    width: 214px !important;
+  }
+}
+
+
+/* v74 FIX: HTML 구조는 left / divider / right 3열이므로 3열 유지 */
+.kain-mid-grid{
+  grid-template-columns: 238px 1px minmax(0, 1fr) !important;
+  gap: 24px !important;
+  align-items: start !important;
+}
+
+.kain-mid-left{
+  min-width: 0 !important;
+}
+
+.kain-mid-right{
+  min-width: 0 !important;
+}
+
+.kain-mid-divider{
+  align-self: stretch !important;
+}
+
+.kain-image-song-card{
+  width: 206px !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  flex: 0 0 auto !important;
+  display: block !important;
+}
+
+.kain-interview-box{
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+.kain-chat-bubble{
+  max-width: 96% !important;
+  line-height: 1.58 !important;
+}
+
+@media (max-width: 820px){
+  .kain-mid-grid{
+    grid-template-columns: 1fr !important;
+  }
+  .kain-mid-divider{
+    display:none !important;
+  }
+  .kain-image-song-card{
+    width: min(214px, 100%) !important;
+  }
+}
+
+
+/* v75: 플레이어를 억지로 세로로 늘리지 않고 전체 카드 비율 자체를 키움 */
+.kain-mid-grid{
+  grid-template-columns: 318px 1px minmax(0, 1fr) !important;
+  gap: 28px !important;
+  align-items: start !important;
+}
+
+.kain-mid-left,
+.kain-mid-right{
+  min-width: 0 !important;
+}
+
+.kain-mid-divider{
+  align-self: stretch !important;
+}
+
+.kain-image-song-card{
+  width: 262px !important;
+  max-width: 100% !important;
+  min-height: 0 !important;
+  height: auto !important;
+  flex: 0 0 auto !important;
+  display: block !important;
+  padding: 18px !important;
+  border-radius: 28px !important;
+}
+
+.kain-song-cover{
+  border-radius: 16px !important;
+}
+
+.kain-song-title{
+  font-size: 17px !important;
+  line-height: 1.18 !important;
+}
+
+.kain-song-artist{
+  font-size: 10px !important;
+}
+
+.kain-song-time{
+  margin-top: 12px !important;
+  font-size: 9px !important;
+}
+
+.kain-song-controls{
+  margin-top: 12px !important;
+  gap: 18px !important;
+}
+
+.kain-song-btn.play{
+  width: 44px !important;
+  height: 44px !important;
+  font-size: 15px !important;
+}
+
+.kain-lyrics-btn{
+  height: 27px !important;
+  padding: 0 14px !important;
+  font-size: 8.5px !important;
+}
+
+.kain-song-wave{
+  height: 24px !important;
+  margin-top: 14px !important;
+}
+
+.kain-chat-bubble{
+  max-width: 96% !important;
+  line-height: 1.58 !important;
+}
+
+@media (max-width: 900px){
+  .kain-mid-grid{
+    grid-template-columns: 1fr !important;
+  }
+
+  .kain-mid-divider{
+    display:none !important;
+  }
+
+  .kain-image-song-card{
+    width: min(262px, 100%) !important;
   }
 }

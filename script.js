@@ -115,3 +115,33 @@ document.addEventListener("DOMContentLoaded", function () {
     lightbox.setAttribute("aria-hidden", "true");
   });
 });
+
+
+/* v71 image song player */
+(function(){
+  const card=document.getElementById("kainImageSongPlayer");
+  if(!card) return;
+  const audio=document.getElementById("kainSongAudio");
+  const playBtn=document.getElementById("kainSongPlay");
+  const progress=document.getElementById("kainSongProgress");
+  const current=document.getElementById("kainSongCurrent");
+  const duration=document.getElementById("kainSongDuration");
+  const waveBars=Array.from(document.querySelectorAll("#kainSongWave span"));
+  const openLyrics=document.getElementById("kainLyricsOpen");
+  const closeLyrics=document.getElementById("kainLyricsClose");
+  const lyricsOverlay=document.getElementById("kainLyricsOverlay");
+  let audioCtx=null,analyser=null,dataArray=null,sourceNode=null,rafId=null;
+  function formatTime(sec){if(!Number.isFinite(sec))return"00:00";const m=Math.floor(sec/60),s=Math.floor(sec%60);return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}
+  function updateProgress(){const d=audio.duration||0,c=audio.currentTime||0;current.textContent=formatTime(c);duration.textContent=formatTime(d);const r=d?c/d:0;progress.value=Math.max(0,Math.min(1000,r*1000));progress.style.setProperty("--p",(r*100).toFixed(2)+"%");}
+  function connectAnalyser(){if(sourceNode)return;audioCtx=new(window.AudioContext||window.webkitAudioContext)();analyser=audioCtx.createAnalyser();analyser.fftSize=64;analyser.smoothingTimeConstant=.72;dataArray=new Uint8Array(analyser.frequencyBinCount);sourceNode=audioCtx.createMediaElementSource(audio);sourceNode.connect(analyser);analyser.connect(audioCtx.destination)}
+  function renderWave(){if(!analyser||audio.paused||audio.ended){rafId=null;return}analyser.getByteFrequencyData(dataArray);waveBars.forEach((bar,i)=>{const idx=Math.floor(i/waveBars.length*dataArray.length),v=dataArray[idx]||0;bar.style.height=(4+v/255*20).toFixed(1)+"px";bar.style.opacity=(.24+v/255*.66).toFixed(2)});rafId=requestAnimationFrame(renderWave)}
+  async function playSong(){try{connectAnalyser();if(audioCtx.state==="suspended")await audioCtx.resume();await audio.play();card.classList.remove("is-fake-playing");playBtn.textContent="Ⅱ";if(!rafId)renderWave()}catch(e){card.classList.toggle("is-fake-playing");playBtn.textContent=card.classList.contains("is-fake-playing")?"Ⅱ":"▶"}}
+  function pauseSong(){audio.pause();card.classList.remove("is-fake-playing");playBtn.textContent="▶";waveBars.forEach(bar=>{bar.style.height="4px";bar.style.opacity=".24"})}
+  playBtn.addEventListener("click",()=>audio.paused?playSong():pauseSong());
+  audio.addEventListener("loadedmetadata",updateProgress);audio.addEventListener("timeupdate",updateProgress);audio.addEventListener("ended",()=>{playBtn.textContent="▶";progress.value=0;progress.style.setProperty("--p","0%")});
+  progress.addEventListener("input",()=>{if(!audio.duration)return;audio.currentTime=Number(progress.value)/1000*audio.duration;updateProgress()});
+  openLyrics.addEventListener("click",()=>{lyricsOverlay.classList.add("is-open");lyricsOverlay.setAttribute("aria-hidden","false")});
+  closeLyrics.addEventListener("click",()=>{lyricsOverlay.classList.remove("is-open");lyricsOverlay.setAttribute("aria-hidden","true")});
+  lyricsOverlay.addEventListener("click",e=>{if(e.target===lyricsOverlay){lyricsOverlay.classList.remove("is-open");lyricsOverlay.setAttribute("aria-hidden","true")}});
+  updateProgress();
+})();
