@@ -79,6 +79,10 @@
           <input id="exportFileName" value="character.html">
         </label>
       </div>
+      <label style="margin-top:10px;display:flex;grid-template-columns:auto 1fr;align-items:center;gap:8px;text-transform:none;letter-spacing:0;color:var(--maker-muted);font-size:12px">
+        <input type="checkbox" id="includeNav" style="width:auto">
+        Include Nav / 사이트 메뉴 포함
+      </label>
     </section>
 
     <section class="maker_panel">
@@ -6082,7 +6086,7 @@ document.addEventListener("DOMContentLoaded", function () {
       render();
     });
 
-    render();
+    renderNow();
   });
 });
 
@@ -6462,6 +6466,7 @@ function lexiBacklogHtml(mode){
 
 function profileHtml(mode="preview"){
   const isLexi = value("#charType") === "lexi";
+  const includeNav = mode === "preview" ? false : $("#includeNav").checked;
   const hero = mode === "preview" ? previewUrl("hero", value("#heroFile")) : filePath(value("#heroFile"));
   const backlog = mode === "preview" ? previewUrl("backlog", value("#backlogFile")) : filePath(value("#backlogFile"));
   const identity = state.identity.map(([k,v])=>`<div class="info_row"><div class="info_key">${esc(k)}</div><p class="info_value">${br(v)}</p></div>`).join("");
@@ -6484,7 +6489,7 @@ function profileHtml(mode="preview"){
   ${mode==="preview" ? `<style>${SITE_CSS}\n${isLexi ? LEXI_CSS : ""}</style>` : `<link rel="stylesheet" href="/halcyon/style.css?v=76">\n  ${isLexi ? '<link rel="stylesheet" href="/halcyon/lexi.css?v=76">' : ''}`}
 </head>
 <body class="${pageClass}">
-${mode==="preview" ? navHtml() : '<div id="nav-placeholder"></div>'}
+${includeNav ? (mode==="preview" ? navHtml() : '<div id="nav-placeholder"></div>') : ''}
 
   <div class="profile_shell ${shellClass}" style="--hero-img:url('${hero}'); --backlog-img:url('${backlog}');">
     <header class="hero_card">
@@ -6552,11 +6557,70 @@ function navHtml(){
   return `<nav class="site_nav"><a href="#">MAIN</a><a href="#">ROSTER</a><a href="#">UNIT</a><a href="#">ARCHIVE</a></nav>`;
 }
 
+let renderTimer = null;
+let lastPreviewHtml = "";
+
 function render(){
+  $("#exportCode").value = profileHtml("export");
+
+  clearTimeout(renderTimer);
+  renderTimer = setTimeout(() => {
+    renderPreview();
+  }, 450);
+}
+
+function renderNow(){
+  $("#exportCode").value = profileHtml("export");
+  clearTimeout(renderTimer);
+  renderPreview();
+}
+
+function getFrameScroll(){
+  const frame = $("#previewFrame");
+  try{
+    const win = frame.contentWindow;
+    const doc = frame.contentDocument;
+    return {
+      x: win ? win.scrollX : 0,
+      y: win ? win.scrollY : 0,
+      rootTop: doc?.documentElement?.scrollTop || 0,
+      bodyTop: doc?.body?.scrollTop || 0
+    };
+  }catch(e){
+    return {x:0,y:0,rootTop:0,bodyTop:0};
+  }
+}
+
+function restoreFrameScroll(pos){
+  const frame = $("#previewFrame");
+  try{
+    const win = frame.contentWindow;
+    const doc = frame.contentDocument;
+    const y = Math.max(pos.y || 0, pos.rootTop || 0, pos.bodyTop || 0);
+    if(win) win.scrollTo(pos.x || 0, y);
+    if(doc?.documentElement) doc.documentElement.scrollTop = y;
+    if(doc?.body) doc.body.scrollTop = y;
+  }catch(e){}
+}
+
+function renderPreview(){
   const html = profileHtml("preview");
   const frame = $("#previewFrame");
+  const pos = getFrameScroll();
+
+  if(html === lastPreviewHtml){
+    restoreFrameScroll(pos);
+    return;
+  }
+
+  lastPreviewHtml = html;
+  frame.onload = () => {
+    requestAnimationFrame(() => {
+      restoreFrameScroll(pos);
+      setTimeout(() => restoreFrameScroll(pos), 80);
+    });
+  };
   frame.srcdoc = html;
-  $("#exportCode").value = profileHtml("export");
 }
 
 function bindStaticInputs(){
@@ -6567,14 +6631,14 @@ function bindStaticInputs(){
   bindUpload("#heroUpload","hero");
   bindUpload("#backlogUpload","backlog");
   bindUpload("#songUpload","song");
-  $("#addIdentity").onclick=()=>{state.identity.push(["New Key","내용"]);refreshEditors();render();};
-  $("#addNote").onclick=()=>{state.notes.push({title:"NEW NOTE",text:"내용"});refreshEditors();render();};
-  $("#addSkill").onclick=()=>{state.skills.push({num:"SKILL 04",name:"New Skill",text:"내용"});refreshEditors();render();};
-  $("#addCombat").onclick=()=>{state.combat.push(["NEW KEY","내용"]);refreshEditors();render();};
-  $("#addPref").onclick=()=>{state.prefs.push({title:"NEW PREF",text:"내용"});refreshEditors();render();};
-  $("#addRel").onclick=()=>{state.rels.push(["NEW KEY","내용"]);refreshEditors();render();};
-  $("#addInterview").onclick=()=>{state.interviews.push({q:"질문",a:"답변"});refreshEditors();render();};
-  $("#addBacklog").onclick=()=>{state.backlog.push({page:`Page ${String(state.backlog.length+1).padStart(2,"0")}`,title:"새 페이지",text:"내용"});refreshEditors();render();};
+  $("#addIdentity").onclick=()=>{state.identity.push(["New Key","내용"]);refreshEditors();renderNow();};
+  $("#addNote").onclick=()=>{state.notes.push({title:"NEW NOTE",text:"내용"});refreshEditors();renderNow();};
+  $("#addSkill").onclick=()=>{state.skills.push({num:"SKILL 04",name:"New Skill",text:"내용"});refreshEditors();renderNow();};
+  $("#addCombat").onclick=()=>{state.combat.push(["NEW KEY","내용"]);refreshEditors();renderNow();};
+  $("#addPref").onclick=()=>{state.prefs.push({title:"NEW PREF",text:"내용"});refreshEditors();renderNow();};
+  $("#addRel").onclick=()=>{state.rels.push(["NEW KEY","내용"]);refreshEditors();renderNow();};
+  $("#addInterview").onclick=()=>{state.interviews.push({q:"질문",a:"답변"});refreshEditors();renderNow();};
+  $("#addBacklog").onclick=()=>{state.backlog.push({page:`Page ${String(state.backlog.length+1).padStart(2,"0")}`,title:"새 페이지",text:"내용"});refreshEditors();renderNow();};
   $("#toggleOutputBtn").onclick=()=>$("#outputPanel").classList.toggle("open");
   $("#copyBtn").onclick=async()=>{await navigator.clipboard.writeText(profileHtml("export")); alert("복사 완료");};
   $("#downloadBtn").onclick=()=>{
@@ -6591,7 +6655,7 @@ function bindStaticInputs(){
 
 refreshEditors();
 bindStaticInputs();
-render();
+renderNow();
 </script>
 </body>
 </html>
