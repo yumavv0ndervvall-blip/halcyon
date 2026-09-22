@@ -6367,6 +6367,18 @@ body.unit_media_lightbox_open {
 }
 
 
+/* PROMPT PAGE NAV POSITION V81 */
+body.prompt_archive_page #nav-placeholder {
+  padding-top: 38px;
+}
+
+@media (max-width: 640px) {
+  body.prompt_archive_page #nav-placeholder {
+    padding-top: 30px;
+  }
+}
+
+
 /* v76: Kain/Lexi image song player final ratio */
 .kain-mid-grid{
   grid-template-columns: 340px 1px minmax(0, 1fr) !important;
