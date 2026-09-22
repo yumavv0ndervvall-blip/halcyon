@@ -3,9 +3,19 @@
 document.addEventListener("DOMContentLoaded", function () {
   var nav = document.getElementById("nav-placeholder");
   if (nav) {
-    fetch("/halcyon/nav.html?v=68")
+    fetch("./nav.html?v=79")
       .then(function (res) { return res.text(); })
-      .then(function (html) { nav.innerHTML = html; })
+      .then(function (html) {
+        nav.innerHTML = html;
+
+        var currentPage = window.location.pathname.split("/").pop() || "index.html";
+        nav.querySelectorAll("a").forEach(function (link) {
+          var linkPage = link.getAttribute("href").split("/").pop();
+          if (linkPage === currentPage || linkPage + ".html" === currentPage) {
+            link.setAttribute("aria-current", "page");
+          }
+        });
+      })
       .catch(function () {});
   }
 });
@@ -282,3 +292,222 @@ function initHalcyonImageSongPlayers(){
 }
 
 document.addEventListener("DOMContentLoaded", initHalcyonImageSongPlayers);
+
+/* ===== PROMPT ARCHIVE V79 ===== */
+document.addEventListener("DOMContentLoaded", function () {
+  var archive = document.querySelector("[data-prompt-carousel]");
+  if (!archive) return;
+
+  /*
+    thumbnail: 캐러셀에 보이는 세로 썸네일
+    image: 클릭했을 때 팝업에 보이는 원본 이미지
+    두 파일을 따로 지정하면 각각 다른 이미지를 사용할 수 있습니다.
+  */
+  var records = [
+    {
+      title: "BLACK OFFICER",
+      thumbnail: "./images/archive/black-officer.png",
+      image: "./images/archive/black-officer.png",
+      prompt: "girl, 3::aged up::, mature female, tall female, small breasts, long hair, side part, parted bangs, pale sky blue hair, no bangs, straight hair, very long sidelocks, half updo, lavender eyes, empty eyes, 1.5::dead eyes::, tsurime, unturned eyes, half-closed eyes, black military officer uniform, 2::black peaked cap::, formal black long coat, black one-shoulder cape, silver epaulettes, silver trim, black dress shirt, high collar"
+    },
+    {
+      title: "ICE FIELD",
+      thumbnail: "./images/cairn_pf.png",
+      image: "./images/cairn_pf.png",
+      prompt: "1girl, mature female, white hair, sleepy eyes, white padded uniform, winter field gear, cold atmosphere, desaturated blue-gray palette, cinematic portrait"
+    },
+    {
+      title: "DAYBREAK",
+      thumbnail: "./images/dawn_pf.png",
+      image: "./images/dawn_pf.png",
+      prompt: "1girl, black tactical uniform, electric light, pale yellow lightning, black background, high contrast, cinematic rim light, character portrait"
+    },
+    {
+      title: "DOVE",
+      thumbnail: "./images/dove_pf.png",
+      image: "./images/dove_pf.png",
+      prompt: "1girl, short brown hair, neat bangs, restrained expression, practical uniform, muted noir palette, soft backlight, vertical portrait"
+    },
+    {
+      title: "ECHO SIGNAL",
+      thumbnail: "./images/echo_pf.png",
+      image: "./images/echo_pf.png",
+      prompt: "1girl, wind guide, dark uniform, subtle air vibration, soundwave distortion, pure black background, cool gray highlights"
+    },
+    {
+      title: "BLUE FORTRESS",
+      thumbnail: "./images/kain_pf.png",
+      image: "./images/kain_pf.png",
+      prompt: "1man, navy slicked-back undercut, gray eyes, facial burn scar, black military uniform, one-shoulder cape, blue fire, cinematic character portrait"
+    },
+    {
+      title: "CORE RECORD",
+      thumbnail: "./images/lexi_pf.png",
+      image: "./images/lexi_pf.png",
+      prompt: "1girl, medical researcher, black uniform, clinical lighting, monochrome laboratory mood, calm expression, precise linework, portrait"
+    },
+    {
+      title: "GREENHOUSE",
+      thumbnail: "./images/lily_pf.png",
+      image: "./images/lily_pf.png",
+      prompt: "1girl, elegant long hair, black uniform, dark green botanical effects, poisonous flowers, serene smile, moody portrait lighting"
+    },
+    {
+      title: "MUSE",
+      thumbnail: "./images/muse_pf.png",
+      image: "./images/muse_pf.png",
+      prompt: "1girl, very long blue-black hair, blue eyes, pale skin, black formal uniform, cold expression, dim electric light, cinematic portrait"
+    },
+    {
+      title: "NOCTURNE",
+      thumbnail: "./images/nocturne_pf.png",
+      image: "./images/nocturne_pf.png",
+      prompt: "1man, dark military uniform, long coat, wind pressure, teal air current, black background, sharp profile, dramatic rim light"
+    },
+    {
+      title: "POLARIS",
+      thumbnail: "./images/polaris_pf.png",
+      image: "./images/polaris_pf.png",
+      prompt: "1girl, guide uniform, quiet expression, starlight reflection, dark navy background, muted celestial atmosphere, film grain"
+    },
+    {
+      title: "BLACKOUT",
+      thumbnail: "./images/short_pf.png",
+      image: "./images/short_pf.png",
+      prompt: "1girl, short stature, black officer uniform, thin yellow lightning, blackout city lights, hard rim light, high contrast portrait"
+    }
+  ];
+
+  var track = archive.querySelector("[data-carousel-track]");
+  var prev = archive.querySelector("[data-carousel-prev]");
+  var next = archive.querySelector("[data-carousel-next]");
+  var total = document.querySelector("[data-archive-total]");
+  var count = document.querySelector("[data-carousel-count]");
+  var progress = document.querySelector("[data-carousel-progress]");
+  var modal = document.querySelector("[data-archive-modal]");
+  var modalNumber = modal.querySelector("[data-modal-number]");
+  var modalTitle = modal.querySelector("[data-modal-title]");
+  var modalImage = modal.querySelector("[data-modal-image]");
+  var modalPrompt = modal.querySelector("[data-modal-prompt]");
+  var copyButton = modal.querySelector("[data-copy-prompt]");
+  var lastFocused = null;
+  var position = 0;
+
+  function pad(value) {
+    return String(value).padStart(2, "0");
+  }
+
+  records.forEach(function (record, index) {
+    var item = document.createElement("button");
+    var image = document.createElement("img");
+    var label = document.createElement("span");
+
+    item.type = "button";
+    item.className = "prompt_archive_item";
+    item.setAttribute("aria-label", pad(index + 1) + " " + record.title + " 프롬프트 열기");
+
+    image.src = record.thumbnail;
+    image.alt = record.title + " 썸네일";
+    image.loading = index < 8 ? "eager" : "lazy";
+
+    label.className = "prompt_archive_item_label";
+    label.innerHTML = "<b>" + pad(index + 1) + "</b><span>" + record.title + "</span>";
+
+    item.appendChild(image);
+    item.appendChild(label);
+    item.addEventListener("click", function () {
+      openModal(record, index, item);
+    });
+    track.appendChild(item);
+  });
+
+  function visibleCount() {
+    var value = parseInt(getComputedStyle(track).getPropertyValue("--visible-count"), 10);
+    return Number.isFinite(value) ? value : 8;
+  }
+
+  function maxPosition() {
+    return Math.max(0, records.length - visibleCount());
+  }
+
+  function renderCarousel() {
+    var visible = visibleCount();
+    var max = maxPosition();
+    position = Math.min(position, max);
+    track.style.transform = "translate3d(" + (-position * (100 / visible)) + "%, 0, 0)";
+    prev.disabled = position === 0;
+    next.disabled = position === max;
+
+    var current = position + 1;
+    count.textContent = pad(current) + " / " + pad(records.length);
+    progress.style.width = ((position + visible) / records.length * 100) + "%";
+  }
+
+  function openModal(record, index, source) {
+    lastFocused = source;
+    modalNumber.textContent = "RECORD " + String(index + 1).padStart(3, "0");
+    modalTitle.textContent = record.title;
+    modalImage.src = record.image;
+    modalImage.alt = record.title + " 원본 이미지";
+    modalPrompt.textContent = record.prompt;
+    copyButton.textContent = "COPY PROMPT";
+    modal.classList.add("is_open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("prompt_archive_modal_open");
+    modal.querySelector(".prompt_archive_modal_close").focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove("is_open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("prompt_archive_modal_open");
+    if (lastFocused) lastFocused.focus();
+  }
+
+  prev.addEventListener("click", function () {
+    position = Math.max(0, position - 1);
+    renderCarousel();
+  });
+
+  next.addEventListener("click", function () {
+    position = Math.min(maxPosition(), position + 1);
+    renderCarousel();
+  });
+
+  modal.querySelectorAll("[data-archive-close]").forEach(function (button) {
+    button.addEventListener("click", closeModal);
+  });
+
+  copyButton.addEventListener("click", function () {
+    var promptText = modalPrompt.textContent;
+    var copied = navigator.clipboard && window.isSecureContext
+      ? navigator.clipboard.writeText(promptText)
+      : Promise.reject();
+
+    copied.then(function () {
+      copyButton.textContent = "COPIED";
+    }).catch(function () {
+      var field = document.createElement("textarea");
+      field.value = promptText;
+      document.body.appendChild(field);
+      field.select();
+      document.execCommand("copy");
+      field.remove();
+      copyButton.textContent = "COPIED";
+    });
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (modal.classList.contains("is_open")) {
+      if (event.key === "Escape") closeModal();
+      return;
+    }
+
+    if (event.key === "ArrowLeft") prev.click();
+    if (event.key === "ArrowRight") next.click();
+  });
+
+  window.addEventListener("resize", renderCarousel);
+  total.textContent = "001 — " + String(records.length).padStart(3, "0");
+  renderCarousel();
+});
