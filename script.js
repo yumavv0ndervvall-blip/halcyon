@@ -305,75 +305,105 @@ document.addEventListener("DOMContentLoaded", function () {
   */
   var records = [
     {
-      title: "BLACK OFFICER",
-      thumbnail: "./images/archive/black-officer.png",
-      image: "./images/archive/black-officer.png",
+      title: "FIRN",
+      thumbnail: "./images/archive/firn_fr.png",
+      image: "./images/archive/firn_fr.png",
       prompt: "girl, 3::aged up::, mature female, tall female, small breasts, long hair, side part, parted bangs, pale sky blue hair, no bangs, straight hair, very long sidelocks, half updo, lavender eyes, empty eyes, 1.5::dead eyes::, tsurime, unturned eyes, half-closed eyes, black military officer uniform, 2::black peaked cap::, formal black long coat, black one-shoulder cape, silver epaulettes, silver trim, black dress shirt, high collar"
     },
     {
-      title: "ICE FIELD",
-      thumbnail: "./images/cairn_pf.png",
-      image: "./images/cairn_pf.png",
+      title: "LIBERTY",
+      thumbnail: "./images/liberty_fr.png",
+      image: "./images/liberty_fr.png",
       prompt: "1girl, mature female, white hair, sleepy eyes, white padded uniform, winter field gear, cold atmosphere, desaturated blue-gray palette, cinematic portrait"
     },
     {
-      title: "DAYBREAK",
-      thumbnail: "./images/dawn_pf.png",
-      image: "./images/dawn_pf.png",
+      title: "REM",
+      thumbnail: "./images/rem_fr.png",
+      image: "./images/rem_fr.png",
       prompt: "1girl, black tactical uniform, electric light, pale yellow lightning, black background, high contrast, cinematic rim light, character portrait"
     },
     {
-      title: "DOVE",
-      thumbnail: "./images/dove_pf.png",
-      image: "./images/dove_pf.png",
+      title: "KAIN",
+      thumbnail: "./images/kain_fr.png",
+      image: "./images/kain_fr.png",
       prompt: "1girl, short brown hair, neat bangs, restrained expression, practical uniform, muted noir palette, soft backlight, vertical portrait"
     },
     {
-      title: "ECHO SIGNAL",
-      thumbnail: "./images/echo_pf.png",
-      image: "./images/echo_pf.png",
+      title: "LILY",
+      thumbnail: "./images/lily_fr.png",
+      image: "./images/lily_fr.png",
       prompt: "1girl, wind guide, dark uniform, subtle air vibration, soundwave distortion, pure black background, cool gray highlights"
     },
     {
-      title: "BLUE FORTRESS",
-      thumbnail: "./images/kain_pf.png",
-      image: "./images/kain_pf.png",
+      title: "SHORT",
+      thumbnail: "./images/short_fr.png",
+      image: "./images/short_fr.png",
       prompt: "1man, navy slicked-back undercut, gray eyes, facial burn scar, black military uniform, one-shoulder cape, blue fire, cinematic character portrait"
     },
     {
-      title: "CORE RECORD",
-      thumbnail: "./images/lexi_pf.png",
-      image: "./images/lexi_pf.png",
+      title: "NOCTURNE",
+      thumbnail: "./images/nocturne_fr.png",
+      image: "./images/nocturne_fr.png",
       prompt: "1girl, medical researcher, black uniform, clinical lighting, monochrome laboratory mood, calm expression, precise linework, portrait"
     },
     {
-      title: "GREENHOUSE",
-      thumbnail: "./images/lily_pf.png",
-      image: "./images/lily_pf.png",
+      title: "AVICI",
+      thumbnail: "./images/avici_fr.png",
+      image: "./images/avici_fr.png",
       prompt: "1girl, elegant long hair, black uniform, dark green botanical effects, poisonous flowers, serene smile, moody portrait lighting"
     },
     {
-      title: "MUSE",
-      thumbnail: "./images/muse_pf.png",
-      image: "./images/muse_pf.png",
+      title: "MARIGOLD",
+      thumbnail: "./images/marigold_fr.png",
+      image: "./images/marigold_fr.png",
       prompt: "1girl, very long blue-black hair, blue eyes, pale skin, black formal uniform, cold expression, dim electric light, cinematic portrait"
     },
     {
-      title: "NOCTURNE",
-      thumbnail: "./images/nocturne_pf.png",
-      image: "./images/nocturne_pf.png",
+      title: "SORA",
+      thumbnail: "./images/sora_fr.png",
+      image: "./images/sora_fr.png",
       prompt: "1man, dark military uniform, long coat, wind pressure, teal air current, black background, sharp profile, dramatic rim light"
     },
     {
-      title: "POLARIS",
-      thumbnail: "./images/polaris_pf.png",
-      image: "./images/polaris_pf.png",
+      title: "DAWN",
+      thumbnail: "./images/dawn_fr.png",
+      image: "./images/dawn_pf.png",
       prompt: "1girl, guide uniform, quiet expression, starlight reflection, dark navy background, muted celestial atmosphere, film grain"
     },
     {
-      title: "BLACKOUT",
-      thumbnail: "./images/short_pf.png",
-      image: "./images/short_pf.png",
+      title: "MUSE",
+      thumbnail: "./images/muse_fr.png",
+      image: "./images/muse_fr.png",
+      prompt: "1girl, short stature, black officer uniform, thin yellow lightning, blackout city lights, hard rim light, high contrast portrait"
+    },
+     {
+      title: "CAIRN",
+      thumbnail: "./images/cairn_fr.png",
+      image: "./images/cairn_fr.png",
+      prompt: "1girl, short stature, black officer uniform, thin yellow lightning, blackout city lights, hard rim light, high contrast portrait"
+    },
+     {
+      title: "ECHO",
+      thumbnail: "./images/echo_fr.png",
+      image: "./images/echo_fr.png",
+      prompt: "1girl, short stature, black officer uniform, thin yellow lightning, blackout city lights, hard rim light, high contrast portrait"
+    },
+     {
+      title: "DOVE",
+      thumbnail: "./images/dove_fr.png",
+      image: "./images/dove_fr.png",
+      prompt: "1girl, short stature, black officer uniform, thin yellow lightning, blackout city lights, hard rim light, high contrast portrait"
+    },
+     {
+      title: "DR.LEXI",
+      thumbnail: "./images/lexi_fr.png",
+      image: "./images/lexi_fr.png",
+      prompt: "1girl, short stature, black officer uniform, thin yellow lightning, blackout city lights, hard rim light, high contrast portrait"
+    },
+     {
+      title: "POLARIS",
+      thumbnail: "./images/polaris_fr.png",
+      image: "./images/polaris_fr.png",
       prompt: "1girl, short stature, black officer uniform, thin yellow lightning, blackout city lights, hard rim light, high contrast portrait"
     }
   ];
