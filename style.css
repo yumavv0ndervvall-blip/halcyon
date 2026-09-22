@@ -2844,6 +2844,242 @@ body.home_center .brief_home_alt {
 }
 
 /* ==============================
+   VANGUARD ALPHA PAGE
+============================== */
+
+.alpha_page {
+  --alpha-red: #b14c58;
+  --alpha-gold: #c7aa70;
+  --alpha-dark-red: rgba(111, 31, 42, 0.24);
+}
+
+.alpha_page .sfs_frame {
+  background:
+    radial-gradient(circle at 86% 4%, rgba(177, 76, 88, 0.10), transparent 30%),
+    radial-gradient(circle at 12% 84%, rgba(199, 170, 112, 0.035), transparent 28%),
+    linear-gradient(180deg, rgba(12,13,17,0.40), rgba(6,7,10,0.28));
+}
+
+.alpha_page .sfs_frame::before {
+  background-image:
+    linear-gradient(rgba(199,170,112,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(177,76,88,0.015) 1px, transparent 1px);
+  opacity: 0.22;
+}
+
+.alpha_page .sfs_label,
+.alpha_page .sfs_section_code {
+  color: rgba(199,170,112,0.66);
+}
+
+.alpha_page .sfs_title {
+  letter-spacing: 0.005em;
+  text-shadow:
+    0 0 18px rgba(177,76,88,0.14),
+    0 2px 0 rgba(0,0,0,0.92);
+}
+
+.alpha_title_mark {
+  color: var(--alpha-red);
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  text-shadow: 0 0 16px rgba(177,76,88,0.32);
+}
+
+.alpha_page .sfs_header {
+  border-bottom-color: rgba(177,76,88,0.22);
+}
+
+.alpha_page .sfs_header_tag {
+  border-color: rgba(199,170,112,0.22);
+  background: rgba(177,76,88,0.035);
+  color: rgba(232,221,196,0.76);
+}
+
+.alpha_page .sfs_header_panel {
+  border-color: rgba(199,170,112,0.18);
+  background: linear-gradient(145deg, rgba(177,76,88,0.055), rgba(255,255,255,0.008));
+  box-shadow: inset 3px 0 0 rgba(177,76,88,0.58);
+}
+
+.alpha_page .sfs_meta_item {
+  border-color: rgba(199,170,112,0.13);
+  background: linear-gradient(180deg, rgba(177,76,88,0.025), rgba(255,255,255,0.008));
+}
+
+.alpha_page .sfs_section {
+  border-color: rgba(199,170,112,0.12);
+}
+
+.alpha_page .sfs_section_head {
+  border-bottom-color: rgba(177,76,88,0.18);
+  background: linear-gradient(90deg, rgba(177,76,88,0.075), rgba(255,255,255,0.008));
+  box-shadow: inset 3px 0 0 rgba(177,76,88,0.55);
+}
+
+.alpha_page .sfs_table tr,
+.alpha_page .sfs_member_top {
+  border-bottom-color: rgba(199,170,112,0.10);
+}
+
+.alpha_page .sfs_card,
+.alpha_page .sfs_member_card,
+.alpha_page .sfs_dark_note {
+  border-color: rgba(199,170,112,0.12);
+  background: linear-gradient(145deg, rgba(177,76,88,0.025), rgba(255,255,255,0.008));
+}
+
+.alpha_page .sfs_card {
+  position: relative;
+  overflow: hidden;
+}
+
+.alpha_page .sfs_card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--alpha-red), rgba(199,170,112,0.42));
+}
+
+.alpha_page .sfs_member_area {
+  min-height: 194px;
+  border-color: rgba(199,170,112,0.13);
+  background:
+    radial-gradient(circle at 50% 40%, rgba(177,76,88,0.08), transparent 42%),
+    linear-gradient(180deg, rgba(255,255,255,0.012), rgba(0,0,0,0.07));
+}
+
+.alpha_page .sfs_member_wall {
+  min-height: 174px;
+}
+
+.alpha_page .sfs_photo {
+  width: 184px;
+  height: 132px;
+  border-color: rgba(199,170,112,0.44);
+  background: rgba(224,217,199,0.92);
+}
+
+.alpha_page .sfs_photo.p1 {
+  left: 38px;
+  top: 21px;
+  --rot: -5deg;
+  z-index: 5;
+}
+
+.alpha_page .sfs_photo.p2 {
+  left: 258px;
+  top: 28px;
+  --rot: 2deg;
+  z-index: 6;
+}
+
+.alpha_page .sfs_photo.p3 {
+  left: 478px;
+  top: 18px;
+  --rot: 5deg;
+  z-index: 4;
+}
+
+.alpha_photo_placeholder {
+  position: absolute;
+  left: 7px;
+  right: 7px;
+  top: 7px;
+  bottom: 24px;
+  display: grid;
+  place-content: center;
+  gap: 7px;
+  background:
+    radial-gradient(circle at 50% 34%, rgba(177,76,88,0.20), transparent 32%),
+    linear-gradient(145deg, #171920, #090a0e);
+  color: rgba(236,226,205,0.78);
+  text-align: center;
+}
+
+.alpha_photo_placeholder b {
+  font-size: 15px;
+  line-height: 1;
+  letter-spacing: 0.16em;
+}
+
+.alpha_photo_placeholder small {
+  color: rgba(199,170,112,0.44);
+  font-size: 7px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+}
+
+.alpha_page .sfs_photo img:not([hidden]) + .alpha_photo_placeholder {
+  display: none;
+}
+
+.alpha_page .sfs_photo::after {
+  color: rgba(70,31,35,0.76);
+}
+
+.alpha_page .sfs_member_name {
+  color: rgba(245,235,216,0.92);
+}
+
+.alpha_page .sfs_member_type {
+  color: rgba(199,170,112,0.60);
+}
+
+.alpha_page .alpha_motto {
+  color: rgba(236,226,205,0.72);
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+.alpha_page .sfs_footer {
+  border-top-color: rgba(177,76,88,0.20);
+  color: rgba(199,170,112,0.44);
+}
+
+@media (max-width: 760px) {
+  .alpha_page .sfs_member_wall {
+    min-height: 448px;
+  }
+
+  .alpha_page .sfs_photo {
+    width: 166px;
+    height: 120px;
+  }
+
+  .alpha_page .sfs_photo.p1 {
+    left: 8px;
+    top: 15px;
+  }
+
+  .alpha_page .sfs_photo.p2 {
+    left: auto;
+    right: 8px;
+    top: 151px;
+  }
+
+  .alpha_page .sfs_photo.p3 {
+    left: 22px;
+    top: 290px;
+  }
+}
+
+@media (max-width: 390px) {
+  .alpha_page .sfs_title {
+    font-size: 34px;
+  }
+
+  .alpha_page .sfs_photo {
+    width: 148px;
+    height: 112px;
+  }
+}
+
+/* ==============================
    HOME GUIDE / SELECTION / CURSOR / PAGE FADE
 ============================== */
 
