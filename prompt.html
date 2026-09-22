@@ -6,6 +6,19 @@
 
   <title>PROMPT ARCHIVE | ARCH PERSONA DATABASE</title>
   <link rel="stylesheet" href="./style.css?v=80">
+  <style>
+    /* 메뉴만 아래로 이동: 본문 위치에는 영향을 주지 않음 */
+    body.prompt_archive_page #nav-placeholder {
+      padding-top: 24px !important;
+      transform: translateY(28px);
+    }
+
+    @media (max-width: 640px) {
+      body.prompt_archive_page #nav-placeholder {
+        transform: translateY(18px);
+      }
+    }
+  </style>
 </head>
 
 <body class="prompt_archive_page">
