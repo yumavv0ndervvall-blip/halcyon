@@ -6486,7 +6486,7 @@ function profileHtml(mode="preview"){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>${esc(value("#htmlTitle"))}</title>
-  ${mode==="preview" ? `<style>${SITE_CSS}\n${isLexi ? LEXI_CSS : ""}</style>` : `<link rel="stylesheet" href="/halcyon/style.css?v=79">\n  ${isLexi ? '<link rel="stylesheet" href="/halcyon/lexi.css?v=76">' : ''}`}
+  ${mode==="preview" ? `<style>${SITE_CSS}\n${isLexi ? LEXI_CSS : ""}</style>` : `<link rel="stylesheet" href="/halcyon/style.css?v=80">\n  ${isLexi ? '<link rel="stylesheet" href="/halcyon/lexi.css?v=76">' : ''}`}
 </head>
 <body class="${pageClass}">
 ${includeNav ? (mode==="preview" ? navHtml() : '<div id="nav-placeholder"></div>') : ''}
@@ -6548,13 +6548,13 @@ ${imageSongHtml(mode)}
   </div>
 
 <div class="backlog_lightbox" id="backlogLightbox" aria-hidden="true"><img class="backlog_lightbox_img" src="${backlog}" alt="백로그 이미지 확대본"></div>
-${mode==="preview" ? `<script>${SITE_JS}<\/script>` : `<script src="/halcyon/script.js?v=79"><\/script>\n  ${isLexi ? '<script src="/halcyon/lexi.js?v=76"><\/script>' : ''}`}
+${mode==="preview" ? `<script>${SITE_JS}<\/script>` : `<script src="/halcyon/script.js?v=80"><\/script>\n  ${isLexi ? '<script src="/halcyon/lexi.js?v=76"><\/script>' : ''}`}
 </body>
 </html>`;
 }
 
 function navHtml(){
-  return `<nav class="site_nav"><a href="#">MAIN</a><a href="#">ROSTER</a><a href="#">UNIT</a><a href="#">ARCHIVE</a></nav>`;
+  return `<nav class="site_nav"><a href="#">MAIN</a><a href="#">ROSTER</a><a href="#">UNIT</a><a href="#">PROMPT</a></nav>`;
 }
 
 let renderTimer = null;

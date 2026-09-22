@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>PROMPT ARCHIVE | ARCH PERSONA DATABASE</title>
+  <link rel="stylesheet" href="./style.css?v=80">
+</head>
+
+<body class="prompt_archive_page">
+  <div id="nav-placeholder"></div>
+
+  <main class="prompt_archive_main">
+    <section class="prompt_archive" aria-labelledby="promptArchiveTitle">
+      <header class="prompt_archive_header">
+        <p class="prompt_archive_eyebrow">ARCH VISUAL RECORDS</p>
+        <div class="prompt_archive_title_row">
+          <h1 id="promptArchiveTitle">PROMPT ARCHIVE</h1>
+          <span class="prompt_archive_title_line" aria-hidden="true"></span>
+        </div>
+      </header>
+
+      <div class="prompt_carousel" data-prompt-carousel>
+        <button class="prompt_carousel_arrow prompt_carousel_prev" type="button" data-carousel-prev aria-label="이전 이미지 보기"></button>
+
+        <div class="prompt_carousel_viewport">
+          <div class="prompt_carousel_track" data-carousel-track></div>
+        </div>
+
+        <button class="prompt_carousel_arrow prompt_carousel_next" type="button" data-carousel-next aria-label="다음 이미지 보기"></button>
+      </div>
+
+      <div class="prompt_archive_progress" aria-hidden="true">
+        <span class="prompt_archive_progress_fill" data-carousel-progress></span>
+      </div>
+
+      <div class="prompt_archive_status">
+        <span class="prompt_archive_hint">SELECT IMAGE TO VIEW PROMPT</span>
+      </div>
+    </section>
+  </main>
+
+  <div class="prompt_archive_modal" data-archive-modal aria-hidden="true">
+    <button class="prompt_archive_modal_dim" type="button" data-archive-close aria-label="프롬프트 창 닫기"></button>
+
+    <section class="prompt_archive_modal_panel" role="dialog" aria-modal="true" aria-labelledby="archiveModalTitle">
+      <button class="prompt_archive_modal_close" type="button" data-archive-close aria-label="닫기">×</button>
+
+      <header class="prompt_archive_modal_head">
+        <div>
+          <h2 id="archiveModalTitle" data-modal-title>BLACK OFFICER</h2>
+        </div>
+        <span class="prompt_archive_modal_state">ARCHIVED PROMPT</span>
+      </header>
+
+      <div class="prompt_archive_modal_grid">
+        <figure class="prompt_archive_modal_visual">
+          <img data-modal-image src="./images/archive/black-officer.png" alt="BLACK OFFICER 원본 이미지">
+        </figure>
+
+        <div class="prompt_archive_modal_prompt">
+          <div class="prompt_archive_modal_prompt_head">
+            <span>PROMPT DATA</span>
+            <button type="button" data-copy-prompt>COPY PROMPT</button>
+          </div>
+          <pre data-modal-prompt></pre>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="./script.js?v=80"></script>
+</body>
+</html>

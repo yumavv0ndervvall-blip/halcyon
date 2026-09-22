@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   var nav = document.getElementById("nav-placeholder");
   if (nav) {
-    fetch("./nav.html?v=79")
+    fetch("./nav.html?v=80")
       .then(function (res) { return res.text(); })
       .then(function (html) {
         nav.innerHTML = html;
@@ -293,7 +293,7 @@ function initHalcyonImageSongPlayers(){
 
 document.addEventListener("DOMContentLoaded", initHalcyonImageSongPlayers);
 
-/* ===== PROMPT ARCHIVE V79 ===== */
+/* ===== PROMPT ARCHIVE V80 ===== */
 document.addEventListener("DOMContentLoaded", function () {
   var archive = document.querySelector("[data-prompt-carousel]");
   if (!archive) return;
@@ -381,21 +381,14 @@ document.addEventListener("DOMContentLoaded", function () {
   var track = archive.querySelector("[data-carousel-track]");
   var prev = archive.querySelector("[data-carousel-prev]");
   var next = archive.querySelector("[data-carousel-next]");
-  var total = document.querySelector("[data-archive-total]");
-  var count = document.querySelector("[data-carousel-count]");
   var progress = document.querySelector("[data-carousel-progress]");
   var modal = document.querySelector("[data-archive-modal]");
-  var modalNumber = modal.querySelector("[data-modal-number]");
   var modalTitle = modal.querySelector("[data-modal-title]");
   var modalImage = modal.querySelector("[data-modal-image]");
   var modalPrompt = modal.querySelector("[data-modal-prompt]");
   var copyButton = modal.querySelector("[data-copy-prompt]");
   var lastFocused = null;
   var position = 0;
-
-  function pad(value) {
-    return String(value).padStart(2, "0");
-  }
 
   records.forEach(function (record, index) {
     var item = document.createElement("button");
@@ -404,19 +397,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     item.type = "button";
     item.className = "prompt_archive_item";
-    item.setAttribute("aria-label", pad(index + 1) + " " + record.title + " 프롬프트 열기");
+    item.setAttribute("aria-label", record.title + " 프롬프트 열기");
 
     image.src = record.thumbnail;
     image.alt = record.title + " 썸네일";
     image.loading = index < 8 ? "eager" : "lazy";
 
     label.className = "prompt_archive_item_label";
-    label.innerHTML = "<b>" + pad(index + 1) + "</b><span>" + record.title + "</span>";
+    label.innerHTML = "<span>" + record.title + "</span>";
 
     item.appendChild(image);
     item.appendChild(label);
     item.addEventListener("click", function () {
-      openModal(record, index, item);
+      openModal(record, item);
     });
     track.appendChild(item);
   });
@@ -438,14 +431,11 @@ document.addEventListener("DOMContentLoaded", function () {
     prev.disabled = position === 0;
     next.disabled = position === max;
 
-    var current = position + 1;
-    count.textContent = pad(current) + " / " + pad(records.length);
     progress.style.width = ((position + visible) / records.length * 100) + "%";
   }
 
-  function openModal(record, index, source) {
+  function openModal(record, source) {
     lastFocused = source;
-    modalNumber.textContent = "RECORD " + String(index + 1).padStart(3, "0");
     modalTitle.textContent = record.title;
     modalImage.src = record.image;
     modalImage.alt = record.title + " 원본 이미지";
@@ -508,6 +498,64 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   window.addEventListener("resize", renderCarousel);
-  total.textContent = "001 — " + String(records.length).padStart(3, "0");
   renderCarousel();
+});
+
+/* ===== COMMON UNIT IMAGE LIGHTBOX V80 ===== */
+document.addEventListener("DOMContentLoaded", function () {
+  var photoLinks = Array.prototype.slice.call(
+    document.querySelectorAll(".sfs_photo, .rgr_photo")
+  );
+
+  if (!photoLinks.length) return;
+
+  var lightbox = document.createElement("div");
+  lightbox.className = "unit_media_lightbox";
+  lightbox.setAttribute("aria-hidden", "true");
+  lightbox.innerHTML =
+    '<div class="unit_media_lightbox_inner" role="dialog" aria-modal="true" aria-label="이미지 크게 보기">' +
+      '<button class="unit_media_lightbox_close" type="button" aria-label="닫기">×</button>' +
+      '<img class="unit_media_lightbox_img" src="" alt="확대 이미지">' +
+      '<div class="unit_media_lightbox_hint">CLICK ANYWHERE TO CLOSE</div>' +
+    '</div>';
+  document.body.appendChild(lightbox);
+
+  var lightboxImage = lightbox.querySelector(".unit_media_lightbox_img");
+  var closeButton = lightbox.querySelector(".unit_media_lightbox_close");
+  var lastFocused = null;
+
+  function closeLightbox() {
+    lightbox.classList.remove("is_open");
+    lightbox.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("unit_media_lightbox_open");
+    lightboxImage.removeAttribute("src");
+    if (lastFocused) lastFocused.focus();
+  }
+
+  photoLinks.forEach(function (link) {
+    link.addEventListener("click", function (event) {
+      var thumbnail = link.querySelector("img");
+      var fullImage = link.getAttribute("data-full") || link.getAttribute("href") || (thumbnail ? thumbnail.getAttribute("src") : "");
+
+      event.preventDefault();
+      if (!fullImage || fullImage === "#" || !thumbnail || thumbnail.hidden) return;
+      if (thumbnail.complete && thumbnail.naturalWidth === 0) return;
+
+      lastFocused = link;
+      lightboxImage.src = fullImage;
+      lightboxImage.alt = thumbnail.alt || "확대 이미지";
+      lightbox.classList.add("is_open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.classList.add("unit_media_lightbox_open");
+      closeButton.focus();
+    });
+  });
+
+  lightbox.addEventListener("click", closeLightbox);
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && lightbox.classList.contains("is_open")) {
+      closeLightbox();
+    }
+  });
 });
