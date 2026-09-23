@@ -367,7 +367,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       title: "DAWN",
       thumbnail: "./images/archive/dawn_frs.png",
-      image: "./images/archive/dawn_pf.png",
+      image: "./images/archive/dawn_fr.png",
       prompt: "1girl, guide uniform, quiet expression, starlight reflection, dark navy background, muted celestial atmosphere, film grain"
     },
     {
