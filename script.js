@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   var nav = document.getElementById("nav-placeholder");
   if (nav) {
-    fetch("./nav.html?v=80")
+    fetch("./nav.html?v=83")
       .then(function (res) { return res.text(); })
       .then(function (html) {
         nav.innerHTML = html;
