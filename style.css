@@ -6470,3 +6470,12 @@ body.prompt_archive_page #nav-placeholder {
     width: min(280px, 100%) !important;
   }
 }
+
+/* Stable hit targets for overlapping unit photographs. */
+@media (hover: hover) and (pointer: fine) {
+  .rgr_photo:hover, .sfs_photo:hover {
+    transform: rotate(var(--rot));
+    z-index: auto;
+    filter: brightness(1.06);
+  }
+}

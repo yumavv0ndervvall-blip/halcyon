@@ -3,15 +3,17 @@
 document.addEventListener("DOMContentLoaded", function () {
   var nav = document.getElementById("nav-placeholder");
   if (nav) {
-    fetch("./nav.html?v=83")
+    fetch("./nav.html?v=86")
       .then(function (res) { return res.text(); })
       .then(function (html) {
         nav.innerHTML = html;
 
-        var currentPage = window.location.pathname.split("/").pop() || "index.html";
+        var pathParts = window.location.pathname.split("/").filter(Boolean);
+        var currentPage = window.location.pathname.endsWith("/") && pathParts.length ? pathParts[pathParts.length - 1] : (pathParts[pathParts.length - 1] || "index");
+        currentPage = currentPage.replace(/\.html$/, "");
         nav.querySelectorAll("a").forEach(function (link) {
           var linkPage = link.getAttribute("href").split("/").pop();
-          if (linkPage === currentPage || linkPage + ".html" === currentPage) {
+          if (linkPage.replace(/\.html$/, "") === currentPage) {
             link.setAttribute("aria-current", "page");
           }
         });
@@ -566,21 +568,30 @@ document.addEventListener("DOMContentLoaded", function () {
     if (lastFocused) lastFocused.focus();
   }
 
+  function openPhoto(link) {
+    var thumbnail = link.querySelector("img");
+    var fullImage = link.getAttribute("data-full") || link.getAttribute("href") || (thumbnail ? thumbnail.getAttribute("src") : "");
+    if (!fullImage || fullImage === "#") return;
+    lastFocused = link;
+    lightboxImage.src = fullImage;
+    lightboxImage.alt = thumbnail ? (thumbnail.alt || "확대 이미지") : "확대 이미지";
+    lightbox.classList.add("is_open");
+    lightbox.setAttribute("aria-hidden", "false");
+    document.body.classList.add("unit_media_lightbox_open");
+    closeButton.focus();
+  }
+
   photoLinks.forEach(function (link) {
-    link.addEventListener("click", function (event) {
-      var thumbnail = link.querySelector("img");
-      var fullImage = link.getAttribute("data-full") || link.getAttribute("href") || (thumbnail ? thumbnail.getAttribute("src") : "");
-
+    // Capture the first press before overlapping cards change their hover stacking.
+    link.addEventListener("pointerdown", function (event) {
+      if (event.button !== 0) return;
       event.preventDefault();
-      if (!fullImage || fullImage === "#") return;
-
-      lastFocused = link;
-      lightboxImage.src = fullImage;
-      lightboxImage.alt = thumbnail ? (thumbnail.alt || "확대 이미지") : "확대 이미지";
-      lightbox.classList.add("is_open");
-      lightbox.setAttribute("aria-hidden", "false");
-      document.body.classList.add("unit_media_lightbox_open");
-      closeButton.focus();
+      openPhoto(link);
+    });
+    // Keep keyboard activation and browsers without Pointer Events working.
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      if (!lightbox.classList.contains("is_open")) openPhoto(link);
     });
   });
 
