@@ -1844,10 +1844,12 @@ body.home_center .brief_home_alt {
   cursor: zoom-in;
 }
 
-.rgr_photo:hover {
-  z-index: 20;
-  transform: rotate(var(--rot)) translateY(-4px) scale(1.035);
-  filter: brightness(1.06);
+@media (hover: hover) and (pointer: fine) {
+  .rgr_photo:hover {
+    z-index: 20;
+    transform: rotate(var(--rot)) translateY(-4px) scale(1.035);
+    filter: brightness(1.06);
+  }
 }
 
 .rgr_photo img {
@@ -2628,10 +2630,12 @@ body.home_center .brief_home_alt {
   filter: saturate(0.92) contrast(1.02);
 }
 
-.sfs_photo:hover {
-  z-index: 20;
-  transform: rotate(var(--rot)) translateY(-4px) scale(1.035);
-  filter: brightness(1.06);
+@media (hover: hover) and (pointer: fine) {
+  .sfs_photo:hover {
+    z-index: 20;
+    transform: rotate(var(--rot)) translateY(-4px) scale(1.035);
+    filter: brightness(1.06);
+  }
 }
 
 .sfs_photo.p1 {

@@ -449,6 +449,10 @@ document.addEventListener("DOMContentLoaded", function () {
     return Number.isFinite(value) ? value : 8;
   }
 
+  function pageStep() {
+    return Math.max(1, Math.floor(visibleCount() / 2));
+  }
+
   function maxPosition() {
     return Math.max(0, records.length - visibleCount());
   }
@@ -485,12 +489,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   prev.addEventListener("click", function () {
-    position = Math.max(0, position - 1);
+    position = Math.max(0, position - pageStep());
     renderCarousel();
   });
 
   next.addEventListener("click", function () {
-    position = Math.min(maxPosition(), position + 1);
+    position = Math.min(maxPosition(), position + pageStep());
     renderCarousel();
   });
 
@@ -568,12 +572,11 @@ document.addEventListener("DOMContentLoaded", function () {
       var fullImage = link.getAttribute("data-full") || link.getAttribute("href") || (thumbnail ? thumbnail.getAttribute("src") : "");
 
       event.preventDefault();
-      if (!fullImage || fullImage === "#" || !thumbnail || thumbnail.hidden) return;
-      if (thumbnail.complete && thumbnail.naturalWidth === 0) return;
+      if (!fullImage || fullImage === "#") return;
 
       lastFocused = link;
       lightboxImage.src = fullImage;
-      lightboxImage.alt = thumbnail.alt || "확대 이미지";
+      lightboxImage.alt = thumbnail ? (thumbnail.alt || "확대 이미지") : "확대 이미지";
       lightbox.classList.add("is_open");
       lightbox.setAttribute("aria-hidden", "false");
       document.body.classList.add("unit_media_lightbox_open");
