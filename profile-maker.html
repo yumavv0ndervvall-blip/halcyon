@@ -100,7 +100,7 @@
           <label>Backlog Image Upload<input type="file" id="backlogUpload" accept="image/*"></label>
           <label>Backlog Image File<input id="backlogFile" value="kain_backlog.png"></label>
         </div>
-        <label>Badge<input id="badge" value="S CLASS SENTINEL"></label>
+        <label>Badge<input id="badge" value="S-CLASS ENTITY"></label>
         <label>Threat Label<input id="threat" value="THREAT LEVEL : FORTRESS"></label>
         <label>Big Name<input id="bigName" value="KAIN"></label>
         <label>Phrase Line 1<input id="phrase1" value="모든 불길이 무너질 때, 그는 가장 마지막에 남는 방벽이 된다."></label>
@@ -110,13 +110,13 @@
     </section>
 
     <section class="maker_panel">
-      <h2><span>Profile</span><span>Command</span></h2>
+      <h2><span>Profile</span><span>Epithet</span></h2>
       <div class="maker_stack">
-        <label>Command Title<input id="commandTitle" value="무너지는 전선의 가장 마지막 방벽."></label>
-        <label>Command Text<textarea id="commandText">카인은 리어가드의 전투를 승리보다 생존에 맞춰 재정렬한 지휘관이다.
+        <label>Epithet Title<input id="commandTitle" value="무너지는 전선의 가장 마지막 방벽."></label>
+        <label>Epithet Description<textarea id="commandText">카인은 리어가드의 전투를 승리보다 생존에 맞춰 재정렬한 지휘관이다.
 출력으로 압도하는 S급 센티넬이지만, 그의 진짜 강점은 불꽃을 전장 전체의 방어선으로 바꾸는 판단력과
 끝까지 사람을 포기하지 않는 책임감에 있다.</textarea></label>
-        <label>Command Quote<textarea id="commandQuote">통제 불가능하다고 분류된 인원들을 억누르지 않고, 함께 살아남을 수 있는 팀으로 다시 세운 사람.</textarea></label>
+        <label>Official Evaluation<textarea id="commandQuote">통제 불가능하다고 분류된 인원들을 억누르지 않고, 함께 살아남을 수 있는 팀으로 다시 세운 사람.</textarea></label>
       </div>
     </section>
 
@@ -140,23 +140,13 @@
     </section>
 
     <section class="maker_panel">
-      <h2><span>Skills</span><button class="mini_btn" id="addSkill">Add</button></h2>
+      <h2><span>Ability Overview</span><button class="mini_btn" id="addSkill">Add</button></h2>
       <div id="skillList"></div>
-    </section>
-
-    <section class="maker_panel">
-      <h2><span>Combat Style</span><button class="mini_btn" id="addCombat">Add</button></h2>
-      <div id="combatList"></div>
     </section>
 
     <section class="maker_panel">
       <h2><span>Preferences</span><button class="mini_btn" id="addPref">Add</button></h2>
       <div id="prefList"></div>
-    </section>
-
-    <section class="maker_panel">
-      <h2><span>Relationship</span><button class="mini_btn" id="addRel">Add</button></h2>
-      <div id="relList"></div>
     </section>
 
     <section class="maker_panel">
@@ -6284,7 +6274,7 @@ const state = {
   urls: { hero:"", backlog:"", song:"" },
   identity: [
     ["Codename","KAIN"],["Real Name","차도윤"],["Age","30세"],["Gender","남성"],
-    ["Height","190cm"],["Class","S CLASS SENTINEL"],["Attribute","불"],["Unit","ARCH REARGUARD"]
+    ["Height","190cm"],["Class","S-CLASS ENTITY"],["Attribute","불"],["Unit","ARCH REARGUARD"]
   ],
   notes: [
     {title:"MAIN TRAITS", text:"호쾌하고 친화력이 좋다. 위험한 상황에서도 쉽게 흔들리지 않으며, 팀원들이 불안해할수록 더 평소처럼 행동하려 한다."},
@@ -6297,22 +6287,11 @@ const state = {
     {num:"SKILL 02", name:"Blackblue Dominion", text:"일정 범위 안의 열기와 불꽃을 자신의 영역처럼 통제한다."},
     {num:"SKILL 03", name:"Last Bastion", text:"극한 상황에서 주변 피해를 자신에게 집중시키듯 받아내며 무너지는 전선을 붙잡는다."}
   ],
-  combat: [
-    ["ROLE","전열을 밀어붙이는 딜러이자, 동시에 팀 전체를 감싸는 방벽. 카인은 혼자 전투를 끝내기보다 팀이 무너지지 않는 판을 만든다."],
-    ["STRENGTH","전장 장악력, 압도적인 지속 화력, 방어막에 가까운 불꽃 제어, 긴박한 상황에서의 판단력이 강점이다."],
-    ["WEAKNESS","방어와 유지에 특화된 만큼, 자신의 몸으로 피해를 받아내는 상황이 많다."],
-    ["RISK FACTOR","장시간의 방어 운용은 신체 손상과 피로를 축적시킨다."]
-  ],
   prefs: [
     {title:"LIKES", text:"야구, 낚시, 클라이밍, 자전거, 주말농장."},
     {title:"DISLIKES", text:"팀원을 숫자로만 취급하는 보고서, 책임 회피, 버려지는 사람을 당연하게 여기는 분위기."},
     {title:"HOBBIES", text:"비번 날에는 야구 경기를 틀어두거나 장비를 손질한다."},
     {title:"FAVORITE STYLE", text:"사복은 기능적이고 단정한 쪽을 선호한다."}
-  ],
-  rels: [
-    ["REARGUARD","리어가드의 팀원들은 외부 평가와 달리 카인에게 단순한 부하가 아니다."],
-    ["TEAM CULTURE","강압적인 통제보다 신뢰, 생존 루틴, 효율적인 능력 운용이 부대의 기준이 되었다."],
-    ["OUTSIDE VIEW","외부에서는 여전히 리어가드를 위험하고 불안정한 전력으로 본다."]
   ],
   interviews: [
     {q:"리어가드는 당신에게 어떤 의미입니까?", a:"버려진 전력이 아니라, 끝까지 살아남은 사람들이다. 적어도 나는 그렇게 부른다."},
@@ -6397,9 +6376,7 @@ function refreshEditors(){
   rowEditor("#identityList", state.identity, "Key", "Value");
   objectEditor("#noteList", state.notes, [{key:"title",label:"Title"},{key:"text",label:"Text",area:true}]);
   objectEditor("#skillList", state.skills, [{key:"num",label:"Number"},{key:"name",label:"Name"},{key:"text",label:"Text",area:true}]);
-  rowEditor("#combatList", state.combat, "Key", "Text");
   objectEditor("#prefList", state.prefs, [{key:"title",label:"Title"},{key:"text",label:"Text",area:true}]);
-  rowEditor("#relList", state.rels, "Key", "Text");
   objectEditor("#interviewList", state.interviews, [{key:"q",label:"Question",area:true},{key:"a",label:"Answer",area:true}]);
   objectEditor("#backlogList", state.backlog, [{key:"page",label:"Page"},{key:"title",label:"Title"},{key:"text",label:"Text",area:true}]);
 }
@@ -6464,6 +6441,55 @@ function lexiBacklogHtml(mode){
       </section>`;
 }
 
+const PROFILE_OVERRIDES = `
+.profile_statement_title{
+  margin-top:8px;
+  font-size:19px;
+  line-height:1.38;
+  letter-spacing:-0.05em;
+}
+.profile_statement_eval{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.profile_statement_label_alt{margin-bottom:0}
+.profile_statement_line{display:none}
+.skill_grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+.skill_card{
+  min-height:0;
+  padding:16px 18px;
+  display:grid;
+  grid-template-columns:96px minmax(0,1fr);
+  grid-template-areas:"num title" "num text";
+  gap:6px 16px;
+  align-items:start;
+}
+.skill_number{
+  grid-area:num;
+  margin:3px 0 0;
+}
+.skill_name{
+  grid-area:title;
+  margin:0;
+}
+.skill_text{
+  grid-area:text;
+  margin:0;
+}
+@media(max-width:680px){
+  .skill_card{
+    grid-template-columns:1fr;
+    grid-template-areas:"num" "title" "text";
+    gap:7px;
+  }
+}
+`;
+
 function profileHtml(mode="preview"){
   const isLexi = value("#charType") === "lexi";
   const includeNav = mode === "preview" ? false : $("#includeNav").checked;
@@ -6472,9 +6498,7 @@ function profileHtml(mode="preview"){
   const identity = state.identity.map(([k,v])=>`<div class="info_row"><div class="info_key">${esc(k)}</div><p class="info_value">${br(v)}</p></div>`).join("");
   const notes = state.notes.map(n=>`<article class="note_box"><span class="note_title">${esc(n.title)}</span><p class="note_text">${br(n.text)}</p></article>`).join("");
   const skills = state.skills.map(s=>`<article class="skill_card"><span class="skill_number">${esc(s.num)}</span><h3 class="skill_name">${esc(s.name)}</h3><p class="skill_text">${br(s.text)}</p></article>`).join("");
-  const combat = state.combat.map(([k,v])=>`<div class="info_row"><div class="info_key">${esc(k)}</div><p class="info_value long">${br(v)}</p></div>`).join("");
   const prefs = state.prefs.map(p=>`<article class="note_box"><span class="note_title">${esc(p.title)}</span><p class="note_text">${br(p.text)}</p></article>`).join("");
-  const rels = state.rels.map(([k,v])=>`<div class="info_row"><div class="info_key">${esc(k)}</div><p class="info_value long">${br(v)}</p></div>`).join("");
   const tmiItems = value("#tmi").split("\n").filter(Boolean).map(x=>`<li>${esc(x.replace(/^[-•]\s*/, ""))}</li>`).join("");
   const interviews = state.interviews.map(qa=>`<div class="kain-chat q"><div class="kain-chat-name">Q.</div><div class="kain-chat-bubble">${br(qa.q)}</div></div><div class="kain-chat a"><div class="kain-chat-name">${esc(value("#bigName"))}</div><div class="kain-chat-bubble">${br(qa.a)}</div></div>`).join("");
   const pageClass = isLexi ? "lexi-page" : "";
@@ -6486,7 +6510,7 @@ function profileHtml(mode="preview"){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>${esc(value("#htmlTitle"))}</title>
-  ${mode==="preview" ? `<style>${SITE_CSS}\n${isLexi ? LEXI_CSS : ""}</style>` : `<link rel="stylesheet" href="/halcyon/style.css?v=80">\n  ${isLexi ? '<link rel="stylesheet" href="/halcyon/lexi.css?v=76">' : ''}`}
+  ${mode==="preview" ? `<style>${SITE_CSS}\n${isLexi ? LEXI_CSS : ""}\n${PROFILE_OVERRIDES}</style>` : `<link rel="stylesheet" href="/halcyon/style.css?v=76">\n  ${isLexi ? '<link rel="stylesheet" href="/halcyon/lexi.css?v=76">' : ''}\n  <style>${PROFILE_OVERRIDES}</style>`}
 </head>
 <body class="${pageClass}">
 ${includeNav ? (mode==="preview" ? navHtml() : '<div id="nav-placeholder"></div>') : ''}
@@ -6508,9 +6532,8 @@ ${includeNav ? (mode==="preview" ? navHtml() : '<div id="nav-placeholder"></div>
         <div class="section_head"><h2 class="section_title">PROFILE</h2><span class="section_code">ARCH PERSONA RECORD 01</span></div>
         <div class="profile_grid">
           <article class="profile_statement">
-            <div><span class="profile_statement_label">Command Profile</span><h3 class="profile_statement_title">${esc(value("#commandTitle"))}</h3><p class="profile_statement_text">${br(value("#commandText"))}</p></div>
-            <div class="profile_statement_line" aria-hidden="true"></div>
-            <p class="profile_statement_quote">${br(value("#commandQuote"))}</p>
+            <div><span class="profile_statement_label">CHARACTER EPITHET</span><h3 class="profile_statement_title">${esc(value("#commandTitle"))}</h3><p class="profile_statement_text">${br(value("#commandText"))}</p></div>
+            <div class="profile_statement_eval"><span class="profile_statement_label profile_statement_label_alt">OFFICIAL EVALUATION</span><p class="profile_statement_quote">${br(value("#commandQuote"))}</p></div>
           </article>
           <article class="profile_panel"><div class="profile_panel_head"><span>Identity</span><span class="profile_panel_code">Basic Record</span></div><div class="info_table">${identity}</div></article>
         </div>
@@ -6521,10 +6544,8 @@ ${includeNav ? (mode==="preview" ? navHtml() : '<div id="nav-placeholder"></div>
       </section>
 
       <section class="section"><div class="section_head"><h2 class="section_title">PERSONALITY</h2><span class="section_code">CHARACTER CORE</span></div><div class="two_col">${notes}</div></section>
-      <section class="section"><div class="section_head"><h2 class="section_title">SKILL SETUP</h2><span class="section_code">ACTIVE ABILITY LOG</span></div><div class="skill_grid">${skills}</div></section>
-      <section class="section"><div class="section_head"><h2 class="section_title">COMBAT STYLE</h2><span class="section_code">TACTICAL PROFILE</span></div><div class="info_table">${combat}</div></section>
+      <section class="section"><div class="section_head"><h2 class="section_title">ABILITY OVERVIEW</h2><span class="section_code">ABILITY RECORD</span></div><div class="skill_grid">${skills}</div></section>
       <section class="section"><div class="section_head"><h2 class="section_title">PREFERENCES</h2><span class="section_code">PRIVATE RECORD</span></div><div class="two_col">${prefs}</div></section>
-      <section class="section"><div class="section_head"><h2 class="section_title">RELATIONSHIP</h2><span class="section_code">UNIT CONNECTION</span></div><div class="info_table">${rels}</div></section>
       <section class="section"><div class="section_head"><h2 class="section_title">TMI</h2><span class="section_code">OPTIONAL DETAIL</span></div><ul class="tmi_list">${tmiItems}</ul></section>
 
       <section class="kain-mid-record">
@@ -6548,13 +6569,13 @@ ${imageSongHtml(mode)}
   </div>
 
 <div class="backlog_lightbox" id="backlogLightbox" aria-hidden="true"><img class="backlog_lightbox_img" src="${backlog}" alt="백로그 이미지 확대본"></div>
-${mode==="preview" ? `<script>${SITE_JS}<\/script>` : `<script src="/halcyon/script.js?v=83"><\/script>\n  ${isLexi ? '<script src="/halcyon/lexi.js?v=76"><\/script>' : ''}`}
+${mode==="preview" ? `<script>${SITE_JS}<\/script>` : `<script src="/halcyon/script.js?v=76"><\/script>\n  ${isLexi ? '<script src="/halcyon/lexi.js?v=76"><\/script>' : ''}`}
 </body>
 </html>`;
 }
 
 function navHtml(){
-  return `<nav class="site_nav"><a href="#">MAIN</a><a href="#">ROSTER</a><a href="#">UNIT</a><a href="#">PROMPT</a></nav>`;
+  return `<nav class="site_nav"><a href="#">MAIN</a><a href="#">ROSTER</a><a href="#">UNIT</a><a href="#">ARCHIVE</a></nav>`;
 }
 
 let renderTimer = null;
@@ -6562,17 +6583,14 @@ let lastPreviewHtml = "";
 
 function render(){
   $("#exportCode").value = profileHtml("export");
-
   clearTimeout(renderTimer);
-  renderTimer = setTimeout(() => {
-    renderPreview();
-  }, 450);
+  renderPreview(false);
 }
 
 function renderNow(){
   $("#exportCode").value = profileHtml("export");
   clearTimeout(renderTimer);
-  renderPreview();
+  renderPreview(true);
 }
 
 function getFrameScroll(){
@@ -6603,10 +6621,66 @@ function restoreFrameScroll(pos){
   }catch(e){}
 }
 
-function renderPreview(){
+function syncPreviewNode(current, next){
+  if(!current || !next) return;
+
+  if(current.nodeType !== next.nodeType || (current.nodeType === 1 && current.tagName !== next.tagName)){
+    current.replaceWith(next.cloneNode(true));
+    return;
+  }
+
+  if(current.nodeType === Node.TEXT_NODE){
+    if(current.nodeValue !== next.nodeValue) current.nodeValue = next.nodeValue;
+    return;
+  }
+
+  if(current.nodeType !== Node.ELEMENT_NODE) return;
+
+  [...current.attributes].forEach(attr => {
+    if(!next.hasAttribute(attr.name)) current.removeAttribute(attr.name);
+  });
+  [...next.attributes].forEach(attr => {
+    if(current.getAttribute(attr.name) !== attr.value) current.setAttribute(attr.name, attr.value);
+  });
+
+  const currentChildren = [...current.childNodes];
+  const nextChildren = [...next.childNodes];
+  const max = Math.max(currentChildren.length, nextChildren.length);
+
+  for(let i=0;i<max;i++){
+    const a = current.childNodes[i];
+    const b = nextChildren[i];
+    if(!a && b){
+      current.appendChild(b.cloneNode(true));
+    }else if(a && !b){
+      current.removeChild(a);
+      i--;
+    }else if(a && b){
+      syncPreviewNode(a,b);
+    }
+  }
+}
+
+function renderPreview(forceReload=false){
   const html = profileHtml("preview");
   const frame = $("#previewFrame");
   const pos = getFrameScroll();
+  let doc = null;
+
+  try{ doc = frame.contentDocument; }catch(e){}
+
+  const needsFirstLoad = !doc || !doc.body || !doc.querySelector(".profile_shell");
+  if(forceReload || needsFirstLoad){
+    lastPreviewHtml = html;
+    frame.onload = () => {
+      requestAnimationFrame(() => {
+        restoreFrameScroll(pos);
+        setTimeout(() => restoreFrameScroll(pos), 40);
+      });
+    };
+    frame.srcdoc = html;
+    return;
+  }
 
   if(html === lastPreviewHtml){
     restoreFrameScroll(pos);
@@ -6614,17 +6688,22 @@ function renderPreview(){
   }
 
   lastPreviewHtml = html;
-  frame.onload = () => {
-    requestAnimationFrame(() => {
-      restoreFrameScroll(pos);
-      setTimeout(() => restoreFrameScroll(pos), 80);
-    });
-  };
-  frame.srcdoc = html;
+
+  try{
+    const nextDoc = new DOMParser().parseFromString(html,"text/html");
+    syncPreviewNode(doc.body, nextDoc.body);
+    restoreFrameScroll(pos);
+  }catch(e){
+    frame.srcdoc = html;
+  }
 }
 
 function bindStaticInputs(){
   document.querySelectorAll("input:not([type=file]), textarea, select").forEach(el => {
+    if(el.id === "charType"){
+      el.addEventListener("change", renderNow);
+      return;
+    }
     el.addEventListener("input", render);
     el.addEventListener("change", render);
   });
@@ -6634,9 +6713,7 @@ function bindStaticInputs(){
   $("#addIdentity").onclick=()=>{state.identity.push(["New Key","내용"]);refreshEditors();renderNow();};
   $("#addNote").onclick=()=>{state.notes.push({title:"NEW NOTE",text:"내용"});refreshEditors();renderNow();};
   $("#addSkill").onclick=()=>{state.skills.push({num:"SKILL 04",name:"New Skill",text:"내용"});refreshEditors();renderNow();};
-  $("#addCombat").onclick=()=>{state.combat.push(["NEW KEY","내용"]);refreshEditors();renderNow();};
   $("#addPref").onclick=()=>{state.prefs.push({title:"NEW PREF",text:"내용"});refreshEditors();renderNow();};
-  $("#addRel").onclick=()=>{state.rels.push(["NEW KEY","내용"]);refreshEditors();renderNow();};
   $("#addInterview").onclick=()=>{state.interviews.push({q:"질문",a:"답변"});refreshEditors();renderNow();};
   $("#addBacklog").onclick=()=>{state.backlog.push({page:`Page ${String(state.backlog.length+1).padStart(2,"0")}`,title:"새 페이지",text:"내용"});refreshEditors();renderNow();};
   $("#toggleOutputBtn").onclick=()=>$("#outputPanel").classList.toggle("open");
