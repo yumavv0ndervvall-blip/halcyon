@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HALCYON Profile Maker v4</title>
+<title>HALCYON Profile Maker v13</title>
 <style>
   :root{
     --maker-bg:#05070b;
@@ -24,6 +24,11 @@
   .maker_head h1{margin:0;font-size:16px;letter-spacing:.16em;text-transform:uppercase}
   .maker_head p{margin:7px 0 0;color:var(--maker-muted);font-size:12px;line-height:1.5}
   .maker_actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+  .preset_panel{border:1px solid var(--maker-line);background:rgba(255,255,255,.018);padding:13px;margin-bottom:12px}
+  .preset_panel h2{margin:0 0 11px;display:flex;justify-content:space-between;color:var(--maker-muted);font-size:11px;letter-spacing:.15em;text-transform:uppercase}
+  .preset_actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:9px}
+  .preset_actions .maker_btn{height:34px;font-size:9px;padding:0 6px}
+  @media(max-width:520px){.preset_actions{grid-template-columns:1fr 1fr}}
   .maker_btn{border:1px solid var(--maker-line);background:rgba(255,255,255,.035);color:var(--maker-text);height:38px;padding:0 10px;font-weight:900;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
   .maker_btn:hover{background:rgba(255,255,255,.065)}
   .maker_btn.primary{background:rgba(255,255,255,.10)}
@@ -35,6 +40,10 @@
   input,textarea,select{width:100%;border:1px solid var(--maker-line2);background:#080c13;color:var(--maker-text);padding:9px 10px;border-radius:0;font:inherit;font-size:12px}
   textarea{min-height:78px;resize:vertical;line-height:1.55}
   input[type=file]{font-size:11px;padding:8px}
+  input[type=color]{height:38px;padding:4px 5px;cursor:pointer;background:#080c13}
+  input[type=color]::-webkit-color-swatch-wrapper{padding:0}
+  input[type=color]::-webkit-color-swatch{border:0;border-radius:2px}
+  input[type=color]::-moz-color-swatch{border:0;border-radius:2px}
   .maker_item{border:1px dashed var(--maker-line);padding:10px;background:rgba(255,255,255,.012);margin-bottom:9px}
   .maker_item_top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
   .maker_item_top strong{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,243,251,.72)}
@@ -56,7 +65,7 @@
 <div class="maker_app">
   <aside class="maker_editor">
     <div class="maker_head">
-      <h1>Profile Maker v4</h1>
+      <h1>Profile Maker v13</h1>
       <p>실제 HALCYON v76 사이트 CSS/class 기준. 왼쪽에서 내용 수정하면 오른쪽 iframe에 실제 사이트 양식으로 바로 반영됨.</p>
       <div class="maker_actions">
         <button class="maker_btn primary" id="downloadBtn">HTML 다운로드</button>
@@ -65,6 +74,21 @@
         <button class="maker_btn" id="resetBtn">카인 예시</button>
       </div>
     </div>
+
+    <section class="preset_panel">
+      <h2><span>Preset</span><span>Local Save</span></h2>
+      <div class="maker_stack">
+        <label>Preset Name<input id="presetName" placeholder="예: KAIN / SHORT / POLARIS"></label>
+        <label>Saved Presets<select id="presetSelect"><option value="">저장된 프리셋 없음</option></select></label>
+      </div>
+      <div class="preset_actions">
+        <button class="maker_btn primary" type="button" id="presetSaveBtn">새로 저장</button>
+        <button class="maker_btn" type="button" id="presetLoadBtn">불러오기</button>
+        <button class="maker_btn" type="button" id="presetOverwriteBtn">덮어쓰기</button>
+        <button class="maker_btn" type="button" id="presetDeleteBtn">삭제</button>
+      </div>
+      <p class="hint" style="margin:9px 0 0">브라우저에 저장됩니다. 업로드한 이미지 파일 자체는 새로고침 후 다시 선택해야 합니다.</p>
+    </section>
 
     <section class="maker_panel">
       <h2><span>Mode</span><span>Type</span></h2>
@@ -127,7 +151,7 @@
 
     <section class="maker_panel">
       <h2><span>Visual Profile</span><button class="mini_btn" id="addVisual">Add</button></h2>
-      <div class="hint" style="margin:-2px 0 10px">HAIR / EYES / OUTFIT / BODY처럼 영문 항목명을 자유롭게 추가해 사용할 수 있어요.</div>
+      <div class="hint" style="margin:-2px 0 10px">LOOK / HAIR / EYES / OUTFIT / BODY처럼 영문 항목명을 자유롭게 추가해 사용할 수 있어요.</div>
       <div id="visualList"></div>
     </section>
 
@@ -139,6 +163,33 @@
     <section class="maker_panel">
       <h2><span>Ability Overview</span><button class="mini_btn" id="addSkill">Add</button></h2>
       <div id="skillList"></div>
+      <div class="maker_item" style="margin-top:12px">
+        <div class="maker_item_top">
+          <strong>Rampage Warning</strong>
+          <label style="display:flex;align-items:center;gap:7px;text-transform:none;letter-spacing:0;font-size:11px;color:var(--maker-muted);margin:0">
+            <input type="checkbox" id="useRampage" checked style="width:auto"> Show / Hide
+          </label>
+        </div>
+        <div class="maker_stack">
+          <div class="maker_grid2">
+            <label>Warning Title<input id="rampageTitle" value="폭주 징후"></label>
+            <label>Protocol Name<input id="rampageCode" value="RAMPAGE PROTOCOL"></label>
+          </div>
+          <label>Warning Color
+            <select id="rampageColor">
+              <option value="default" selected>DEFAULT · ARCHIVE</option>
+              <option value="fire">PYRE · 불</option>
+              <option value="water">AQUA · 물</option>
+              <option value="wind">AERO · 바람</option>
+              <option value="lightning">FULMEN · 번개</option>
+              <option value="ice">GLACIES · 얼음</option>
+              <option value="plant">VERDE · 풀</option>
+              <option value="none">NONE · 무속성</option>
+            </select>
+          </label>
+          <label>Description<textarea id="rampageText">불속성 고유의 체질로 가이딩 필요 수치 60%부터 신체 과부하와 맹렬한 파괴 본능이 일어난다. 임계점(80%) 돌파 시 이성은 유지하나 오직 파괴와 해방감에만 중독된 사나운 포식자의 상태가 된다.</textarea></label>
+        </div>
+      </div>
     </section>
 
     <section class="maker_panel">
@@ -784,7 +835,7 @@ body.home_center .brief_home_alt {
   content: "!";
   width: 16px;
   height: 16px;
-  border-radius: 999px;
+  border-radius: 5px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -5981,55 +6032,82 @@ const LEXI_CSS = `
   100% { opacity: 1; }
 }
 
-/* ===== PROFILE MAKER V2 : ATTRIBUTE / VISUAL PROFILE ===== */
+/* ===== PROFILE MAKER V3 : ATTRIBUTE / VISUAL ===== */
 .attribute_badge {
-  display: inline-flex;
+  display: inline-flex !important;
   align-items: center;
-  gap: 7px;
-  min-width: 88px;
-  padding: 5px 9px 5px 10px;
-  border: 1px solid currentColor;
-  border-radius: 4px;
+  justify-content: center;
+  width: fit-content;
+  max-width: 100%;
+  padding: 5px 10px;
+  border-radius: 999px;
   font-size: 10px;
   line-height: 1;
-  font-weight: 900;
-  letter-spacing: .04em;
+  font-weight: 950;
+  letter-spacing: 0;
   white-space: nowrap;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.14), 0 1px 6px rgba(0,0,0,.16);
 }
-.attribute_badge .attribute_ko { font-size: 11px; letter-spacing: 0; }
-.attribute_badge .attribute_en { opacity: .72; font-size: 8px; letter-spacing: .12em; }
-.attr-fire { color:#EA473B; background:rgba(234,71,59,.10); }
-.attr-water { color:#3195E0; background:rgba(49,149,224,.10); }
-.attr-wind { color:#23C56E; background:rgba(35,197,110,.10); }
-.attr-lightning { color:#F8BF00; background:rgba(248,191,0,.10); }
-.attr-ice { color:#9CD2D3; background:rgba(156,210,211,.10); }
-.attr-plant { color:#65B161; background:rgba(101,177,97,.10); }
-.attr-none { color:#8B98A9; background:rgba(139,152,169,.10); }
+.attribute_badge .attribute_text {
+  display: inline-block;
+  color: inherit;
+  font: inherit;
+  letter-spacing: 0;
+}
+.attr-fire { color:#fff !important; background:#EA473B !important; }
+.attr-water { color:#fff !important; background:#1798D4 !important; }
+.attr-wind { color:#fff !important; background:#23C56E !important; }
+.attr-lightning { color:#1A1D24 !important; background:#F8BF00 !important; }
+.attr-ice { color:#1A1D24 !important; background:#9CD2D3 !important; }
+.attr-plant { color:#fff !important; background:#65B161 !important; }
+.attr-none { color:#fff !important; background:#64748B !important; }
+.profile_panel .info_value:has(.attribute_badge){
+  display:flex;
+  align-items:center;
+}
 
+/* compact visual profile: dense two-column cards */
 .visual_profile_table {
-  border: 1px solid rgba(255,255,255,.08);
-  border-top: 1px solid rgba(255,255,255,.11);
-  background: rgba(255,255,255,.008);
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  border:0;
+  background:transparent;
 }
 .visual_profile_table .info_row {
-  grid-template-columns: 118px 1fr;
-  min-height: 54px;
-  padding: 0 15px;
+  display:block;
+  min-height:0;
+  padding:13px 14px 14px;
+  border:1px solid rgba(255,255,255,.085);
+  background:rgba(255,255,255,.010);
 }
+.visual_profile_table .info_row:first-child { border-top:1px solid rgba(255,255,255,.085); }
 .visual_profile_table .info_key {
-  display: flex;
-  align-items: flex-start;
-  padding-top: 16px;
-  color: rgba(135,164,255,.92);
-  font-size: 10px;
+  display:block;
+  padding:0;
+  margin:0 0 8px;
+  color:rgba(135,164,255,.92);
+  font-size:9px;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:.12em;
+  text-transform:uppercase;
 }
-.visual_profile_table .info_value {
-  padding: 14px 0 14px 18px;
-  line-height: 1.85;
+.visual_profile_table .info_value,
+.visual_profile_table .info_value.long {
+  display:block;
+  padding:0;
+  margin:0;
+  border-left:0;
+  color:rgba(230,236,242,.70);
+  font-size:12px;
+  line-height:1.72;
+  font-weight:650;
+  word-break:keep-all;
 }
 @media (max-width: 640px) {
-  .visual_profile_table .info_row { grid-template-columns: 92px 1fr; padding: 0 11px; }
-  .visual_profile_table .info_value { padding-left: 12px; }
+  .visual_profile_table { grid-template-columns:1fr; gap:8px; }
+  .visual_profile_table .info_row { padding:12px 13px 13px; }
 }
 `;
 const SITE_JS = `
@@ -6321,8 +6399,8 @@ document.addEventListener("DOMContentLoaded", initHalcyonImageSongPlayers);
 const state = {
   urls: { hero:"", backlog:"", song:"" },
   identity: [
-    ["Codename","KAIN"],["Real Name","차도윤"],["Age / Nationality","30세 / 대한민국"],["Gender","남성"],
-    ["Height","190cm"],["Class","S-CLASS ENTITY"],["Attribute","fire"],["Unit","ARCH REARGUARD"]
+    ["Codename","KAIN"],["Real Name","차도윤"],["Age","30세"],["Nationality","대한민국"],
+    ["Gender","남성"],["Height","190cm"],["Class","S-CLASS ENTITY"],["Attribute","fire"],["Unit","ARCH REARGUARD"]
   ],
   notes: [
     {title:"MAIN TRAITS", text:"호쾌하고 친화력이 좋다. 위험한 상황에서도 쉽게 흔들리지 않으며, 팀원들이 불안해할수록 더 평소처럼 행동하려 한다."},
@@ -6336,6 +6414,7 @@ const state = {
     {num:"SKILL 03", name:"Last Bastion", text:"극한 상황에서 주변 피해를 자신에게 집중시키듯 받아내며 무너지는 전선을 붙잡는다."}
   ],
   visual: [
+    ["LOOK","왼쪽 얼굴의 화상 흉터와 짙은 눈썹이 강하고 남성적인 인상을 만든다."],
     ["HAIR","남색에 가까운 청회색 머리를 완전히 뒤로 넘긴 올백 스타일. 드러난 이마와 두꺼운 눈썹 때문에 강하고 성숙한 인상을 준다."],
     ["EYES","눈매와 눈동자 색, 시선의 인상 등을 입력하세요."],
     ["OUTFIT","평소 복장이나 제복, 자주 착용하는 장비를 입력하세요."],
@@ -6348,9 +6427,9 @@ const state = {
     {title:"FAVORITE STYLE", text:"사복은 기능적이고 단정한 쪽을 선호한다."}
   ],
   interviews: [
-    {q:"리어가드는 당신에게 어떤 의미입니까?", a:"버려진 전력이 아니라, 끝까지 살아남은 사람들이다. 적어도 나는 그렇게 부른다."},
-    {q:"스스로를 영웅이라 생각합니까?", a:"그런 말은 질색이다. 대신 내가 선 자리가 무너지지 않게는 할 수 있다."},
-    {q:"지휘관으로서 가장 경계하는 순간은 언제입니까?", a:"누군가 조용해질 때. 살려달라는 말보다, 괜찮다는 말이 더 위험할 때가 있다."}
+    {name:"KAIN", q:"리어가드는 당신에게 어떤 의미입니까?", a:"버려진 전력이 아니라, 끝까지 살아남은 사람들이다. 적어도 나는 그렇게 부른다."},
+    {name:"KAIN", q:"스스로를 영웅이라 생각합니까?", a:"그런 말은 질색이다. 대신 내가 선 자리가 무너지지 않게는 할 수 있다."},
+    {name:"KAIN", q:"지휘관으로서 가장 경계하는 순간은 언제입니까?", a:"누군가 조용해질 때. 살려달라는 말보다, 괜찮다는 말이 더 위험할 때가 있다."}
   ],
   backlog: [
     {page:"Page 01 / Origin", title:"무너지는 전선의 가장 마지막 방벽", text:"리어가드의 전선은 늘 불안정했다. 파도처럼 밀려오는 웨이브와 끊기는 보급, 제대로 도착하지 않는 가이딩, 그리고 돌아갈 곳이 없다는 사실이 사람을 천천히 갉아먹었다."},
@@ -6379,13 +6458,13 @@ function bindUpload(id, key){
 }
 
 const ATTRIBUTE_OPTIONS = [
-  {value:"fire",      ko:"불",     en:"Pyre",    cls:"attr-fire"},
-  {value:"water",     ko:"물",     en:"Aqua",    cls:"attr-water"},
-  {value:"wind",      ko:"바람",   en:"Aero",    cls:"attr-wind"},
-  {value:"lightning", ko:"번개",   en:"Fulmen",  cls:"attr-lightning"},
-  {value:"ice",       ko:"얼음",   en:"Glacies", cls:"attr-ice"},
-  {value:"plant",     ko:"풀",     en:"Verde",   cls:"attr-plant"},
-  {value:"none",      ko:"무속성", en:"None",    cls:"attr-none"}
+  {value:"fire",      ko:"불",     en:"Pyre",    cls:"attr-fire",      bg:"#EA473B", fg:"#FFFFFF"},
+  {value:"water",     ko:"물",     en:"Aqua",    cls:"attr-water",     bg:"#1798D4", fg:"#FFFFFF"},
+  {value:"wind",      ko:"바람",   en:"Aero",    cls:"attr-wind",      bg:"#23C56E", fg:"#FFFFFF"},
+  {value:"lightning", ko:"번개",   en:"Fulmen",  cls:"attr-lightning", bg:"#F8BF00", fg:"#1A1D24"},
+  {value:"ice",       ko:"얼음",   en:"Glacies", cls:"attr-ice",       bg:"#9CD2D3", fg:"#1A1D24"},
+  {value:"plant",     ko:"풀",     en:"Verde",   cls:"attr-plant",     bg:"#65B161", fg:"#FFFFFF"},
+  {value:"none",      ko:"무속성", en:"None",    cls:"attr-none",      bg:"#64748B", fg:"#FFFFFF"}
 ];
 
 function getAttributeInfo(value){
@@ -6397,7 +6476,8 @@ function getAttributeInfo(value){
 
 function attributeBadge(value){
   const item = getAttributeInfo(value);
-  return `<span class="attribute_badge ${item.cls}"><span class="attribute_ko">${item.ko}</span><span class="attribute_en">${item.en}</span></span>`;
+  const style = `display:inline-flex;align-items:center;justify-content:center;width:max-content;max-width:100%;padding:5px 9px;border-radius:5px;background:${item.bg};color:${item.fg};font-size:10px;line-height:1;font-weight:850;letter-spacing:-0.02em;white-space:nowrap;box-shadow:inset 0 0 0 1px rgba(255,255,255,.15),0 2px 6px rgba(0,0,0,.22)`;
+  return `<span class="attribute_badge ${item.cls}" style="${style}"><span class="attribute_text">${item.ko} (${item.en})</span></span>`;
 }
 
 function identityEditor(container, rows){
@@ -6486,7 +6566,7 @@ function refreshEditors(){
   objectEditor("#skillList", state.skills, [{key:"num",label:"Number"},{key:"name",label:"Name"},{key:"text",label:"Text",area:true}]);
   rowEditor("#visualList", state.visual, "Section", "Description");
   objectEditor("#prefList", state.prefs, [{key:"title",label:"Title"},{key:"text",label:"Text",area:true}]);
-  objectEditor("#interviewList", state.interviews, [{key:"q",label:"Question",area:true},{key:"a",label:"Answer",area:true}]);
+  objectEditor("#interviewList", state.interviews, [{key:"name",label:"Answerer Name"},{key:"q",label:"Question",area:true},{key:"a",label:"Answer",area:true}]);
   objectEditor("#backlogList", state.backlog, [{key:"page",label:"Page"},{key:"title",label:"Title"},{key:"text",label:"Text",area:true}]);
 }
 
@@ -6551,9 +6631,10 @@ function lexiBacklogHtml(mode){
 }
 
 const PROFILE_OVERRIDES = `
+/* ===== PROFILE MAKER V12 OVERRIDES ===== */
 .profile_statement_title{
   margin-top:8px;
-  font-size:19px;
+  font-size:17px;
   line-height:1.38;
   letter-spacing:-0.05em;
 }
@@ -6564,6 +6645,85 @@ const PROFILE_OVERRIDES = `
 }
 .profile_statement_label_alt{margin-bottom:0}
 .profile_statement_line{display:none}
+
+/* Attribute badge: uses the exact roster attribute colors. */
+.profile_panel .info_value:has(.attribute_badge){
+  display:flex !important;
+  align-items:center !important;
+  padding-top:7px !important;
+  padding-bottom:7px !important;
+}
+.attribute_badge{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:max-content !important;
+  max-width:100% !important;
+  padding:5px 9px !important;
+  border-radius:5px !important;
+  font-size:10px !important;
+  line-height:1 !important;
+  font-weight:850 !important;
+  letter-spacing:-0.02em !important;
+  white-space:nowrap !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.15),0 2px 6px rgba(0,0,0,.22) !important;
+}
+.attr-fire{background:#EA473B !important;color:#fff !important}
+.attr-water{background:#1798D4 !important;color:#fff !important}
+.attr-wind{background:#23C56E !important;color:#fff !important}
+.attr-lightning{background:#F8BF00 !important;color:#1A1D24 !important}
+.attr-ice{background:#9CD2D3 !important;color:#1A1D24 !important}
+.attr-plant{background:#65B161 !important;color:#fff !important}
+.attr-none{background:#64748B !important;color:#fff !important}
+
+/* VISUAL: narrow label rail, no wasted left-side space. */
+.visual_profile_table{
+  display:block !important;
+  border-top:1px solid rgba(255,255,255,.09) !important;
+  border-bottom:1px solid rgba(255,255,255,.09) !important;
+  background:transparent !important;
+}
+.visual_profile_table .info_row{
+  display:grid !important;
+  grid-template-columns:62px minmax(0,1fr) !important;
+  gap:14px !important;
+  align-items:start !important;
+  min-height:0 !important;
+  padding:11px 0 !important;
+  border:0 !important;
+  border-bottom:1px solid rgba(255,255,255,.07) !important;
+  background:transparent !important;
+}
+.visual_profile_table .info_row:last-child{border-bottom:0 !important}
+.visual_profile_table .info_key{
+  display:block !important;
+  width:auto !important;
+  padding:3px 0 0 !important;
+  margin:0 !important;
+  border:0 !important;
+  color:rgba(245,247,250,0.36) !important;
+  font-size:10px !important;
+  line-height:1.15 !important;
+  font-weight:950 !important;
+  letter-spacing:.12em !important;
+  text-transform:uppercase !important;
+  white-space:nowrap !important;
+}
+.visual_profile_table .info_value,
+.visual_profile_table .info_value.long{
+  display:block !important;
+  min-width:0 !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:0 !important;
+  color:rgba(230,236,242,.72) !important;
+  font-size:12px !important;
+  line-height:1.72 !important;
+  font-weight:650 !important;
+  word-break:keep-all !important;
+}
+
+/* Ability cards */
 .skill_grid{
   display:grid;
   grid-template-columns:1fr;
@@ -6578,26 +6738,142 @@ const PROFILE_OVERRIDES = `
   gap:6px 16px;
   align-items:start;
 }
-.skill_number{
-  grid-area:num;
-  margin:3px 0 0;
+.skill_number{grid-area:num;margin:3px 0 0}
+.skill_name{grid-area:title;margin:0}
+.skill_text{grid-area:text;margin:0}
+
+/* Optional sentinel-only rampage warning — selectable archive/attribute palette */
+.rampage_protocol{
+  --rampage-accent:rgba(164,177,203,.62);
+  --rampage-title:rgba(232,237,246,.84);
+  --rampage-border:rgba(164,177,203,.18);
+  --rampage-bg1:rgba(116,132,164,.075);
+  --rampage-bg2:rgba(255,255,255,.010);
+  margin-top:14px;
+  padding:13px 15px 14px;
+  border:1px solid var(--rampage-border);
+  border-left:3px solid var(--rampage-accent);
+  border-radius:4px;
+  background:linear-gradient(90deg,var(--rampage-bg1),var(--rampage-bg2));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.018);
 }
-.skill_name{
-  grid-area:title;
+.rampage_protocol.rampage-fire{
+  --rampage-accent:#EA473B;--rampage-title:#FF8C84;--rampage-border:rgba(234,71,59,.27);--rampage-bg1:rgba(234,71,59,.15);--rampage-bg2:rgba(234,71,59,.045);
+}
+.rampage_protocol.rampage-water{
+  --rampage-accent:#1798D4;--rampage-title:#74CCF4;--rampage-border:rgba(23,152,212,.27);--rampage-bg1:rgba(23,152,212,.15);--rampage-bg2:rgba(23,152,212,.045);
+}
+.rampage_protocol.rampage-wind{
+  --rampage-accent:#23C56E;--rampage-title:#78E6A9;--rampage-border:rgba(35,197,110,.27);--rampage-bg1:rgba(35,197,110,.14);--rampage-bg2:rgba(35,197,110,.04);
+}
+.rampage_protocol.rampage-lightning{
+  --rampage-accent:#F8BF00;--rampage-title:#F8D96A;--rampage-border:rgba(248,191,0,.27);--rampage-bg1:rgba(248,191,0,.14);--rampage-bg2:rgba(248,191,0,.04);
+}
+.rampage_protocol.rampage-ice{
+  --rampage-accent:#9CD2D3;--rampage-title:#C7F0F1;--rampage-border:rgba(156,210,211,.27);--rampage-bg1:rgba(156,210,211,.14);--rampage-bg2:rgba(156,210,211,.04);
+}
+.rampage_protocol.rampage-plant{
+  --rampage-accent:#65B161;--rampage-title:#A5DAA2;--rampage-border:rgba(101,177,97,.27);--rampage-bg1:rgba(101,177,97,.14);--rampage-bg2:rgba(101,177,97,.04);
+}
+.rampage_protocol.rampage-none{
+  --rampage-accent:#64748B;--rampage-title:#A9B5C6;--rampage-border:rgba(100,116,139,.29);--rampage-bg1:rgba(100,116,139,.16);--rampage-bg2:rgba(100,116,139,.045);
+}
+.rampage_protocol_head{
+  display:flex;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:5px;
+  margin:0 0 7px;
+  color:var(--rampage-title);
+  font-size:13px;
+  line-height:1.3;
+  font-weight:900;
+  letter-spacing:-.02em;
+}
+.rampage_protocol_code{
+  color:var(--rampage-title);
+  opacity:.86;
+  font-size:12px;
+  font-weight:850;
+}
+.rampage_protocol_text{
   margin:0;
+  color:rgba(235,239,246,.79);
+  font-size:12px;
+  line-height:1.78;
+  font-weight:650;
+  word-break:keep-all;
 }
-.skill_text{
-  grid-area:text;
-  margin:0;
+
+/* INTERVIEW LOG: fixed frame, the bordered panel itself scrolls. */
+.kain-interview-box{
+  height:510px !important;
+  min-height:510px !important;
+  max-height:510px !important;
+  box-sizing:border-box !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  display:block !important;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(120,136,166,.50) rgba(255,255,255,.012);
+  overscroll-behavior:contain;
 }
+.kain-chat-log{
+  height:auto !important;
+  min-height:100% !important;
+  max-height:none !important;
+  overflow:visible !important;
+  box-sizing:border-box !important;
+  display:grid !important;
+  align-content:start !important;
+  padding:16px !important;
+  gap:11px !important;
+}
+.kain-interview-box::-webkit-scrollbar{width:5px}
+.kain-interview-box::-webkit-scrollbar-track{
+  background:rgba(255,255,255,.010);
+}
+.kain-interview-box::-webkit-scrollbar-thumb{
+  background:rgba(132,149,182,.44);
+  border-radius:2px;
+  border:1px solid rgba(10,14,22,.70);
+}
+.kain-interview-box::-webkit-scrollbar-thumb:hover{
+  background:rgba(156,177,216,.66);
+}
+.kain-chat{
+  display:grid !important;
+  gap:6px !important;
+}
+.kain-chat-bubble{
+  max-width:92% !important;
+  padding:11px 13px !important;
+  line-height:1.74 !important;
+}
+
 @media(max-width:680px){
   .skill_card{
     grid-template-columns:1fr;
     grid-template-areas:"num" "title" "text";
     gap:7px;
   }
+  .visual_profile_table .info_row{
+    grid-template-columns:54px minmax(0,1fr) !important;
+    gap:11px !important;
+  }
+  .kain-interview-box{
+    height:450px !important;
+    min-height:450px !important;
+    max-height:450px !important;
+  }
 }
 `;
+
+function rampageColorClass(value){
+  const allowed = new Set(["fire","water","wind","lightning","ice","plant","none"]);
+  const key = String(value || "default").toLowerCase();
+  return allowed.has(key) ? ` rampage-${key}` : "";
+}
 
 function profileHtml(mode="preview"){
   const isLexi = value("#charType") === "lexi";
@@ -6608,9 +6884,10 @@ function profileHtml(mode="preview"){
   const visual = state.visual.map(([k,v])=>`<div class="info_row"><div class="info_key">${esc(k)}</div><p class="info_value long">${br(v)}</p></div>`).join("");
   const notes = state.notes.map(n=>`<article class="note_box"><span class="note_title">${esc(n.title)}</span><p class="note_text">${br(n.text)}</p></article>`).join("");
   const skills = state.skills.map(s=>`<article class="skill_card"><span class="skill_number">${esc(s.num)}</span><h3 class="skill_name">${esc(s.name)}</h3><p class="skill_text">${br(s.text)}</p></article>`).join("");
+  const rampage = $("#useRampage").checked ? `<article class="rampage_protocol${rampageColorClass(value("#rampageColor"))}"><h3 class="rampage_protocol_head">${esc(value("#rampageTitle"))}<span class="rampage_protocol_code">(${esc(value("#rampageCode"))})</span></h3><p class="rampage_protocol_text">${br(value("#rampageText"))}</p></article>` : "";
   const prefs = state.prefs.map(p=>`<article class="note_box"><span class="note_title">${esc(p.title)}</span><p class="note_text">${br(p.text)}</p></article>`).join("");
   const tmiItems = value("#tmi").split("\n").filter(Boolean).map(x=>`<li>${esc(x.replace(/^[-•]\s*/, ""))}</li>`).join("");
-  const interviews = state.interviews.map(qa=>`<div class="kain-chat q"><div class="kain-chat-name">Q.</div><div class="kain-chat-bubble">${br(qa.q)}</div></div><div class="kain-chat a"><div class="kain-chat-name">${esc(value("#bigName"))}</div><div class="kain-chat-bubble">${br(qa.a)}</div></div>`).join("");
+  const interviews = state.interviews.map(qa=>`<div class="kain-chat q"><div class="kain-chat-name">Q.</div><div class="kain-chat-bubble">${br(qa.q)}</div></div><div class="kain-chat a"><div class="kain-chat-name">${esc(qa.name || value("#bigName"))}</div><div class="kain-chat-bubble">${br(qa.a)}</div></div>`).join("");
   const pageClass = isLexi ? "lexi-page" : "";
   const shellClass = esc(value("#shellClass"));
 
@@ -6649,9 +6926,9 @@ ${includeNav ? (mode==="preview" ? navHtml() : '<div id="nav-placeholder"></div>
         </div>
       </section>
 
-      <section class="section visual_profile_section"><div class="section_head"><h2 class="section_title">VISUAL PROFILE</h2></div><div class="info_table visual_profile_table">${visual}</div></section>
+      <section class="section visual_profile_section"><div class="section_head"><h2 class="section_title">VISUAL</h2></div><div class="info_table visual_profile_table">${visual}</div></section>
       <section class="section"><div class="section_head"><h2 class="section_title">PERSONALITY</h2></div><div class="two_col">${notes}</div></section>
-      <section class="section"><div class="section_head"><h2 class="section_title">ABILITY OVERVIEW</h2></div><div class="skill_grid">${skills}</div></section>
+      <section class="section"><div class="section_head"><h2 class="section_title">ABILITY OVERVIEW</h2></div><div class="skill_grid">${skills}</div>${rampage}</section>
       <section class="section"><div class="section_head"><h2 class="section_title">PREFERENCES</h2></div><div class="two_col">${prefs}</div></section>
       <section class="section"><div class="section_head"><h2 class="section_title">TMI</h2></div><ul class="tmi_list">${tmiItems}</ul></section>
 
@@ -6805,8 +7082,145 @@ function renderPreview(forceReload=false){
   }
 }
 
+const PRESET_STORAGE_KEY = "halcyon_profile_maker_presets_v1";
+
+function cloneData(value){
+  return JSON.parse(JSON.stringify(value));
+}
+
+function getPresetStore(){
+  try{
+    const raw = localStorage.getItem(PRESET_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : {};
+    return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
+  }catch(e){
+    return {};
+  }
+}
+
+function setPresetStore(store){
+  localStorage.setItem(PRESET_STORAGE_KEY, JSON.stringify(store));
+}
+
+function captureStaticFields(){
+  const fields = {};
+  document.querySelectorAll("input[id]:not([type=file]), textarea[id], select[id]").forEach(el => {
+    if(["exportCode","presetName","presetSelect"].includes(el.id)) return;
+    if(el.type === "checkbox") fields[el.id] = el.checked;
+    else fields[el.id] = el.value;
+  });
+  return fields;
+}
+
+function capturePreset(){
+  return {
+    savedAt: new Date().toISOString(),
+    fields: captureStaticFields(),
+    state: {
+      identity: cloneData(state.identity),
+      notes: cloneData(state.notes),
+      skills: cloneData(state.skills),
+      visual: cloneData(state.visual),
+      prefs: cloneData(state.prefs),
+      interviews: cloneData(state.interviews),
+      backlog: cloneData(state.backlog)
+    }
+  };
+}
+
+function applyPreset(data){
+  if(!data || !data.state) return;
+
+  Object.keys(state.urls || {}).forEach(key => {
+    if(state.urls[key]){
+      try{ URL.revokeObjectURL(state.urls[key]); }catch(e){}
+    }
+  });
+  state.urls = {hero:"", backlog:"", song:""};
+
+  ["identity","notes","skills","visual","prefs","interviews","backlog"].forEach(key => {
+    if(Array.isArray(data.state[key])) state[key] = cloneData(data.state[key]);
+  });
+
+  const fields = data.fields || {};
+  Object.entries(fields).forEach(([id,val]) => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    if(el.type === "checkbox") el.checked = !!val;
+    else el.value = val ?? "";
+  });
+
+  ["heroUpload","backlogUpload","songUpload"].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.value = "";
+  });
+
+  refreshEditors();
+  renderNow();
+}
+
+function refreshPresetSelect(selectedName=""){
+  const select = $("#presetSelect");
+  if(!select) return;
+  const store = getPresetStore();
+  const names = Object.keys(store).sort((a,b)=>a.localeCompare(b,"ko"));
+  select.innerHTML = names.length
+    ? `<option value="">프리셋 선택</option>${names.map(name=>`<option value="${esc(name)}">${esc(name)}</option>`).join("")}`
+    : '<option value="">저장된 프리셋 없음</option>';
+  if(selectedName && names.includes(selectedName)) select.value = selectedName;
+}
+
+function bindPresetControls(){
+  refreshPresetSelect();
+
+  $("#presetSelect").addEventListener("change", e => {
+    if(e.target.value) $("#presetName").value = e.target.value;
+  });
+
+  $("#presetSaveBtn").onclick = () => {
+    const name = $("#presetName").value.trim();
+    if(!name){ alert("프리셋 이름을 입력해줘!"); return; }
+    const store = getPresetStore();
+    if(store[name] && !confirm(`'${name}' 프리셋이 이미 있어. 덮어쓸까?`)) return;
+    store[name] = capturePreset();
+    setPresetStore(store);
+    refreshPresetSelect(name);
+  };
+
+  $("#presetLoadBtn").onclick = () => {
+    const name = $("#presetSelect").value || $("#presetName").value.trim();
+    const store = getPresetStore();
+    if(!name || !store[name]){ alert("불러올 프리셋을 선택해줘!"); return; }
+    applyPreset(store[name]);
+    $("#presetName").value = name;
+    refreshPresetSelect(name);
+  };
+
+  $("#presetOverwriteBtn").onclick = () => {
+    const name = $("#presetSelect").value || $("#presetName").value.trim();
+    const store = getPresetStore();
+    if(!name || !store[name]){ alert("덮어쓸 기존 프리셋을 선택해줘!"); return; }
+    store[name] = capturePreset();
+    setPresetStore(store);
+    $("#presetName").value = name;
+    refreshPresetSelect(name);
+  };
+
+  $("#presetDeleteBtn").onclick = () => {
+    const name = $("#presetSelect").value || $("#presetName").value.trim();
+    const store = getPresetStore();
+    if(!name || !store[name]){ alert("삭제할 프리셋을 선택해줘!"); return; }
+    if(!confirm(`'${name}' 프리셋을 삭제할까?`)) return;
+    delete store[name];
+    setPresetStore(store);
+    $("#presetName").value = "";
+    refreshPresetSelect();
+  };
+}
+
 function bindStaticInputs(){
   document.querySelectorAll("input:not([type=file]), textarea, select").forEach(el => {
+    if(["presetName","presetSelect"].includes(el.id)) return;
     if(el.id === "charType"){
       el.addEventListener("change", renderNow);
       return;
@@ -6822,7 +7236,7 @@ function bindStaticInputs(){
   $("#addSkill").onclick=()=>{state.skills.push({num:`SKILL ${String(state.skills.length+1).padStart(2,"0")}`,name:"New Skill",text:"내용"});refreshEditors();renderNow();};
   $("#addVisual").onclick=()=>{state.visual.push(["NEW SECTION","내용"]);refreshEditors();renderNow();};
   $("#addPref").onclick=()=>{state.prefs.push({title:"NEW PREF",text:"내용"});refreshEditors();renderNow();};
-  $("#addInterview").onclick=()=>{state.interviews.push({q:"질문",a:"답변"});refreshEditors();renderNow();};
+  $("#addInterview").onclick=()=>{state.interviews.push({name:value("#bigName") || "ANSWERER",q:"질문",a:"답변"});refreshEditors();renderNow();};
   $("#addBacklog").onclick=()=>{state.backlog.push({page:`Page ${String(state.backlog.length+1).padStart(2,"0")}`,title:"새 페이지",text:"내용"});refreshEditors();renderNow();};
   $("#toggleOutputBtn").onclick=()=>$("#outputPanel").classList.toggle("open");
   $("#copyBtn").onclick=async()=>{await navigator.clipboard.writeText(profileHtml("export")); alert("복사 완료");};
@@ -6840,6 +7254,7 @@ function bindStaticInputs(){
 
 refreshEditors();
 bindStaticInputs();
+bindPresetControls();
 renderNow();
 </script>
 </body>
