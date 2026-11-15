@@ -126,12 +126,9 @@
     </section>
 
     <section class="maker_panel">
-      <h2><span>Long Info</span><span>Rows</span></h2>
-      <div class="maker_stack">
-        <label>Appearance<textarea id="appearance">190cm의 장신에 단단한 체격을 가진 성인 남성. 남색에 가까운 청회색 머리를 완전히 뒤로 넘긴 올백 스타일이며,
-드러난 이마와 두꺼운 눈썹 때문에 첫인상은 강하고 성숙하다.</textarea></label>
-        <label>First Impression<textarea id="firstImpression">위압적인 체격과 흉터 때문에 다가가기 어려워 보이지만, 실제로는 먼저 웃으며 분위기를 풀어주는 쪽이다.</textarea></label>
-      </div>
+      <h2><span>Visual Profile</span><button class="mini_btn" id="addVisual">Add</button></h2>
+      <div class="hint" style="margin:-2px 0 10px">HAIR / EYES / OUTFIT / BODY처럼 영문 항목명을 자유롭게 추가해 사용할 수 있어요.</div>
+      <div id="visualList"></div>
     </section>
 
     <section class="maker_panel">
@@ -5983,6 +5980,57 @@ const LEXI_CSS = `
   50% { opacity: 0.28; }
   100% { opacity: 1; }
 }
+
+/* ===== PROFILE MAKER V2 : ATTRIBUTE / VISUAL PROFILE ===== */
+.attribute_badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 88px;
+  padding: 5px 9px 5px 10px;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.attribute_badge .attribute_ko { font-size: 11px; letter-spacing: 0; }
+.attribute_badge .attribute_en { opacity: .72; font-size: 8px; letter-spacing: .12em; }
+.attr-fire { color:#EA473B; background:rgba(234,71,59,.10); }
+.attr-water { color:#3195E0; background:rgba(49,149,224,.10); }
+.attr-wind { color:#23C56E; background:rgba(35,197,110,.10); }
+.attr-lightning { color:#F8BF00; background:rgba(248,191,0,.10); }
+.attr-ice { color:#9CD2D3; background:rgba(156,210,211,.10); }
+.attr-plant { color:#65B161; background:rgba(101,177,97,.10); }
+.attr-none { color:#8B98A9; background:rgba(139,152,169,.10); }
+
+.visual_profile_table {
+  border: 1px solid rgba(255,255,255,.08);
+  border-top: 1px solid rgba(255,255,255,.11);
+  background: rgba(255,255,255,.008);
+}
+.visual_profile_table .info_row {
+  grid-template-columns: 118px 1fr;
+  min-height: 54px;
+  padding: 0 15px;
+}
+.visual_profile_table .info_key {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 16px;
+  color: rgba(135,164,255,.92);
+  font-size: 10px;
+}
+.visual_profile_table .info_value {
+  padding: 14px 0 14px 18px;
+  line-height: 1.85;
+}
+@media (max-width: 640px) {
+  .visual_profile_table .info_row { grid-template-columns: 92px 1fr; padding: 0 11px; }
+  .visual_profile_table .info_value { padding-left: 12px; }
+}
 `;
 const SITE_JS = `
 /* ===== COMMON NAV ===== */
@@ -6273,8 +6321,8 @@ document.addEventListener("DOMContentLoaded", initHalcyonImageSongPlayers);
 const state = {
   urls: { hero:"", backlog:"", song:"" },
   identity: [
-    ["Codename","KAIN"],["Real Name","차도윤"],["Age","30세"],["Gender","남성"],
-    ["Height","190cm"],["Class","S-CLASS ENTITY"],["Attribute","불"],["Unit","ARCH REARGUARD"]
+    ["Codename","KAIN"],["Real Name","차도윤"],["Age / Nationality","30세 / 대한민국"],["Gender","남성"],
+    ["Height","190cm"],["Class","S-CLASS ENTITY"],["Attribute","fire"],["Unit","ARCH REARGUARD"]
   ],
   notes: [
     {title:"MAIN TRAITS", text:"호쾌하고 친화력이 좋다. 위험한 상황에서도 쉽게 흔들리지 않으며, 팀원들이 불안해할수록 더 평소처럼 행동하려 한다."},
@@ -6286,6 +6334,12 @@ const state = {
     {num:"SKILL 01", name:"Fortress Pyre", text:"청흑색 불꽃을 방벽처럼 세워 적의 접근을 차단하고 아군의 후퇴 시간을 확보한다."},
     {num:"SKILL 02", name:"Blackblue Dominion", text:"일정 범위 안의 열기와 불꽃을 자신의 영역처럼 통제한다."},
     {num:"SKILL 03", name:"Last Bastion", text:"극한 상황에서 주변 피해를 자신에게 집중시키듯 받아내며 무너지는 전선을 붙잡는다."}
+  ],
+  visual: [
+    ["HAIR","남색에 가까운 청회색 머리를 완전히 뒤로 넘긴 올백 스타일. 드러난 이마와 두꺼운 눈썹 때문에 강하고 성숙한 인상을 준다."],
+    ["EYES","눈매와 눈동자 색, 시선의 인상 등을 입력하세요."],
+    ["OUTFIT","평소 복장이나 제복, 자주 착용하는 장비를 입력하세요."],
+    ["BODY","190cm의 장신에 단단한 체격. 신체적 특징이나 흉터 등을 입력하세요."]
   ],
   prefs: [
     {title:"LIKES", text:"야구, 낚시, 클라이밍, 자전거, 주말농장."},
@@ -6322,6 +6376,60 @@ function bindUpload(id, key){
     state.urls[key] = URL.createObjectURL(file);
     render();
   });
+}
+
+const ATTRIBUTE_OPTIONS = [
+  {value:"fire",      ko:"불",     en:"Pyre",    cls:"attr-fire"},
+  {value:"water",     ko:"물",     en:"Aqua",    cls:"attr-water"},
+  {value:"wind",      ko:"바람",   en:"Aero",    cls:"attr-wind"},
+  {value:"lightning", ko:"번개",   en:"Fulmen",  cls:"attr-lightning"},
+  {value:"ice",       ko:"얼음",   en:"Glacies", cls:"attr-ice"},
+  {value:"plant",     ko:"풀",     en:"Verde",   cls:"attr-plant"},
+  {value:"none",      ko:"무속성", en:"None",    cls:"attr-none"}
+];
+
+function getAttributeInfo(value){
+  const raw = String(value ?? "").trim().toLowerCase();
+  const aliases = {"불":"fire","물":"water","바람":"wind","번개":"lightning","얼음":"ice","풀":"plant","무속성":"none"};
+  const normalized = aliases[raw] || raw;
+  return ATTRIBUTE_OPTIONS.find(item => item.value === normalized) || ATTRIBUTE_OPTIONS[6];
+}
+
+function attributeBadge(value){
+  const item = getAttributeInfo(value);
+  return `<span class="attribute_badge ${item.cls}"><span class="attribute_ko">${item.ko}</span><span class="attribute_en">${item.en}</span></span>`;
+}
+
+function identityEditor(container, rows){
+  const root = $(container);
+  root.innerHTML = "";
+  rows.forEach((row, i) => {
+    const isAttribute = String(row[0] || "").trim().toLowerCase() === "attribute";
+    const valueControl = isAttribute
+      ? `<select class="attribute_select" data-i="${i}" data-k="1">${ATTRIBUTE_OPTIONS.map(opt => `<option value="${opt.value}" ${getAttributeInfo(row[1]).value===opt.value?"selected":""}>${opt.ko} (${opt.en})</option>`).join("")}</select>`
+      : `<textarea data-i="${i}" data-k="1">${esc(row[1])}</textarea>`;
+    const item = document.createElement("div");
+    item.className = "maker_item";
+    item.innerHTML = `<div class="maker_item_top"><strong>Row ${i+1}</strong><button type="button" class="mini_btn" data-del="${i}">Delete</button></div>
+    <div class="maker_grid2">
+      <label>Key<input data-i="${i}" data-k="0" value="${esc(row[0])}"></label>
+      <label>${isAttribute ? "Attribute" : "Value"}${valueControl}</label>
+    </div>`;
+    root.appendChild(item);
+  });
+  root.querySelectorAll("input,textarea,select").forEach(el => {
+    const handler = e => {
+      rows[+e.target.dataset.i][+e.target.dataset.k] = e.target.value;
+      render();
+    };
+    el.addEventListener("input", handler);
+    el.addEventListener("change", handler);
+  });
+  root.querySelectorAll("[data-del]").forEach(btn => btn.addEventListener("click", () => {
+    rows.splice(+btn.dataset.del, 1);
+    refreshEditors();
+    renderNow();
+  }));
 }
 
 function rowEditor(container, rows, labelA="Label", labelB="Text"){
@@ -6373,9 +6481,10 @@ function objectEditor(container, rows, fields){
 }
 
 function refreshEditors(){
-  rowEditor("#identityList", state.identity, "Key", "Value");
+  identityEditor("#identityList", state.identity);
   objectEditor("#noteList", state.notes, [{key:"title",label:"Title"},{key:"text",label:"Text",area:true}]);
   objectEditor("#skillList", state.skills, [{key:"num",label:"Number"},{key:"name",label:"Name"},{key:"text",label:"Text",area:true}]);
+  rowEditor("#visualList", state.visual, "Section", "Description");
   objectEditor("#prefList", state.prefs, [{key:"title",label:"Title"},{key:"text",label:"Text",area:true}]);
   objectEditor("#interviewList", state.interviews, [{key:"q",label:"Question",area:true},{key:"a",label:"Answer",area:true}]);
   objectEditor("#backlogList", state.backlog, [{key:"page",label:"Page"},{key:"title",label:"Title"},{key:"text",label:"Text",area:true}]);
@@ -6412,7 +6521,7 @@ function normalBacklogHtml(mode){
       <p class="backlog_prose">${br(p.text)}</p>
     </article>`).join("");
   return `<section class="section">
-        <div class="section_head"><h2 class="section_title">BACKLOG</h2><span class="section_code">NOVEL RECORD</span></div>
+        <div class="section_head"><h2 class="section_title">BACKLOG</h2></div>
         <div class="backlog_novel" data-backlog-reader>
           <div class="backlog_novel_visual" aria-label="백로그 대표 이미지"><img class="backlog_novel_img" src="${img}" alt="백로그 이미지"></div>
           <div class="backlog_novel_body">
@@ -6427,7 +6536,7 @@ function lexiBacklogHtml(mode){
   const img = mode === "preview" ? previewUrl("backlog", value("#backlogFile")) : filePath(value("#backlogFile"));
   const first = state.backlog[0] || {page:"Page 01 / 01", title:"PRIVATE RECORD", text:""};
   return `<section class="section">
-        <div class="section_head"><h2 class="section_title">BACKLOG</h2><span class="section_code">PRIVATE RECORD</span></div>
+        <div class="section_head"><h2 class="section_title">BACKLOG</h2></div>
         <div class="backlog_novel lexi-backlog-reader" id="lexiBacklogReader">
           <div class="backlog_novel_visual lexi-backlog-visual" aria-label="백로그 대표 이미지"><img class="backlog_novel_img" id="lexiBacklogImage" src="${img}" alt="백로그 이미지"></div>
           <div class="backlog_novel_body">
@@ -6495,7 +6604,8 @@ function profileHtml(mode="preview"){
   const includeNav = mode === "preview" ? false : $("#includeNav").checked;
   const hero = mode === "preview" ? previewUrl("hero", value("#heroFile")) : filePath(value("#heroFile"));
   const backlog = mode === "preview" ? previewUrl("backlog", value("#backlogFile")) : filePath(value("#backlogFile"));
-  const identity = state.identity.map(([k,v])=>`<div class="info_row"><div class="info_key">${esc(k)}</div><p class="info_value">${br(v)}</p></div>`).join("");
+  const identity = state.identity.map(([k,v])=>`<div class="info_row"><div class="info_key">${esc(k)}</div><p class="info_value">${String(k).trim().toLowerCase()==="attribute" ? attributeBadge(v) : br(v)}</p></div>`).join("");
+  const visual = state.visual.map(([k,v])=>`<div class="info_row"><div class="info_key">${esc(k)}</div><p class="info_value long">${br(v)}</p></div>`).join("");
   const notes = state.notes.map(n=>`<article class="note_box"><span class="note_title">${esc(n.title)}</span><p class="note_text">${br(n.text)}</p></article>`).join("");
   const skills = state.skills.map(s=>`<article class="skill_card"><span class="skill_number">${esc(s.num)}</span><h3 class="skill_name">${esc(s.name)}</h3><p class="skill_text">${br(s.text)}</p></article>`).join("");
   const prefs = state.prefs.map(p=>`<article class="note_box"><span class="note_title">${esc(p.title)}</span><p class="note_text">${br(p.text)}</p></article>`).join("");
@@ -6529,34 +6639,31 @@ ${includeNav ? (mode==="preview" ? navHtml() : '<div id="nav-placeholder"></div>
 
     <main class="record_frame">
       <section class="section">
-        <div class="section_head"><h2 class="section_title">PROFILE</h2><span class="section_code">ARCH PERSONA RECORD 01</span></div>
+        <div class="section_head"><h2 class="section_title">PROFILE</h2></div>
         <div class="profile_grid">
           <article class="profile_statement">
             <div><span class="profile_statement_label">CHARACTER EPITHET</span><h3 class="profile_statement_title">${esc(value("#commandTitle"))}</h3><p class="profile_statement_text">${br(value("#commandText"))}</p></div>
             <div class="profile_statement_eval"><span class="profile_statement_label profile_statement_label_alt">OFFICIAL EVALUATION</span><p class="profile_statement_quote">${br(value("#commandQuote"))}</p></div>
           </article>
-          <article class="profile_panel"><div class="profile_panel_head"><span>Identity</span><span class="profile_panel_code">Basic Record</span></div><div class="info_table">${identity}</div></article>
+          <article class="profile_panel"><div class="profile_panel_head"><span>Identity</span></div><div class="info_table">${identity}</div></article>
         </div>
-        <div class="profile_longstack"><div class="info_table">
-          <div class="info_row"><div class="info_key">Appearance</div><p class="info_value long">${br(value("#appearance"))}</p></div>
-          <div class="info_row"><div class="info_key">First Impression</div><p class="info_value long">${br(value("#firstImpression"))}</p></div>
-        </div></div>
       </section>
 
-      <section class="section"><div class="section_head"><h2 class="section_title">PERSONALITY</h2><span class="section_code">CHARACTER CORE</span></div><div class="two_col">${notes}</div></section>
-      <section class="section"><div class="section_head"><h2 class="section_title">ABILITY OVERVIEW</h2><span class="section_code">ABILITY RECORD</span></div><div class="skill_grid">${skills}</div></section>
-      <section class="section"><div class="section_head"><h2 class="section_title">PREFERENCES</h2><span class="section_code">PRIVATE RECORD</span></div><div class="two_col">${prefs}</div></section>
-      <section class="section"><div class="section_head"><h2 class="section_title">TMI</h2><span class="section_code">OPTIONAL DETAIL</span></div><ul class="tmi_list">${tmiItems}</ul></section>
+      <section class="section visual_profile_section"><div class="section_head"><h2 class="section_title">VISUAL PROFILE</h2></div><div class="info_table visual_profile_table">${visual}</div></section>
+      <section class="section"><div class="section_head"><h2 class="section_title">PERSONALITY</h2></div><div class="two_col">${notes}</div></section>
+      <section class="section"><div class="section_head"><h2 class="section_title">ABILITY OVERVIEW</h2></div><div class="skill_grid">${skills}</div></section>
+      <section class="section"><div class="section_head"><h2 class="section_title">PREFERENCES</h2></div><div class="two_col">${prefs}</div></section>
+      <section class="section"><div class="section_head"><h2 class="section_title">TMI</h2></div><ul class="tmi_list">${tmiItems}</ul></section>
 
       <section class="kain-mid-record">
         <div class="kain-mid-grid">
           <div class="kain-mid-col kain-mid-left">
-            <div class="kain-mid-col-head"><span class="kain-section-title">IMAGE SONG</span><span class="kain-section-side">NOW PLAYING</span></div>
+            <div class="kain-mid-col-head"><span class="kain-section-title">IMAGE SONG</span></div>
 ${imageSongHtml(mode)}
           </div>
           <div class="kain-mid-divider" aria-hidden="true"></div>
           <div class="kain-mid-col kain-mid-right">
-            <div class="kain-mid-col-head"><span class="kain-section-title">INTERVIEW LOG</span><span class="kain-section-side">PERSONAL RECORD</span></div>
+            <div class="kain-mid-col-head"><span class="kain-section-title">INTERVIEW LOG</span></div>
             <div class="kain-interview-box"><div class="kain-chat-log">${interviews}</div></div>
           </div>
         </div>
@@ -6712,7 +6819,8 @@ function bindStaticInputs(){
   bindUpload("#songUpload","song");
   $("#addIdentity").onclick=()=>{state.identity.push(["New Key","내용"]);refreshEditors();renderNow();};
   $("#addNote").onclick=()=>{state.notes.push({title:"NEW NOTE",text:"내용"});refreshEditors();renderNow();};
-  $("#addSkill").onclick=()=>{state.skills.push({num:"SKILL 04",name:"New Skill",text:"내용"});refreshEditors();renderNow();};
+  $("#addSkill").onclick=()=>{state.skills.push({num:`SKILL ${String(state.skills.length+1).padStart(2,"0")}`,name:"New Skill",text:"내용"});refreshEditors();renderNow();};
+  $("#addVisual").onclick=()=>{state.visual.push(["NEW SECTION","내용"]);refreshEditors();renderNow();};
   $("#addPref").onclick=()=>{state.prefs.push({title:"NEW PREF",text:"내용"});refreshEditors();renderNow();};
   $("#addInterview").onclick=()=>{state.interviews.push({q:"질문",a:"답변"});refreshEditors();renderNow();};
   $("#addBacklog").onclick=()=>{state.backlog.push({page:`Page ${String(state.backlog.length+1).padStart(2,"0")}`,title:"새 페이지",text:"내용"});refreshEditors();renderNow();};
