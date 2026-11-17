@@ -378,6 +378,12 @@ document.addEventListener("DOMContentLoaded", function () {
       image: "./images/archive/muse_fr.png",
       prompt: "1girl, short stature, black officer uniform, thin yellow lightning, blackout city lights, hard rim light, high contrast portrait"
     },
+      {
+      title: "TENUUN",
+      thumbnail: "./images/archive/tenuun_frs.png",
+      image: "./images/archive/tenuun_fr.png",
+      prompt: "1girl, short stature, black officer uniform, thin yellow lightning, blackout city lights, hard rim light, high contrast portrait"
+    },
      {
       title: "CAIRN",
       thumbnail: "./images/archive/cairn_frs.png",
